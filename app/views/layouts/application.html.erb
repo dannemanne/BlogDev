@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :defaults %>
+  <%= include_tiny_mce_if_needed %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+
+<div id="container">
+
+  <div id="header">
+
+    <div class="wrap_left">
+
+    </div>
+
+    <div class="wrap_right">
+      <% if anybody_signed_in? %>
+      <span><%= link_to current_user.display_name, edit_user_registration_path %></span>
+      <span><%= link_to "Sign Out", destroy_user_session_path %></span>
+      <% else %>
+      <span><%= link_to "Sign In", new_user_session_path %></span>
+      <% end %>
+    </div>
+
+    <div class="clear"></div>
+  </div>
+
+  <div id="content">
+
+    <div id="title" class="container_12">
+
+      <div class="grid_3">
+        <h1>Know it already?</h1>
+      </div>
+
+      <div class="grid_9">
+        <div id="nav">
+          <ul>
+            <li class="menu-item-home"><%= link_to '', root_path %></li>
+          </ul>
+        </div>
+      </div>
+      <div class="clear"></div>
+
+    </div>
+
+    <div id="main" class="container_12">
+
+      <div id="workspace" class="grid_9">
+        <div class="border">
+
+          <%= yield %>
+
+        </div>
+      </div>
+
+      <div id="side" class="grid_3">
+
+        <div class="section">
+          <h2>Tags</h2>
+
+        </div>
+
+        <div class="section">
+          <h2>Tools</h2>
+          <% if can? :create, Post %>
+          <p><%= link_to "New Post", new_post_path  %></p>
+          <% else %>
+          <p>asd</p>
+          <% end %>
+        </div>
+
+      </div>
+
+      <div class="clear"></div>
+
+    </div>
+
+  </div>
+
+  <div id="footer">
+
+    <div class="container_12">
+
+      <div class="grid_3">
+        <p>Copyright © 2011</p>
+      </div>
+      <div class="grid_3">
+        <p>&nbsp;</p>
+      </div>
+      <div class="grid_3">
+        <p>&nbsp;</p>
+      </div>
+      <div class="grid_3">
+        <p><%= link_to 'info@dannemanne.com', 'mailto:info@dannemanne.com' %></p>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

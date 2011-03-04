@@ -1,0 +1,32 @@
+/**
+ * 100% height layout with header and footer
+ * ----------------------------------------------
+ * Feel free to copy/use/change/improve
+ */
+
+html,body {
+	margin:0;
+	padding:0;
+	height:100%; /* needed for container min-height */
+}
+
+div#container {
+	position:relative; /* needed for footer positioning*/
+	margin:0 auto; /* center, not in IE5 */
+
+	height:auto !important; /* real browsers */
+	height:100%; /* IE6: treaded as min-height*/
+
+	min-height:100%; /* real browsers */
+}
+
+div#content {
+	padding:0 0 4em; /* bottom padding for footer */
+}
+
+div#footer {
+	position:absolute;
+    height: 3em;
+	width:100%;
+	bottom:0; /* stick to bottom */
+}

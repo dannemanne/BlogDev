@@ -1,0 +1,15 @@
+# Here you can specify default options for TinyMCE across all controllers
+#
+# theme: advanced
+# plugins:
+#  - table
+#  - fullscreen
+editor_selector: mceEditor
+language: en
+mode: textareas
+theme: advanced
+theme_advanced_toolbar_location: top
+theme_advanced_toolbar_align: left
+theme_advanced_buttons1: bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,outdent,indent,|,undo,redo,|,formatselect
+theme_advanced_buttons2: ''
+theme_advanced_buttons3: ''

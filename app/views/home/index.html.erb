@@ -1,0 +1,13 @@
+<% @posts.each do |post| %>
+
+<div class="post">
+
+  <h1><%= post.title %></h1>
+
+  <div><%=raw post.body %></div>
+
+  <p><%= post.posted_at.strftime("%b %d, %y") %></p>
+
+</div>
+
+<% end %>

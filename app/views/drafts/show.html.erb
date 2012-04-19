@@ -1,0 +1,7 @@
+<h1>Edit Draft</h1>
+
+<%= form_for @post, :url => draft_path(@post) do |f| %>
+
+  <%= render "/posts/post_form", :f => f %>
+
+<% end %>

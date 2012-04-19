@@ -1,0 +1,8 @@
+<h1>Posts tagged with <%= @tag.name %></h1>
+
+<% @tag.posts.posted.each do |post| %>
+
+  <%= render "/posts/post_preview", :post => post %>
+  <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
+
+<% end %>

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,30 +11,62 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110121072623) do
+ActiveRecord::Schema.define(:version => 20120401055733) do
 
   create_table "comments", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "post_id"
+    t.integer  "user_id",    :null => false
+    t.integer  "post_id",    :null => false
     t.string   "title"
     t.string   "message"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "posts", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "title"
-    t.text     "body"
+  create_table "links", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
     t.integer  "status"
-    t.datetime "posted_at"
+    t.integer  "tip_by_id"
+    t.string   "tip_by_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "links", ["status"], :name => "index_links_on_status"
+  add_index "links", ["tip_by_id"], :name => "index_links_on_tip_by_id"
+
+  create_table "post_tags", :force => true do |t|
+    t.integer "post_id"
+    t.integer "tag_id"
+  end
+
+  add_index "post_tags", ["post_id"], :name => "index_post_tags_on_post_id"
+  add_index "post_tags", ["tag_id", "post_id"], :name => "index_post_tags_on_tag_id_and_post_id", :unique => true
+  add_index "post_tags", ["tag_id"], :name => "index_post_tags_on_tag_id"
+
+  create_table "posts", :force => true do |t|
+    t.integer  "user_id",                       :null => false
+    t.string   "title"
+    t.text     "body"
+    t.integer  "status",         :default => 0, :null => false
+    t.datetime "posted_at"
+    t.integer  "comments_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title_url"
+  end
+
   add_index "posts", ["posted_at"], :name => "index_posts_on_posted_at"
   add_index "posts", ["status"], :name => "index_posts_on_status"
+  add_index "posts", ["title_url"], :name => "index_posts_on_title_url", :unique => true
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
+  create_table "tags", :force => true do |t|
+    t.string  "name"
+    t.integer "posts_count", :default => 0, :null => false
+  end
+
+  add_index "tags", ["posts_count"], :name => "index_tags_on_posts_count"
 
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false

@@ -9,13 +9,17 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :posts
+  has_many :comments
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :name, :password, :password_confirmation, :remember_me
 
-  attr_protected :role
+  validates_presence_of :name, :email
+  validates_inclusion_of :role, :in => ROLES.keys
 
   def display_name
-    self.name.blank? ? self.email : self.name
+    name
   end
 
   def role?(role)

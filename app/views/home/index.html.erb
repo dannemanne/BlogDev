@@ -1,13 +1,16 @@
-<% @posts.each do |post| %>
+<h1>Welcome to DanneManne.com</h1>
 
-<div class="post">
+<p>
+  I am a Ruby on Rails developer currently living in Hong Kong.
+  My posts will mainly have a coding focus. Most of it will be about Rails but as I try other things,
+  I will try to share anything I find valuable, wierd or just fun.
+</p>
 
-  <h1><%= post.title %></h1>
+<div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
 
-  <div><%=raw post.body %></div>
+<% recent_posts.each do |post| %>
 
-  <p><%= post.posted_at.strftime("%b %d, %y") %></p>
-
-</div>
+  <%= render "/posts/post_preview", :post => post %>
+  <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
 
 <% end %>

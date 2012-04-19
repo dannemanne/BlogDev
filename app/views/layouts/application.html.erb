@@ -1,79 +1,129 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Blog</title>
-  <%= stylesheet_link_tag :all %>
+  <title>DanneManne.com</title>
   <%= javascript_include_tag :defaults %>
-  <%= include_tiny_mce_if_needed %>
+  <%= javascript_include_tag "google-code-prettify/prettify.js" %>
+  <%= stylesheet_link_tag "/javascripts/google-code-prettify/prettify.css" %>
+  <%= javascript_include_tag "showdown/showdown.js" %>
+  <%= javascript_include_tag "wysiwym/wysiwym.js" %>
+  <%= stylesheet_link_tag "/javascripts/wysiwym/wysiwym.css" %>
+  <%= stylesheet_link_tag :all %>
+
+  <script type="text/javascript">
+    // For the Live Preview we want to check the value of
+    // textarea changes as some set interval.  If it's
+    // changed, we'll call Showdown to convert the textarea
+    // input to HTML then prettify to colorize code blocks.
+    var showdown = new Showdown.converter();
+    var prev_text = "";
+    var update_live_preview = function(node, preview) {
+        var input_text = node.val(); //$('#post_body')
+        if (input_text != prev_text) {
+            var text = $("<div>"+ showdown.makeHtml(input_text) +"</div>");
+            text.find('pre').addClass('prettyprint linenums');
+            text.find('p code').addClass('prettyprint');
+            text.find('pre').each(function() {
+                $(this).html(prettyPrintOne($(this).html(), undefined, true));
+            });
+            text.find('p code').each(function() {
+                $(this).html(prettyPrintOne($(this).html()));
+            });
+            preview.html(text); //$('#post_body_preview')
+            prev_text = input_text;
+        }
+    };
+    var parse_preview = function(node){
+        var text = $("<div>"+ node.html() +"</div>");
+        text.find('pre').addClass('prettyprint linenums');
+        text.find('p code').addClass('prettyprint');
+        text.find('pre').each(function() {
+            $(this).html(prettyPrintOne($(this).html(), undefined, true));
+        });
+        text.find('p code').each(function() {
+            $(this).html(prettyPrintOne($(this).html()));
+        });
+        node.html(text);
+    };
+  </script>
+
   <%= csrf_meta_tag %>
 </head>
 <body>
 
 <div id="container">
+  <div id="header-top">
+    <div class="container_12">
+      <div class="grid_12">
+        <% if user_signed_in? %>
+          <p>Logged in as <%= current_user.display_name %>. <%= link_to "Logout", destroy_user_session_path %></p>
+        <% else %>
+          <p><%= link_to "Login", new_user_session_path %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
   <div id="header">
+    <div class="container_12">
 
-    <div class="wrap_left">
+      <div class="grid_2">
+        <%= link_to image_tag("/images/logo.png", :style => "margin: 17px 0;"), root_path %>
+      </div>
 
+      <div class="grid_8">
+        <%= image_tag "/images/header.png" %>
+      </div>
+
+      <div class="grid_2">&nbsp;</div>
+
+      <div class="clear"></div>
     </div>
-
-    <div class="wrap_right">
-      <% if anybody_signed_in? %>
-      <span><%= link_to current_user.display_name, edit_user_registration_path %></span>
-      <span><%= link_to "Sign Out", destroy_user_session_path %></span>
-      <% else %>
-      <span><%= link_to "Sign In", new_user_session_path %></span>
-      <% end %>
-    </div>
-
-    <div class="clear"></div>
   </div>
 
   <div id="content">
 
-    <div id="title" class="container_12">
-
-      <div class="grid_3">
-        <h1>Know it already?</h1>
-      </div>
-
-      <div class="grid_9">
-        <div id="nav">
-          <ul>
-            <li class="menu-item-home"><%= link_to '', root_path %></li>
-          </ul>
-        </div>
-      </div>
-      <div class="clear"></div>
-
-    </div>
-
     <div id="main" class="container_12">
 
-      <div id="workspace" class="grid_9">
-        <div class="border">
-
-          <%= yield %>
-
+      <div id="left_side" class="grid_2">
+        <div class="section">
+          <h2>LATEST POSTS</h2>
+          <% recent_posts.each do |post| %>
+            <p><%= link_to post.title, post_path(post) %></p>
+          <% end %>
         </div>
       </div>
 
-      <div id="side" class="grid_3">
-
-        <div class="section">
-          <h2>Tags</h2>
-
+      <div id="workspace" class="grid_8">
+        <div style="padding: 0 10px;">
+          <%= yield %>
         </div>
+      </div>
 
+      <div id="right_side" class="grid_2">
         <div class="section">
-          <h2>Tools</h2>
-          <% if can? :create, Post %>
-          <p><%= link_to "New Post", new_post_path  %></p>
-          <% else %>
-          <p>asd</p>
+          <h2>ARCHIVE</h2>
+          <% archive_months.each do |post| %>
+            <p><%= link_to post.display_archive_date, archive_path(post.archive_year, post.archive_month) %></p>
           <% end %>
         </div>
 
+        <div class="section">
+          <h2>TAGS</h2>
+          <% popular_tags.each do |tag| %>
+            <p><%= link_to "#{tag.name} (#{tag.posts_count})", tag_path(tag), :title => "List all Posts tagged by #{tag.name}" %></p>
+          <% end %>
+        </div>
+
+        <% if user_signed_in? %>
+          <div class="section">
+            <h2>TOOLS</h2>
+            <% if can? :create, Post %>
+              <%= content_tag :p, link_to("New Post", new_post_path) %>
+              <%= content_tag :p, link_to("Drafts (#{current_user.posts.drafts.count})", drafts_path) %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
 
       <div class="clear"></div>

@@ -1,0 +1,37 @@
+<script type="text/javascript">
+// Setup the WYSIWYM editor!
+jQuery(window).load(function() {
+  jQuery('#post_body').wysiwym(Wysiwym.Markdown, {});
+
+  var update_post = function(){
+      update_live_preview(jQuery("#post_body"), jQuery("#post_body_preview"));
+  };
+  setInterval(update_post, 200);
+});
+</script>
+<% if f.object.errors.any? %>
+  <ul>
+    <% f.object.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h2><%= f.label :title %></h2>
+<p><%= f.text_field :title %></p>
+
+<h2><%= f.label :body %></h2>
+<p><%= f.text_area :body, :style => "width: 600px; height: 200px; resize: vertical;" %></p>
+
+<div class="clear"></div>
+<h2>Preview of post</h2>
+<div id="post_body_preview" class="post-preview"></div>
+
+<h2><%= f.label :tag_names %></h2>
+<p><%= f.text_field :tag_names %></p>
+
+<h2><%= f.label :status %></h2>
+<p><%= f.radio_button :status, Post::STATUS_DRAFT %> Draft</p>
+<p><%= f.radio_button :status, Post::STATUS_POSTED %> Published</p>
+
+<h2><%= f.submit "Save" %></h2>

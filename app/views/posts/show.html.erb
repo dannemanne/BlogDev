@@ -1,2 +1,44 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<script type="text/javascript">
+// Setup the WYSIWYM editor!
+jQuery(window).load(function() {
+  parse_preview(jQuery("#post_<%= @post.id %>"));
+});
+</script>
+<div class="post">
+
+  <h1><%= @post.title %></h1>
+  <p style="color: rgb(169,169,169); margin-bottom: 3px;">
+    <%= @post.posted_at.strftime("%a, %Y-%m-%d %H:%M") %> - <%= @post.user.display_name %>
+    <% if can? :update, @post %>
+      - <%= link_to "Edit", edit_post_path(@post) %>
+    <% end %>
+  </p>
+
+  <div id="post_<%= @post.id %>"><%= @post.display_body %></div>
+
+  <h3>Comments</h3>
+
+  <% @post.comments.each do |comment| %>
+    <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
+    <p><%= comment.title %>
+      <span style="float: right;">
+        <%= comment.created_at.strftime("%a, %Y-%m-%d %H:%M") %> - <%= comment.user.display_name %>
+      </span>
+    </p>
+    <p><%= comment.message %></p>
+  <% end %>
+
+  <% if can? :comment, @post %>
+    <%= form_for @comment || @post.comments.new, :url => { :action => :comment } do |f| %>
+      <p><%= f.text_field :title, :placeHolder => "Title" %></p>
+      <p><%= f.text_area :message, :style => "height: 50px; width: 17em; font-family:arial,sans-serif;", :placeHolder => "Message" %></p>
+      <% if user_signed_in? %>
+        <p>As <%= current_user.name %></p>
+      <% else %>
+        <p>As Anonymous. <%= link_to "Login", new_user_session_path %> to post personal comment.</p>
+      <% end %>
+      <p><%= f.submit "Comment" %></p>
+    <% end %>
+  <% end %>
+
+</div>

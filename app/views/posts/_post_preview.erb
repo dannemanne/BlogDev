@@ -1,0 +1,25 @@
+<script type="text/javascript">
+jQuery(window).load(function() {
+  parse_preview(jQuery("#post_preview_<%= post.id %>"));
+});
+</script>
+<h2><%= link_to post.title, post_path(post) %></h2>
+<p style="color: rgb(169,169,169); margin-bottom: 3px;">
+  <%= post.posted_at.strftime("%a, %Y-%m-%d %H:%M") %> - <%= post.user.display_name %>
+  <% if can? :update, post %>
+    - <%= link_to "Edit", edit_post_path(post) %>
+  <% end %>
+</p>
+<div id="post_preview_<%= post.id %>"><%= post.display_body %></div>
+<p><%= link_to "Read More >>", post_path(post) %></p>
+<p>
+  <span style="float:left;"><%= post.comments_count %> Comments</span>
+  <span style="float:right;">
+    <% post.tags.each do |tag| %>
+      <span class="postTag">
+        <span class="postTagText"><%= tag.name %></span>
+      </span>
+    <% end %>
+  </span>
+</p>
+<div class="clear"></div>

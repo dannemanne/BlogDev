@@ -6,7 +6,7 @@ class CreatePosts < ActiveRecord::Migration
       t.text :body
       t.integer :status, :null => false, :default => 0
       t.datetime :posted_at
-      t.integer :comments_count
+      t.integer :comments_count, :null => false, :default => 0
 
       t.timestamps
     end

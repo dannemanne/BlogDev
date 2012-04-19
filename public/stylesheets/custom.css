@@ -241,3 +241,104 @@ pre.prettyprint {
 li.L0,li.L1,li.L2,li.L3,li.L4,li.L5,li.L6,li.L7,li.L8,li.L9{
     list-style-type:decimal
 }
+
+
+/* Project Styles
+****************************/
+div#my_projects {
+    background: #000;
+
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+div#my_projects .project-header {
+    height: 30px;
+
+    background:-webkit-gradient(linear,0% 0%,0% 100%,
+        color-stop(0%, rgba(192,192,192,1)),
+        color-stop(100%, rgba(142,142,142,1)));
+
+    background:-moz-linear-gradient(top,
+        rgba(192,192,192,1),
+        rgba(142,142,142,1));
+
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+
+    text-align: center;
+}
+
+div#projects {
+    padding: 3px;
+    height: 500px;
+    overflow-y: scroll;
+}
+
+div#projects .project-prompt {
+    height: 20px;
+    float:left;
+    clear: left;
+    margin-right: 5px;
+}
+
+div#projects .project-command {
+    height: 20px;
+    float:left;
+    clear: right;
+}
+
+div#projects .project-output {
+    margin: 10px 0 20px;
+    clear: both;
+    float: left;
+}
+
+div#projects .project-output .project-indent {
+    padding-left: 10px;
+}
+
+div#projects h1, div#projects h1 a {
+    font-family: "Lucida Console", monospace;
+    font-size: 12pt;
+    margin: 5px 0;
+    color: #0b0;
+    text-transform: uppercase;
+}
+
+div#projects h1 a:hover {
+    text-decoration: underline;
+}
+
+div#projects h2, div#projects th {
+    font-family: "Lucida Console", monospace;
+    font-size: 10pt;
+    margin: 2px 0;
+    font-weight: bold;
+    text-decoration: none;
+    color: #0b0;
+}
+
+div#projects th {
+    text-align: left;
+    vertical-align: top;
+}
+
+div#projects td {
+    width: 400px;
+    vertical-align: top;
+}
+
+div#projects p, div#projects p a,
+div#projects td, div#projects td a {
+    font-family: "Lucida Console", monospace;
+    font-size: 10pt;
+    margin: 0;
+    text-decoration: none;
+    color: #0b0;
+}

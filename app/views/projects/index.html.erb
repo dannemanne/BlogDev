@@ -1,0 +1,53 @@
+<script type="text/javascript">
+  var promptTemplate = "<div class=\"project-prompt\"><p>DanneManne.com:Projects DanneManne$ </p></div>";
+  var commandTemplate = "<div class=\"project-command\"><p>${command}</p></div>";
+  var projectTemplate = "<div class=\"project-output\"><h1><a href=\"#\" onclick=\"listProject(event,'${name}');\">${name}</a></h1><div class=\"project-indent\"><table><tr><th>Created:</th><td>${((new Date(created_at)).toLocaleFormat())}</td></tr><tr><th>Updated:</th><td>${((new Date(updated_at)).toLocaleFormat())}</td></tr><tr><th>Description:</th><td>${description}</td></tr></table></div></div>";
+  var commitTemplate = "<div class=\"project-output\"><h2>${name}</h1><div class=\"project-indent\"><table><tr><th>Committer:</th><td>${commit.committer.name}</td></tr><tr><th>Date:</th><td>${((new Date(commit.committer.date)).toLocaleFormat())}</td></tr><tr><th>Message:</th><td>${commit.message}</td></tr></table></div></div>";
+  var showProjects = function(response){
+      jQuery.each(response.data, function(i, project){
+          jQuery("#projectsClear").before(jQuery("<div>"+projectTemplate+"</div>").tmpl( project ));
+      });
+      addPrompt();
+  };
+  var listProject = function(evt, project){
+      evt.stopPropagation();
+      evt.preventDefault();
+      addCommand("ls "+project+" --commits");
+      var script=document.createElement('script');
+      script.type='text/javascript';
+      script.src="https://api.github.com/repos/dannemanne/"+project+"/commits?callback=showCommits";
+      jQuery("body").append(script);
+  };
+  var showCommits = function(response){
+      jQuery.each(response.data, function(i, commit){
+          jQuery("#projectsClear").before(jQuery("<div>"+commitTemplate+"</div>").tmpl( commit ));
+      });
+      addPrompt();
+  };
+  var addPrompt = function(){
+      jQuery("#projectsClear").before(jQuery("<div>"+promptTemplate+"</div>").tmpl());
+  };
+  var addCommand = function(command){
+      jQuery("#projectsClear").before(jQuery("<div>"+commandTemplate+"</div>").tmpl( {command:command} ));
+  };
+  jQuery(window).load(function(){
+      addPrompt();
+      addCommand("ls -a");
+      var script=document.createElement('script');
+      script.type='text/javascript';
+      script.src="https://api.github.com/users/dannemanne/repos?callback=showProjects";
+      jQuery("body").append(script);
+  });
+</script>
+
+<div id="my_projects">
+  <div class="project-header">
+    <h1>MY PROJECTS</h1>
+  </div>
+
+  <div id="projects">
+    <div class="project-command" style="clear: both;"><p>Last login: <%= DateTime.now.strftime("%a %b %d %H:%M:%S") %> on console</p></div>
+
+    <div id="projectsClear" class="clear"></div>
+  </div>
+</div>

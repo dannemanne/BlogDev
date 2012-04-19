@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def archive_months(limit = 5)
-    @archive_months = Post.archive_months(limit)
+    @archive_months = Post.archive_months.group_by { |post| post.posted_at.strftime("%Y-%m") }.keys
   end
 
 end

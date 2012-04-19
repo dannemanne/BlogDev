@@ -68,11 +68,12 @@ class Post < ActiveRecord::Base
   scope :recent, Proc.new { |limit = 5| order("posts.posted_at DESC").limit(limit) }
   scope :posted, includes(:comments).where("posts.status = ?", STATUS_POSTED)
   scope :drafts, where(:status => STATUS_DRAFT)
-  scope :archive_months, Proc.new { |limit = 5|
-    select("DISTINCT date_format(posted_at, '%Y-%m') AS 'year_month'").
-    where(:status => STATUS_POSTED).
-    order("1 DESC").
-    limit(limit)
-  }
+#  scope :archive_months, Proc.new { |limit = 5|
+#    select("DISTINCT date_format(posted_at, '%Y-%m') AS 'year_month'").
+#    where(:status => STATUS_POSTED).
+#    order("1 DESC").
+#    limit(limit)
+#  }
+  scope :archive_months, select(:posted_at).where(:status => STATUS_POSTED).order("1 DESC")
 
 end

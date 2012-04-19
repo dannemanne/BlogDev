@@ -18,22 +18,9 @@ ActiveRecord::Schema.define(:version => 20120401055733) do
     t.integer  "post_id",    :null => false
     t.string   "title"
     t.string   "message"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
-
-  create_table "links", :force => true do |t|
-    t.string   "name"
-    t.string   "url"
-    t.integer  "status"
-    t.integer  "tip_by_id"
-    t.string   "tip_by_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "links", ["status"], :name => "index_links_on_status"
-  add_index "links", ["tip_by_id"], :name => "index_links_on_tip_by_id"
 
   create_table "post_tags", :force => true do |t|
     t.integer "post_id"
@@ -50,9 +37,9 @@ ActiveRecord::Schema.define(:version => 20120401055733) do
     t.text     "body"
     t.integer  "status",         :default => 0, :null => false
     t.datetime "posted_at"
-    t.integer  "comments_count"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "comments_count", :default => 0, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "title_url"
   end
 
@@ -69,9 +56,8 @@ ActiveRecord::Schema.define(:version => 20120401055733) do
   add_index "tags", ["posts_count"], :name => "index_tags_on_posts_count"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                               :default => "", :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
+    t.string   "email",                               :default => "",    :null => false
+    t.string   "encrypted_password",   :limit => 128, :default => "",    :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
@@ -80,10 +66,11 @@ ActiveRecord::Schema.define(:version => 20120401055733) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
     t.string   "name"
-    t.integer  "role"
+    t.integer  "role",                                :default => 0,     :null => false
+    t.boolean  "use_gravatar",                        :default => false, :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

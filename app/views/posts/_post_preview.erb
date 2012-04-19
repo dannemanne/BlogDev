@@ -15,10 +15,11 @@ jQuery(window).load(function() {
 <p>
   <span style="float:left;"><%= post.comments_count %> Comments</span>
   <span style="float:right;">
-    <% post.tags.each do |tag| %>
-      <span class="postTag">
-        <span class="postTagText"><%= tag.name %></span>
-      </span>
+    <% if post.tags.any? %>
+      Tags:
+      <% post.tags.each_with_index do |tag, i| %><% if i != 0 %>,<% end %>
+        <%= link_to tag_path(tag), :class => "postTag" do %>
+          <span class="postTagText"><%= tag.name %></span><% end %><% end %>
     <% end %>
   </span>
 </p>

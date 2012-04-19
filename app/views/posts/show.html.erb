@@ -19,12 +19,13 @@ jQuery(window).load(function() {
   <h3>Comments</h3>
 
   <% @post.comments.each do |comment| %>
+    <a id="comment_<%= comment.id %>"></a>
     <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
-    <p><%= comment.title %>
-      <span style="float: right;">
-        <%= comment.created_at.strftime("%a, %Y-%m-%d %H:%M") %> - <%= comment.user.display_name %>
+    <h2><%= link_to comment.title, post_path(@post, :anchor => "comment_#{comment.id}") %>
+      <span style="float: right; font-size: 8pt;">
+        <%= comment.created_at.strftime("%a, %Y-%m-%d %H:%M") %><% if comment.user %> - <%= comment.user.display_name %><% end %>
       </span>
-    </p>
+    </h2>
     <p><%= comment.message %></p>
   <% end %>
 

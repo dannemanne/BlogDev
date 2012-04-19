@@ -126,7 +126,9 @@
             <h2>TOOLS</h2>
             <% if can? :create, Post %>
               <%= content_tag :p, link_to("New Post", new_post_path) %>
-              <%= content_tag :p, link_to("Drafts (#{current_user.posts.drafts.count})", drafts_path) %>
+              <% if current_user.posts.drafts.any? %>
+                <%= content_tag :p, link_to("Drafts (#{current_user.posts.drafts.count})", drafts_path) %>
+              <% end %>
             <% end %>
           </div>
         <% end %>

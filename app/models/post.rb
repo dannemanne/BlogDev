@@ -43,37 +43,17 @@ class Post < ActiveRecord::Base
     @tag_names ||= tags.map(&:name).join " "
   end
 
-  # Only used when the scope archive_months has been called
-  def archive_date
-    if year_month
-      @archive_date ||= Date.new(*year_month.split("-").map(&:to_i))
-    else
-      nil
-    end
+  def previous_post
+    @previous_post ||= Post.posted.where("posted_at < ?", posted_at).order("posted_at DESC").first
   end
 
-  def display_archive_date
-    archive_date && archive_date.strftime("%B %Y")
-  end
-
-  def archive_year
-    archive_date && archive_date.year
-  end
-
-  def archive_month
-    @archive_month ||= archive_date && archive_date.month
-    @archive_month > 9 ? @archive_month : "0#{@archive_month}"
+  def next_post
+    @next_post ||= Post.posted.where("posted_at > ?", posted_at).order("posted_at ASC").first
   end
 
   scope :recent, Proc.new { |limit = 5| order("posts.posted_at DESC").limit(limit) }
   scope :posted, includes(:comments).where("posts.status = ?", STATUS_POSTED)
   scope :drafts, where(:status => STATUS_DRAFT)
-#  scope :archive_months, Proc.new { |limit = 5|
-#    select("DISTINCT date_format(posted_at, '%Y-%m') AS 'year_month'").
-#    where(:status => STATUS_POSTED).
-#    order("1 DESC").
-#    limit(limit)
-#  }
   scope :archive_months, select(:posted_at).where(:status => STATUS_POSTED).order("1 DESC")
 
 end

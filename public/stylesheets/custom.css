@@ -42,7 +42,8 @@ div#header-top p {
     font-size: 10px;
 }
 
-div#header {
+header.body-header {
+    display: block;
     position: relative;
     z-index: 100;
 	height: 100px;
@@ -59,13 +60,18 @@ div#header {
     -moz-box-shadow: 0 2px 8px rgba(160, 160, 160, 1);
      box-shadow: 0 2px 8px; rgba(160, 160, 160, 1);
 }
-div#header span {
+header.body-header span {
     margin: 0 3px;
 }
 
-div#footer {
+header.body-header .header-logo {
+    margin: 17px 0;
 }
-	div#footer p {
+
+footer {
+    display:block;
+}
+	footer p {
         font-size: 10px;
 		margin:0;
 	}
@@ -88,7 +94,7 @@ div#left_side, div#right_side {
     padding: 10px 0;
 }
 
-div#left_side div.section, div#right_side div.section {
+div#left_side section, div#right_side section {
     padding: 0 0 20px;
 }
 
@@ -191,10 +197,10 @@ div#nav li.page-item-14.current_page_item a{
 
 
 /* Post Styles */
-div.post {
+article {
     padding: 10px;
 }
-div.post p {
+article p {
 
 }
 

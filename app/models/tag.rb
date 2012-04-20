@@ -4,18 +4,18 @@ class Tag < ActiveRecord::Base
 
   attr_accessible :name
   validates_presence_of :name
-  validates_format_of :name, :with => /\A[A-Za-z0-9_\-]*\Z/i
-  validates_uniqueness_of :name
+  validates_format_of :stub, :with => /\A[a-z0-9_\-]*\Z/i
+  validates_uniqueness_of :name, :stub
 
   before_validation do
-    name.gsub! " ", "-"
+    self.stub = name.downcase.gsub(" ", "-")
   end
 
   def to_param
-    name.downcase
+    stub
   end
 
   def self.from_param(name)
-    find_by_name!(name)
+    find_by_stub!(name)
   end
 end

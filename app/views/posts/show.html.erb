@@ -4,42 +4,67 @@ jQuery(window).load(function() {
   parse_preview(jQuery("#post_<%= @post.id %>"));
 });
 </script>
-<div class="post">
-
-  <h1><%= @post.title %></h1>
-  <p style="color: rgb(169,169,169); margin-bottom: 3px;">
-    <%= @post.posted_at.strftime("%a, %Y-%m-%d %H:%M") %> - <%= @post.user.display_name %>
-    <% if can? :update, @post %>
-      - <%= link_to "Edit", edit_post_path(@post) %>
-    <% end %>
-  </p>
-
-  <div id="post_<%= @post.id %>"><%= @post.display_body %></div>
-
-  <h3>Comments</h3>
-
-  <% @post.comments.each do |comment| %>
-    <a id="comment_<%= comment.id %>"></a>
-    <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
-    <h2><%= link_to comment.title, post_path(@post, :anchor => "comment_#{comment.id}") %>
-      <span style="float: right; font-size: 8pt;">
-        <%= comment.created_at.strftime("%a, %Y-%m-%d %H:%M") %><% if comment.user %> - <%= comment.user.display_name %><% end %>
-      </span>
-    </h2>
-    <p><%= comment.message %></p>
-  <% end %>
-
-  <% if can? :comment, @post %>
-    <%= form_for @comment || @post.comments.new, :url => { :action => :comment } do |f| %>
-      <p><%= f.text_field :title, :placeHolder => "Title" %></p>
-      <p><%= f.text_area :message, :style => "height: 50px; width: 17em; font-family:arial,sans-serif;", :placeHolder => "Message" %></p>
-      <% if user_signed_in? %>
-        <p>As <%= current_user.name %></p>
-      <% else %>
-        <p>As Anonymous. <%= link_to "Login", new_user_session_path %> to post personal comment.</p>
+<article>
+  <header>
+    <h1><%= @post.title %></h1>
+    <p style="color: rgb(169,169,169); margin-bottom: 3px;">
+      <%= @post.posted_at.strftime("%a, %Y-%m-%d %H:%M") %> - <%= @post.user.display_name %>
+      <% if can? :update, @post %>
+        - <%= link_to "Edit", edit_post_path(@post) %>
       <% end %>
-      <p><%= f.submit "Comment" %></p>
-    <% end %>
-  <% end %>
+    </p>
+  </header>
 
-</div>
+  <section id="post_<%= @post.id %>">
+    <%= @post.display_body %>
+  </section>
+
+  <section>
+    <span style="float:right;">
+      <% if @post.tags.any? %>
+        Tags:
+        <% @post.tags.each_with_index do |tag, i| %><% if i != 0 %>,<% end %>
+          <%= link_to tag_path(tag), :class => "postTag", :title => "View posts tagged with #{tag.name}", :rel => "tag" do %>
+            <span class="postTagText"><%= tag.name %></span><% end %><% end %>
+      <% end %>
+    </span>
+    <div class="clear"></div>
+
+    <h3>Comments</h3>
+    <% if @post.comments.any? %>
+      <% @post.comments.each do |comment| %>
+        <a id="comment_<%= comment.id %>"></a>
+        <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
+        <h2><%= link_to comment.title, post_path(@post, :anchor => "comment_#{comment.id}") %>
+          <span style="float: right; font-size: 8pt;">
+            <%= comment.created_at.strftime("%a, %Y-%m-%d %H:%M") %><% if comment.user %> - <%= comment.user.display_name %><% end %>
+          </span>
+        </h2>
+        <p><%= comment.message %></p>
+      <% end %>
+    <% else %>
+      <p>No comments yet</p>
+    <% end %>
+
+    <% if can? :comment, @post %>
+      <%= form_for @comment || @post.comments.new, :url => { :action => :comment } do |f| %>
+        <p><%= f.text_field :title, :placeHolder => "Title" %></p>
+        <p><%= f.text_area :message, :style => "height: 50px; width: 17em; font-family:arial,sans-serif;", :placeHolder => "Message" %></p>
+       <% if user_signed_in? %>
+           <p>As <%= current_user.name %></p>
+        <% else %>
+          <p>As Anonymous. <%= link_to "Login", new_user_session_path %> to post personal comment.</p>
+        <% end %>
+        <p><%= f.submit "Comment" %></p>
+      <% end %>
+    <% end %>
+
+    <% if @post.previous_post %>
+      <span style="float: left;"><%= link_to "<< #{@post.previous_post.title}", post_path(@post.previous_post), :rel => "prev", :title => "View the previous post: #{@post.previous_post.title}" %></span>
+    <% end %>
+    <% if @post.next_post %>
+      <span style="float: right;"><%= link_to "#{@post.next_post.title} >>", post_path(@post.next_post), :rel => "next", :title => "View the next post: #{@post.next_post.title}" %></span>
+    <% end %>
+    <div class="clear"></div>
+  </section>
+</article>

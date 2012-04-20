@@ -1,19 +1,24 @@
 <% @posts.each do |post| %>
-  <script type="text/javascript">
-    jQuery(window).load(function() {
-      parse_preview(jQuery("#post_draft_<%= post.id %>"));
-    });
-  </script>
-  <h2><%= link_to post.title, draft_path(post) %></h2>
-  <p style="color: rgb(169,169,169); margin-bottom: 3px;">
-    Last saved at <%= post.updated_at.strftime("%a, %Y-%m-%d %H:%M") %>
-  </p>
-  <div id="post_draft_<%= post.id %>"><%= post.display_body %></div>
-  <div>
-    <span style="float: left;"><%= button_to "Edit", draft_path(post), :method => :get %></span>
-    <span style="float: left;"><%= button_to "Delete", draft_path(post), :method => :delete, :confirm => "Are you sure you want to delete this post?" %></span>
-    <div class="clear"></div>
-  </div>
-  <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
-
+  <article>
+    <script type="text/javascript">
+      jQuery(window).load(function() {
+        parse_preview(jQuery("#post_draft_<%= post.id %>"));
+      });
+    </script>
+    <header>
+      <h2><%= link_to post.title, draft_path(post) %></h2>
+      <p style="color: rgb(169,169,169); margin-bottom: 3px;">
+        Last saved at <%= post.updated_at.strftime("%a, %Y-%m-%d %H:%M") %>
+      </p>
+    </header>
+    <section id="post_draft_<%= post.id %>">
+      <%= post.display_body %>
+    </section>
+    <section>
+      <span style="float: left;"><%= button_to "Edit", draft_path(post), :method => :get %></span>
+      <span style="float: left;"><%= button_to "Delete", draft_path(post), :method => :delete, :confirm => "Are you sure you want to delete this post?" %></span>
+      <div class="clear"></div>
+    </section>
+    <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
+  </article>
 <% end %>

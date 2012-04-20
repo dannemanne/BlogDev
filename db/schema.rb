@@ -11,19 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120401055733) do
+ActiveRecord::Schema.define(:version => 20120420022901) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id",    :null => false
     t.string   "title"
     t.string   "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "linkbacks", :force => true do |t|
+    t.string   "source_uri"
+    t.string   "target_uri"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
-  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "post_tags", :force => true do |t|
     t.integer "post_id"
@@ -41,8 +45,8 @@ ActiveRecord::Schema.define(:version => 20120401055733) do
     t.integer  "status",         :default => 0, :null => false
     t.datetime "posted_at"
     t.integer  "comments_count", :default => 0, :null => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "title_url"
   end
 
@@ -61,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20120401055733) do
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "",    :null => false
     t.string   "encrypted_password",   :limit => 128, :default => "",    :null => false
+    t.string   "password_salt",                       :default => "",    :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
@@ -69,10 +74,10 @@ ActiveRecord::Schema.define(:version => 20120401055733) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                             :null => false
-    t.datetime "updated_at",                                             :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "name"
-    t.integer  "role",                                :default => 0,     :null => false
+    t.integer  "role"
     t.boolean  "use_gravatar",                        :default => false, :null => false
   end
 

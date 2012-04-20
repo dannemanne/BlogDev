@@ -18,6 +18,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    set_xpingback_header
     respond_to do |format|
       format.html
       format.js

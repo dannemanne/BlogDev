@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
 
   def index
+    set_xpingback_header
     respond_to do |format|
       format.html
       format.js

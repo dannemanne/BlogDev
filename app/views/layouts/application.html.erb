@@ -99,6 +99,7 @@
           <% recent_posts.each do |post| %>
             <p><%= link_to post.title, post_path(post), :title => "View post: #{post.title}" %></p>
           <% end %>
+          <p style="padding-top: 15px;"><%= link_to "View more Posts", posts_path, :title => "View more Posts" %></p>
         </section>
 
         <section>
@@ -119,6 +120,7 @@
           <% archive_months.each do |date| %>
             <p><%= link_to Date.new(*date.split("-").map(&:to_i)).strftime("%B %Y"), archive_path(Date.new(*date.split("-").map(&:to_i)).year, Date.new(*date.split("-").map(&:to_i)).month > 9 ? Date.new(*date.split("-").map(&:to_i)).month : "0#{Date.new(*date.split("-").map(&:to_i)).month}"), :title => "View posts made in #{date}" %></p>
           <% end %>
+          <p style="padding-top: 15px;"><%= link_to "View more Posts", posts_path, :title => "View more Posts" %></p>
         </section>
 
         <section>
@@ -126,6 +128,7 @@
           <% popular_tags.each do |tag| %>
             <p><%= link_to tag.name, tag_path(tag), :title => "List all Posts tagged by #{tag.name}", :rel => "tag" %></p>
           <% end %>
+          <p style="padding-top: 15px;"><%= link_to "View more Tags", tags_path, :title => "View more Tags" %></p>
         </section>
 
         <% if user_signed_in? %>

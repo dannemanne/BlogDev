@@ -4,7 +4,7 @@ Blog::Application.routes.draw do
 
   devise_for :users
 
-  resources :posts, :except => :index do
+  resources :posts do
     post :comment, :on => :member
   end
   get "tag/:tag" => "posts#by_tag", :as => :tag

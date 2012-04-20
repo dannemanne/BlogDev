@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  load_and_authorize_resource     :find_by => :title_url, :except => [:by_tag, :archive]
+  load_and_authorize_resource     :find_by => :title_url, :except => [:index, :by_tag, :archive]
   before_filter :find_by_tag,     :only => :by_tag
   before_filter :find_by_date,    :only => :archive
 
@@ -11,6 +11,18 @@ class PostsController < ApplicationController
   end
 
   def archive
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def index
+    posts_per_page = 5
+    @no_of_pages = Post.posted.count / posts_per_page + ( (Post.posted.count % posts_per_page) > 0 ? 1 : 0)
+    @page = params[:page] && params[:page].to_i || 1
+    @page = 1 if @page <= 0
+    @posts = Post.posted.order("posted_at DESC").limit(posts_per_page).offset( (@page-1) * posts_per_page )
     respond_to do |format|
       format.html
       format.js

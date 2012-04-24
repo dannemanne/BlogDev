@@ -101,7 +101,7 @@
           <% recent_posts.each do |post| %>
             <p><%= link_to post.title, post_path(post), :title => "View post: #{post.title}" %></p>
           <% end %>
-          <p style="padding-top: 15px;"><%= link_to "View more Posts", posts_path, :title => "View more Posts" %></p>
+          <p style="padding-top: 15px;"><%= link_to "... more Posts", posts_path, :title => "View more Posts" %></p>
         </section>
 
         <section>
@@ -144,6 +144,10 @@
             <% end %>
           </section>
         <% end %>
+
+        <section>
+          <a target="_blank" href="http://affiliate.godaddy.com/redirect/D977424A8125589D47110BFC95D3A75D2B620E732AAE57F8FE9B27C136D8CB7396704B4D47D2D0B7F93FF1C19FBC289A44283E8490B4DE3E3307A3910A18894E"><img src="http://affiliate.godaddy.com/ads/D977424A8125589D47110BFC95D3A75D2B620E732AAE57F8FE9B27C136D8CB7396704B4D47D2D0B7F93FF1C19FBC289A44283E8490B4DE3E3307A3910A18894E" border="0" width="120"  height="240" alt="Go Daddy Deal of the Week: Get Deluxe Web Hosting for just $5/mo! Offer expires 4/24/12"/></a>
+        </section>
       </div>
 
       <div class="clear"></div>
@@ -158,8 +162,15 @@
 
       <div class="grid_2">&nbsp;</div>
       <div class="grid_8">
-        <p style="float:left;">Copyright © <%= DateTime.now.year %></p>
-        <p style="float:right;"><%= link_to 'info@dannemanne.com', 'mailto:info@dannemanne.com' %></p>
+        <p style="text-align: center">
+          <span>Copyright © <%= DateTime.now.year %></span>
+          <span style="margin: 0 3px;">|</span>
+          <span><a href="http://affiliate.godaddy.com/redirect/0B39B79C3D795D72A3EDC7DB46A9DF44EBA179C0E9E1E9C4451059E3E737319A48DC102E020DE638F5311AABFE92330C20A5357462FE79A49CA3DE36679B1A10" target="_blank" title="GoDaddy.com">GoDaddy.com</a><img src="http://affiliate.godaddy.com/content/spacer.png?q=0B39B79C3D795D72A3EDC7DB46A9DF44EBA179C0E9E1E9C4451059E3E737319A48DC102E020DE638F5311AABFE92330C20A5357462FE79A49CA3DE36679B1A10" width="0" height="0" alt=""/></span>
+          <span style="margin: 0 3px;">|</span>
+          <span><%= link_to 'About', about_path %></span>
+          <span style="margin: 0 3px;">|</span>
+          <span><%= link_to 'info@dannemanne.com', 'mailto:info@dannemanne.com' %></span>
+        </p>
       </div>
       <div class="grid_2">&nbsp;</div>
       <div class="clear"></div>

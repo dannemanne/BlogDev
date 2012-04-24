@@ -6,6 +6,11 @@
 		<priority>0.5</priority>
 	</url>
 	<url>
+		<loc>http://dannemanne.com/about</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
 		<loc>http://dannemanne.com/posts</loc>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>

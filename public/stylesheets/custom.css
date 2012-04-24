@@ -347,3 +347,11 @@ div#projects td, div#projects td a {
     text-decoration: none;
     color: #0b0;
 }
+
+
+/* Static Sites styles
+************************/
+img.align-left {
+    float: left;
+    margin:  6px 6px 6px 0;
+}

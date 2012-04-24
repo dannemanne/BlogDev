@@ -24,7 +24,7 @@ div#content {
 	padding:0 0 4em; /* bottom padding for footer */
 }
 
-div#footer {
+footer {
 	position:absolute;
     height: 3em;
 	width:100%;

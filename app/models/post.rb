@@ -43,12 +43,12 @@ class Post < ActiveRecord::Base
     @tag_names ||= tags.map(&:name).join " "
   end
 
-  def previous_post
-    @previous_post ||= Post.posted.where("posted_at < ?", posted_at).order("posted_at DESC").first
+  def older_post
+    @older_post ||= Post.posted.where("posted_at < ?", posted_at).order("posted_at DESC").first
   end
 
-  def next_post
-    @next_post ||= Post.posted.where("posted_at > ?", posted_at).order("posted_at ASC").first
+  def newer_post
+    @newer_post ||= Post.posted.where("posted_at > ?", posted_at).order("posted_at ASC").first
   end
 
   scope :recent, Proc.new { |limit = 5| order("posts.posted_at DESC").limit(limit) }

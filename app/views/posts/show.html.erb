@@ -59,11 +59,11 @@ jQuery(window).load(function() {
       <% end %>
     <% end %>
 
-    <% if @post.previous_post %>
-      <span style="float: left;"><%= link_to "< #{@post.previous_post.title}", post_path(@post.previous_post), :rel => "prev", :title => "View the previous post: #{@post.previous_post.title}" %></span>
+    <% if @post.newer_post %>
+      <span style="float: left;"><%= link_to "< #{@post.newer_post.title}", post_path(@post.newer_post), :rel => "prev", :title => "View the previous post: #{@post.newer_post.title}" %></span>
     <% end %>
-    <% if @post.next_post %>
-      <span style="float: right;"><%= link_to "#{@post.next_post.title} >", post_path(@post.next_post), :rel => "next", :title => "View the next post: #{@post.next_post.title}" %></span>
+    <% if @post.older_post %>
+      <span style="float: right;"><%= link_to "#{@post.older_post.title} >", post_path(@post.older_post), :rel => "next", :title => "View the next post: #{@post.older_post.title}" %></span>
     <% end %>
     <div class="clear"></div>
   </section>

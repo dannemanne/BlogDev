@@ -7,7 +7,7 @@
 
 <nav class="prev-next">
   <% if @page > 1 %>
-    <span><%= link_to "< Next", posts_path(:page => @page -1), :title => "Go to the next page", :rel => "next" %></span>
+    <span><%= link_to "< Next", posts_page_path(@page -1), :title => "Go to the next page", :rel => "next" %></span>
   <% else %>
     <span>< Next</span>
   <% end %>
@@ -15,11 +15,11 @@
     <% if p == @page %>
       <span style="text-decoration: underline;"><%= p %></span>
     <% else %>
-      <span><%= link_to p, posts_path(:page => p), :title => "Go to page #{p}", :rel => "index" %></span>
+      <span><%= link_to p, posts_page_path(p), :title => "Go to page #{p}", :rel => "index" %></span>
     <% end %>
   <% end %>
   <% if @page < @no_of_pages %>
-    <span><%= link_to "Previous >", posts_path(:page => @page +1), :title => "Go to the previous page", :rel => "prev" %></span>
+    <span><%= link_to "Previous >", posts_page_path(@page +1), :title => "Go to the previous page", :rel => "prev" %></span>
   <% else %>
     <span>Previous ></span>
   <% end %>

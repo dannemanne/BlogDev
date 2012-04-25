@@ -5,6 +5,7 @@ Blog::Application.routes.draw do
 
   devise_for :users
 
+  get "posts/:page" => "posts#index", :as => :posts_page, :constraints => { :page => /[0-9]+/ }
   resources :posts do
     post :comment, :on => :member
   end

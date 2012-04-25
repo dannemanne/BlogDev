@@ -7,9 +7,9 @@
 
 <nav class="prev-next">
   <% if @page > 1 %>
-    <span><%= link_to "< Previous", posts_path(:page => @page -1), :title => "Go to the previous page", :rel => "prev" %></span>
+    <span><%= link_to "< Next", posts_path(:page => @page -1), :title => "Go to the next page", :rel => "next" %></span>
   <% else %>
-    <span>< Previous</span>
+    <span>< Next</span>
   <% end %>
   <% (1..@no_of_pages).each do |p| %>
     <% if p == @page %>
@@ -19,8 +19,8 @@
     <% end %>
   <% end %>
   <% if @page < @no_of_pages %>
-    <span><%= link_to "Next >", posts_path(:page => @page +1), :title => "Go to the next page", :rel => "next" %></span>
+    <span><%= link_to "Previous >", posts_path(:page => @page +1), :title => "Go to the previous page", :rel => "prev" %></span>
   <% else %>
-    <span>Next ></span>
+    <span>Previous ></span>
   <% end %>
 </nav>

@@ -12,8 +12,10 @@ Blog::Application.routes.draw do
   resources :tags, :except => [:new, :create]
   resources :drafts, :only => [:index, :show, :update, :destroy]
   resources :projects, :only => [:index]
+  resources :cheat_sheets, :except => :show
 
   get "about" => "home#about", :as => :about
   post "xmlrpc" => "pingback#xmlrpc"
+  get "sitemap" => "home#sitemap"
 
 end

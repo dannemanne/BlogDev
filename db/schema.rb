@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120420041253) do
+ActiveRecord::Schema.define(:version => 20120427075334) do
+
+  create_table "cheat_sheets", :force => true do |t|
+    t.string   "category"
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"

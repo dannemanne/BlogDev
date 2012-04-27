@@ -1,0 +1,36 @@
+<h1>CHEAT SHEETS</h1>
+
+<section id="table-of-content">
+  <h2>Table of Content</h2>
+  <ul>
+    <% @cheat_sheet_groups.each do |category_stub, cheat_sheets| %>
+      <li><%= link_to cheat_sheets.first.category, "##{category_stub}" %>
+        <ol>
+          <% cheat_sheets.each do |cheat_sheet| %>
+            <li><%= link_to cheat_sheet.title, "##{cheat_sheet.title_stub}" %></li>
+          <% end %>
+        </ol>
+      </li>
+    <% end %>
+  </ul>
+
+</section>
+
+<% @cheat_sheet_groups.each do |category_stub, cheat_sheets| %>
+  <section id="<%= category_stub %>">
+    <h2><%= cheat_sheets.first.category %></h2>
+    <% cheat_sheets.each do |cheat_sheet| %>
+      <section id="<%= cheat_sheet.title_stub %>">
+        <h3><%= cheat_sheet.title %></h3>
+        <% if can? :update, cheat_sheet %><p><%= link_to "Edit", edit_cheat_sheet_path(cheat_sheet) %></p><% end %>
+        <script type="text/javascript">
+          jQuery(window).load(function() { parse_preview(jQuery("#cheat_sheet_<%= cheat_sheet.id %>")); });
+        </script>
+        <div id="cheat_sheet_<%= cheat_sheet.id %>">
+          <%= cheat_sheet.display_body %>
+        </div>
+        <p><%= link_to "Back to Table of Content", "#table-of-content", :rel => "index" %></p>
+      </section>
+    <% end %>
+  </section>
+<% end %>

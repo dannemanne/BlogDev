@@ -24,6 +24,7 @@ class Ability
     can :read, Post, :status => Post::STATUS_POSTED
     can :comment, Post, :status => Post::STATUS_POSTED
     can :read, Tag
+    can :read, CheatSheet
 
     # Tempoarary preventing comments
     cannot :create, Comment

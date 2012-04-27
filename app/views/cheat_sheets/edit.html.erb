@@ -1,0 +1,8 @@
+<h1>Edit Cheat Sheet</h1>
+
+<%= form_for @cheat_sheet do |f| %>
+
+  <%= render "cheat_sheet_form", :f => f %>
+
+<% end %>
+<p><%= button_to "Delete", cheat_sheet_path(@cheat_sheet), :method => :delete %></p>

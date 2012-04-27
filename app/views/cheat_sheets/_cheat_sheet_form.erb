@@ -1,0 +1,40 @@
+<script type="text/javascript">
+// Setup the WYSIWYM editor!
+jQuery(window).load(function() {
+  jQuery('#cheat_sheet_body').wysiwym(Wysiwym.Markdown, {});
+
+  $(function() {
+	var availableTags = <%= CheatSheet.select("DISTINCT category").map(&:category).to_json.html_safe %>;
+		$( "#cheat_sheet_category" ).autocomplete({
+			source: availableTags
+		});
+	});
+
+  var update_cheat_sheet = function(){
+      update_live_preview(jQuery("#cheat_sheet_body"), jQuery("#cheat_sheet_body_preview"));
+  };
+  setInterval(update_cheat_sheet, 200);
+});
+</script>
+<% if f.object.errors.any? %>
+  <ul>
+    <% f.object.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h2><%= f.label :title %></h2>
+<p><%= f.text_field :title %></p>
+
+<h2><%= f.label :category %></h2>
+<p><%= f.text_field :category %></p>
+
+<h2><%= f.label :body %></h2>
+<p><%= f.text_area :body, :style => "width: 600px; height: 200px; resize: vertical;" %></p>
+
+<div class="clear"></div>
+<h2>Preview of Cheat Sheet</h2>
+<div id="cheat_sheet_body_preview" class="post-preview"></div>
+
+<h2><%= f.submit "Save" %></h2>

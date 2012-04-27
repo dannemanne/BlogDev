@@ -7,6 +7,7 @@
   <link rel="pingback" href="<%= pingback_server_url %>" />
   <link rel="sitemap" href="/sitemap.xml" />
   <link rel="shortcut icon" href="/images/favicon.ico">
+  <meta name="description" content="A blog from Hong Kong with news, tips and tutorials about programming. Mostly about Ruby, Rails and Node.js but anything can come up."
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" %>
   <%= javascript_include_tag "http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js" %>
@@ -102,8 +103,10 @@
         </section>
 
         <section>
-          <h2>PROJECTS</h2>
-          <p><%= link_to "View all Projects", projects_path, :title => "View all Projects" %></p>
+          <h2>RESOURCES</h2>
+          <p><%= link_to "Projects", projects_path, :title => "View all Projects" %></p>
+          <p><%= link_to "Cheat Sheets", cheat_sheets_path, :title => "Browse my Cheat Sheets" %></p>
+          <p><%= link_to "About Me", about_path, :title => "About me" %></p>
         </section>
       </div>
 
@@ -126,6 +129,7 @@
                 <%= content_tag :p, link_to("Drafts (#{current_user.posts.drafts.count})", drafts_path) %>
               <% end %>
             <% end %>
+            <% if can? :create, CheatSheet %><%= content_tag :p, link_to("New Cheat Sheet", new_cheat_sheet_path) %><% end %>
           </section>
         <% end %>
 

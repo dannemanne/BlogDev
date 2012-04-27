@@ -24,3 +24,8 @@
     <span>Previous ></span>
   <% end %>
 </nav>
+
+<% content_for :sidebar_right do %>
+  <%= archive_tag %>
+  <%= popular_tags %>
+<% end %>

@@ -4,20 +4,12 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => exception.message
   end
 
-  helper_method :popular_tags, :recent_posts, :archive_months, :pingback_server_url
+  helper_method :recent_posts, :pingback_server_url
 
 protected
 
-  def popular_tags(limit = 5)
-    Tag.order("posts_count DESC").limit(limit)
-  end
-
   def recent_posts(limit = 5)
     Post.posted.recent(limit)
-  end
-
-  def archive_months(limit = 5)
-    @archive_months = Post.archive_months.group_by { |post| post.posted_at.strftime("%Y-%m") }.keys
   end
 
   def set_xpingback_header

@@ -68,3 +68,8 @@ jQuery(window).load(function() {
     <div class="clear"></div>
   </section>
 </article>
+
+<% content_for :sidebar_right do %>
+  <%= archive_tag %>
+  <%= popular_tags %>
+<% end %>

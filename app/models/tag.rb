@@ -11,6 +11,14 @@ class Tag < ActiveRecord::Base
     self.stub = name && name.downcase.gsub(/[^a-z0-9_\-]/i, "_").gsub(/_+/, "_")
   end
 
+  # If save failed, reset it to previous value. Otherwise path helpers
+  # will generate invalid paths.
+  after_rollback do
+    if changes[:stub].present?
+      self.stub = changes[:stub].first
+    end
+  end
+
   def to_param
     stub
   end

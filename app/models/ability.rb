@@ -11,6 +11,7 @@ class Ability
     # Ops can manage Comments
     elsif user.role? :op
       can :manage, Comment
+      can :manage, Tag
 
     end
 
@@ -22,6 +23,7 @@ class Ability
     # Everybody can read and comment on posted Posts
     can :read, Post, :status => Post::STATUS_POSTED
     can :comment, Post, :status => Post::STATUS_POSTED
+    can :read, Tag
 
     # Tempoarary preventing comments
     cannot :create, Comment

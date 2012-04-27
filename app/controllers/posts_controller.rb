@@ -1,14 +1,14 @@
 class PostsController < ApplicationController
-  load_and_authorize_resource     :find_by => :title_url, :except => [:index, :by_tag, :archive]
-  before_filter :find_by_tag,     :only => :by_tag
+  load_and_authorize_resource     :find_by => :title_url, :except => [:index, :archive]
+#  before_filter :find_by_tag,     :only => :by_tag
   before_filter :find_by_date,    :only => :archive
 
-  def by_tag
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
+#  def by_tag
+#    respond_to do |format|
+#      format.html
+#      format.js
+#    end
+#  end
 
   def archive
     respond_to do |format|
@@ -118,11 +118,11 @@ private
 #    end
 #  end
 
-  def find_by_tag
-    @tag = Tag.from_param(params[:tag])
-  rescue ActiveRecord::RecordNotFound
-    redirect_to root_path
-  end
+#  def find_by_tag
+#    @tag = Tag.from_param(params[:tag])
+#  rescue ActiveRecord::RecordNotFound
+#    redirect_to root_path
+#  end
 
   def find_by_date
     @date1 = Date.new(params[:year].to_i,params[:month].to_i)

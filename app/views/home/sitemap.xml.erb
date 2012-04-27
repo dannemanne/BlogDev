@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<url>
+		<loc>http://dannemanne.com</loc>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://dannemanne.com/about</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://dannemanne.com/posts</loc>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://dannemanne.com/projects</loc>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<% Tag.all.each do |tag| %>
+	<url>
+		<loc><%= tag_url(tag) %></loc>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<% end %>
+	<% Post.archive_months.group_by { |post| post.posted_at.strftime("%Y-%m") }.keys.each do |date| %>
+	<url>
+		<loc><%= archive_url(Date.new(*date.split("-").map(&:to_i)).year, Date.new(*date.split("-").map(&:to_i)).month > 9 ? Date.new(*date.split("-").map(&:to_i)).month : "0#{Date.new(*date.split("-").map(&:to_i)).month}") %></loc>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<% end %>
+    <% Post.recent(10).each do |post| %>
+	<url>
+		<loc><%= post_url(post) %></loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<% end %>
+</urlset>

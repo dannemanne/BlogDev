@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
-  <title>DanneManne.com</title>
-  <link rel="pingback" href="/xmlrpc" />
+  <title><%= content_for?(:title) ? yield(:title) : "Yet another coding Blog" %> | DanneManne.com</title>
+  <link rel="pingback" href="<%= pingback_server_url %>" />
   <link rel="sitemap" href="/sitemap.xml" />
   <link rel="shortcut icon" href="/images/favicon.ico">
   <%= javascript_include_tag :defaults %>

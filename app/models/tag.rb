@@ -8,7 +8,7 @@ class Tag < ActiveRecord::Base
   validates_uniqueness_of :name, :stub
 
   before_validation do
-    self.stub = name.downcase.gsub(" ", "-")
+    self.stub = name && name.downcase.gsub(/[^a-z0-9_\-]/i, "_").gsub(/_+/, "_")
   end
 
   def to_param

@@ -26,8 +26,8 @@ class Post < ActiveRecord::Base
   end
 
   before_save do
-    if @tag_names && @tag_names != tags.map(&:name).join(" ")
-      self.tags = @tag_names.split(" ").map{ |tag| Tag.find_or_create_by_name(tag) }
+    if @tag_names && @tag_names.strip != tags.map(&:name).join(", ").strip
+      self.tags = @tag_names.split(",").map{ |tag| Tag.find_or_create_by_name(tag.strip) }
     end
   end
 
@@ -40,7 +40,7 @@ class Post < ActiveRecord::Base
   end
 
   def tag_names
-    @tag_names ||= tags.map(&:name).join " "
+    @tag_names ||= tags.map(&:name).join ", "
   end
 
   def older_post

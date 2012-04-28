@@ -13,44 +13,6 @@
   <%= javascript_include_tag "http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js" %>
   <%= stylesheet_link_tag "application" %>
 
-
-  <script type="text/javascript">
-    // For the Live Preview we want to check the value of
-    // textarea changes as some set interval.  If it's
-    // changed, we'll call Showdown to convert the textarea
-    // input to HTML then prettify to colorize code blocks.
-    var showdown = new Showdown.converter();
-    var prev_text = "";
-    var update_live_preview = function(node, preview) {
-        var input_text = node.val(); //$('#post_body')
-        if (input_text != prev_text) {
-            var text = $("<div>"+ showdown.makeHtml(input_text) +"</div>");
-            text.find('pre').addClass('prettyprint linenums');
-            text.find('p code').addClass('prettyprint');
-            text.find('pre').each(function() {
-                $(this).html(prettyPrintOne($(this).html(), undefined, true));
-            });
-            text.find('p code').each(function() {
-                $(this).html(prettyPrintOne($(this).html()));
-            });
-            preview.html(text); //$('#post_body_preview')
-            prev_text = input_text;
-        }
-    };
-    var parse_preview = function(node){
-        var text = $("<div>"+ node.html() +"</div>");
-        text.find('pre').addClass('prettyprint linenums');
-        text.find('p code').addClass('prettyprint');
-        text.find('pre').each(function() {
-            $(this).html(prettyPrintOne($(this).html(), undefined, true));
-        });
-        text.find('p code').each(function() {
-            $(this).html(prettyPrintOne($(this).html()));
-        });
-        node.html(text);
-    };
-  </script>
-
   <%= csrf_meta_tag %>
 
   <% if Rails.env.production? %>

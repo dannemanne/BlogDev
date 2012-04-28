@@ -1,9 +1,4 @@
-<script type="text/javascript">
-// Setup the WYSIWYM editor!
-jQuery(window).load(function() {
-  parse_preview(jQuery("#post_<%= @post.id %>"));
-});
-</script>
+<% content_for :title do %><%= @post.title %><% end %>
 <article>
   <header>
     <h1><%= @post.title %></h1>
@@ -15,7 +10,7 @@ jQuery(window).load(function() {
     </p>
   </header>
 
-  <section id="post_<%= @post.id %>">
+  <section data-parse="once">
     <%= @post.display_body %>
   </section>
 

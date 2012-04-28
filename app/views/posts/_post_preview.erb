@@ -1,9 +1,4 @@
 <article>
-  <script type="text/javascript">
-  jQuery(window).load(function() {
-    parse_preview(jQuery("#post_preview_<%= post.id %>"));
-  });
-  </script>
   <header>
     <h2><%= link_to post.title, post_path(post) %></h2>
     <p style="color: rgb(169,169,169); margin-bottom: 3px;">
@@ -13,7 +8,7 @@
       <% end %>
     </p>
   </header>
-  <section id="post_preview_<%= post.id %>">
+  <section data-parse="once">
     <%= post.display_body %>
   </section>
   <section>

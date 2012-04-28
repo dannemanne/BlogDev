@@ -1,4 +1,9 @@
 /* ...
 *= require_self
-*= require_tree .
+*= require 100_height_with_header_and_footer
+*= require 960
+*= require cupertino/jquery-ui-1.8.19.custom
+*= require google-code-prettify/prettify
+*= require wysiwym/wysiwym
+*= require custom
 */

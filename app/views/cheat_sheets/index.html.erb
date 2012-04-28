@@ -23,12 +23,9 @@
       <section id="<%= cheat_sheet.title_stub %>">
         <h3><%= cheat_sheet.title %></h3>
         <% if can? :update, cheat_sheet %><p><%= link_to "Edit", edit_cheat_sheet_path(cheat_sheet) %></p><% end %>
-        <script type="text/javascript">
-          jQuery(window).load(function() { parse_preview(jQuery("#cheat_sheet_<%= cheat_sheet.id %>")); });
-        </script>
-        <div id="cheat_sheet_<%= cheat_sheet.id %>">
+        <section data-parse="once">
           <%= cheat_sheet.display_body %>
-        </div>
+        </section>
         <p><%= link_to "Back to Table of Content", "#table-of-content", :rel => "index" %></p>
       </section>
     <% end %>

@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
-		<loc>http://dannemanne.com</loc>
+		<loc><%= root_url %></loc>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
-		<loc>http://dannemanne.com/about</loc>
+		<loc><%= about_url %></loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
-		<loc>http://dannemanne.com/posts</loc>
+		<loc><%= posts_url %></loc>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
-		<loc>http://dannemanne.com/projects</loc>
-		<changefreq>daily</changefreq>
+		<loc><%= projects_url %></loc>
+		<changefreq>weekly</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc><%= cheat_sheets_url %></loc>
+		<changefreq>weekly</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<% Tag.all.each do |tag| %>

@@ -52,7 +52,7 @@ class PostsController < ApplicationController
       if @post.status == Post::STATUS_POSTED
         redirect_to @post
       else
-        redirect_to edit_post_path(@post)
+        redirect_to drafts_path(@post)
       end
     else
       render :action => :new

@@ -18,4 +18,6 @@ Blog::Application.routes.draw do
   post "xmlrpc" => "pingback#xmlrpc"
   get "sitemap" => "home#sitemap"
 
+  get "tag/:tagname" => redirect("/tags/%{tagname}")
+
 end

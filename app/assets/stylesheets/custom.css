@@ -10,13 +10,13 @@ html,body {
 h1 {
     color:#494949;
 	font:1.5em arial,sans-serif;
-	margin:0.5em 0;
+	margin: 2em 0 0;
 }
 
 h2 {
     color:#494949;
 	font:1.25em arial,sans-serif;
-	margin:0 0 0.5em;
+	margin: 1.5em 0 0;
 }
 
 h1, h2 {
@@ -27,7 +27,7 @@ p {
     font-family:arial,sans-serif;
     color:#494949;
 	line-height:1.5;
-	margin:0 0 1em;
+	margin: 1em 0 0;
     padding: 0;
 }
 

@@ -14,8 +14,8 @@
   <section>
     <p><%= link_to "Read More >>", post_path(post) %></p>
     <p>
-      <% if false # Temporary remove comments %>
-      <span style="float:left;"><%= post.comments_count %> Comments</span>
+      <% if post.allow_comments %>
+        <span style="float:left;"><%= post.comments_count %> Comments</span>
       <% end %>
       <span style="float:right;">
         <% if post.tags.any? %>

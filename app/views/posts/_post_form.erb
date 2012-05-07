@@ -70,4 +70,10 @@ jQuery(window).load(function() {
 <p><%= f.radio_button :status, Post::STATUS_DRAFT %> Draft</p>
 <p><%= f.radio_button :status, Post::STATUS_POSTED %> Published</p>
 
+<h2><%= f.label :allow_comments %></h2>
+<p>
+  <%= f.radio_button :allow_comments, false %> No
+  <%= f.radio_button :allow_comments, true %> Yes
+</p>
+
 <h2><%= f.submit "Save" %></h2>

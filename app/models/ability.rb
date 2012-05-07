@@ -21,14 +21,14 @@ class Ability
     end
 
     # Everybody can read and comment on posted Posts
-    can :read, Post, :status => Post::STATUS_POSTED
-    can :comment, Post, :status => Post::STATUS_POSTED
+    can :read, Post, :status => Post::STATUS_POSTED, :allow_comments => true
+    can :comment, Post, :status => Post::STATUS_POSTED, :allow_comments => true
     can :read, Tag
     can :read, CheatSheet
 
     # Tempoarary preventing comments
-    cannot :create, Comment
-    cannot :comment, Post
+    cannot :create, Comment, :allow_comments => false
+    cannot :comment, Post, :allow_comments => false
 
   end
 end

@@ -25,34 +25,33 @@
     </span>
     <div class="clear"></div>
 
-    <% if false # Temporary remove comments %>
-    <h3>Comments</h3>
-    <% if @post.comments.any? %>
-      <% @post.comments.each do |comment| %>
-        <a id="comment_<%= comment.id %>"></a>
-        <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
-        <h2><%= link_to comment.title, post_path(@post, :anchor => "comment_#{comment.id}") %>
-          <span style="float: right; font-size: 8pt;">
-            <%= comment.created_at.strftime("%a, %Y-%m-%d %H:%M") %><% if comment.user %> - <%= comment.user.display_name %><% end %>
-          </span>
-        </h2>
-        <p><%= comment.message %></p>
-      <% end %>
-    <% else %>
-      <p>No comments yet</p>
-    <% end %>
-    <% end %>
-
-    <% if can? :comment, @post %>
-      <%= form_for @comment || @post.comments.new, :url => { :action => :comment } do |f| %>
-        <p><%= f.text_field :title, :placeHolder => "Title" %></p>
-        <p><%= f.text_area :message, :style => "height: 50px; width: 17em; font-family:arial,sans-serif;", :placeHolder => "Message" %></p>
-       <% if user_signed_in? %>
-           <p>As <%= current_user.name %></p>
-        <% else %>
-          <p>As Anonymous. <%= link_to "Login", new_user_session_path %> to post personal comment.</p>
+    <% if @post.allow_comments %>
+      <h3>Comments</h3>
+      <% if @post.comments.length > 0 %>
+        <% @post.comments.each do |comment| %>
+          <a id="comment_<%= comment.id %>"></a>
+          <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
+          <h2><%= link_to comment.title, post_path(@post, :anchor => "comment_#{comment.id}") %>
+            <span style="float: right; font-size: 8pt;">
+              <%= comment.created_at.strftime("%a, %Y-%m-%d %H:%M") %><% if comment.user %> - <%= comment.user.display_name %><% end %>
+            </span>
+          </h2>
+          <p><%= comment.message %></p>
         <% end %>
-        <p><%= f.submit "Comment" %></p>
+      <% else %>
+        <p>No comments yet</p>
+      <% end %>
+      <% if can? :comment, @post %>
+        <%= form_for @comment || @post.comments.new, :url => { :action => :comment } do |f| %>
+          <p><%= f.text_field :title, :placeHolder => "Title", :style => "width: 300px;" %></p>
+          <p><%= f.text_area :message, :style => "height: 50px; width: 300px; font-family:arial,sans-serif; font-size: 10pt;", :placeHolder => "Message" %></p>
+         <% if user_signed_in? %>
+             <p>As <%= current_user.name %></p>
+          <% else %>
+            <p>As Anonymous. <%= link_to "Login", new_user_session_path %> to post personal comment.</p>
+          <% end %>
+          <p><%= f.submit "Comment" %></p>
+        <% end %>
       <% end %>
     <% end %>
 

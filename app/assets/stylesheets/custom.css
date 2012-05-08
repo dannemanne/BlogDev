@@ -69,7 +69,7 @@ header.body-header {
 
     -webkit-box-shadow: 0 2px 8px rgba(160, 160, 160, 1);
     -moz-box-shadow: 0 2px 8px rgba(160, 160, 160, 1);
-     box-shadow: 0 2px 8px; rgba(160, 160, 160, 1);
+     box-shadow: 0 2px 8px rgba(160, 160, 160, 1);
 }
 header.body-header span {
     margin: 0 3px;

@@ -29,14 +29,17 @@ class Post < ActiveRecord::Base
     if @tag_names && @tag_names.strip != tags.map(&:name).join(", ").strip
       self.tags = @tag_names.split(",").map{ |tag| Tag.find_or_create_by_name(tag.strip) }
     end
+    self.parsed_body = Kramdown::Document.new(body).to_html
+    paragraph = Nokogiri::HTML.fragment(parsed_body).children.first
+    self.parsed_preview = paragraph.respond_to?(:to_html) && paragraph.to_html || ""
   end
 
   def display_body
-    parse_body.to_html.html_safe
+    parsed_body.html_safe
   end
 
-  def preview_body
-    parse_body.to_html.html_safe
+  def display_preview
+    parsed_preview.html_safe
   end
 
   def to_param
@@ -59,10 +62,5 @@ class Post < ActiveRecord::Base
   scope :posted, includes(:comments).where("posts.status = ?", STATUS_POSTED)
   scope :drafts, where(:status => STATUS_DRAFT)
   scope :archive_months, select(:posted_at).where(:status => STATUS_POSTED).order("1 DESC")
-
-private
-  def parse_body
-    @parse_body ||= Kramdown::Document.new(body)
-  end
 
 end

@@ -1,7 +1,9 @@
 <section>
   <h2>POPULAR TAGS</h2>
-  <% popular_tags.each do |tag| %>
-    <p><%= link_to tag.name, tag_path(tag), :title => "List all Posts tagged by #{tag.name}", :rel => "tag" %></p>
-  <% end %>
-  <p style="padding-top: 15px;"><%= link_to "View more Tags", tags_path, :title => "View more Tags" %></p>
+  <ul>
+    <% popular_tags.each do |tag| %>
+      <li><%= link_to tag.name, tag_path(tag), :title => "List all Posts tagged by #{tag.name}", :rel => "tag" %></li>
+    <% end %>
+    <li style="padding-top: 15px;"><%= link_to "View more Tags", tags_path, :title => "View more Tags" %></li>
+  </ul>
 </section>

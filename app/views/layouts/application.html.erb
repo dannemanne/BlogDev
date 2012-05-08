@@ -26,9 +26,9 @@
     <div class="container_12">
       <div class="grid_12">
         <% if user_signed_in? %>
-          <p>Logged in as <%= current_user.display_name %>. <%= link_to "Logout", destroy_user_session_path, :title => "Logout user #{current_user.display_name}" %></p>
+          <span class="wrap_right">Logged in as <%= current_user.display_name %>. <%= link_to "Logout", destroy_user_session_path, :title => "Logout user #{current_user.display_name}" %></span>
         <% else %>
-          <p><%= link_to "Login", new_user_session_path, :title => "Login to DanneManne.com" %></p>
+          <span class="wrap_right"><%= link_to "Login", new_user_session_path, :title => "Login to DanneManne.com" %></span>
         <% end %>
       </div>
     </div>
@@ -55,22 +55,26 @@
 
     <div id="main" class="container_12">
 
-      <div id="left_side" class="grid_2">
+      <nav id="left_side" class="grid_2">
         <section>
           <h2>LATEST POSTS</h2>
-          <% recent_posts.each do |post| %>
-            <p><%= link_to post.title, post_path(post), :title => "View post: #{post.title}" %></p>
-          <% end %>
-          <p style="padding-top: 15px;"><%= link_to "... more Posts", posts_path, :title => "View more Posts" %></p>
+          <ul>
+            <% recent_posts.each do |post| %>
+              <li><%= link_to post.title, post_path(post), :title => "View post: #{post.title}" %></li>
+            <% end %>
+            <li style="padding-top: 15px;"><%= link_to "... more Posts", posts_path, :title => "View more Posts" %></li>
+          </ul>
         </section>
 
         <section>
           <h2>RESOURCES</h2>
-          <p><%= link_to "Projects", projects_path, :title => "View all Projects" %></p>
-          <p><%= link_to "Cheat Sheets", cheat_sheets_path, :title => "Browse my Cheat Sheets" %></p>
-          <p><%= link_to "About Me", about_path, :title => "About me" %></p>
+          <ul>
+            <li><%= link_to "Projects", projects_path, :title => "View all Projects" %></li>
+            <li><%= link_to "Cheat Sheets", cheat_sheets_path, :title => "Browse my Cheat Sheets" %></li>
+            <li><%= link_to "About Me", about_path, :title => "About me" %></li>
+          </ul>
         </section>
-      </div>
+      </nav>
 
       <div id="workspace" class="grid_8">
         <div style="padding: 0 10px;">
@@ -78,27 +82,29 @@
         </div>
       </div>
 
-      <div id="right_side" class="grid_2">
+      <nav id="right_side" class="grid_2">
 
         <%= yield :sidebar_right %>
 
         <% if user_signed_in? %>
           <section>
             <h2>TOOLS</h2>
-            <% if can? :create, Post %>
-              <%= content_tag :p, link_to("New Post", new_post_path) %>
-              <% if current_user.posts.drafts.any? %>
-                <%= content_tag :p, link_to("Drafts (#{current_user.posts.drafts.count})", drafts_path) %>
+            <ul>
+              <% if can? :create, Post %>
+                <li><%= link_to "New Post", new_post_path %></li>
+                <% if current_user.posts.drafts.any? %>
+                  <li><%= link_to"Drafts (#{current_user.posts.drafts.count})", drafts_path %></li>
+                <% end %>
               <% end %>
-            <% end %>
-            <% if can? :create, CheatSheet %><%= content_tag :p, link_to("New Cheat Sheet", new_cheat_sheet_path) %><% end %>
+              <% if can? :create, CheatSheet %><li><%= link_to "New Cheat Sheet", new_cheat_sheet_path %></li><% end %>
+            </ul>
           </section>
         <% end %>
 
         <section>
           <a target="_blank" href="http://affiliate.godaddy.com/redirect/D977424A8125589D47110BFC95D3A75D2B620E732AAE57F8FE9B27C136D8CB7396704B4D47D2D0B7F93FF1C19FBC289A44283E8490B4DE3E3307A3910A18894E"><img src="http://affiliate.godaddy.com/ads/D977424A8125589D47110BFC95D3A75D2B620E732AAE57F8FE9B27C136D8CB7396704B4D47D2D0B7F93FF1C19FBC289A44283E8490B4DE3E3307A3910A18894E" border="0" width="120"  height="240" alt="Go Daddy Deal of the Week: Get Deluxe Web Hosting for just $5/mo! Offer expires 4/24/12"/></a>
         </section>
-      </div>
+      </nav>
 
       <div class="clear"></div>
 

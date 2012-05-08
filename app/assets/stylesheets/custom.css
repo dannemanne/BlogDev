@@ -1,3 +1,12 @@
+/* CSS RESET */
+body{padding:0;margin:0;font:13px Arial,Helvetica,Garuda,sans-serif;*font-size:small;*font:x-small;}
+h1,h2,h3,h4,h5,h6,ul,li,em,strong,pre,code,address{padding:0;margin:0;line-height:1em;font-size:100%;font-weight:normal;font-style: normal;}
+table{font-size:inherit;font:100%;}
+img{border:0;}
+p{margin: 0;}
+address{display: inline;}
+strong{font-weight: bold;}
+
 
 html,body {
 	background-color: #EDF5FA;
@@ -36,10 +45,7 @@ a:hover {color:#0062A0; text-decoration: underline;}
 
 div#header-top {
     height: 20px;
-}
-div#header-top p {
-    float: right;
-    font-size: 10px;
+    font-size: 8pt;
 }
 
 header, article, footer, nav, section {
@@ -108,82 +114,16 @@ div#left_side p, div#right_side p {
 
 
 /* Navigation */
-div#nav{
-    width:580px;
-    height:114px;
-    display:block;
-    float:right;
-    margin:0 -15px 0 0;
+nav#left_side ul, nav#right_side ul {
+    list-style-type: none;
 }
-div#nav ul{
-    margin:0;
-    padding:0
+
+nav#left_side li, nav#right_side li {
+    margin: 0.5em 0;
 }
-div#nav li{
-    display:inline;
-    text-indent: -9999px;
-    margin:0;
-    padding:0
-}
-div#nav li a{
-    display:block;
-    float:left;
-    height:114px;
-    background-image:url('/images/nav.png');
-    background-repeat:no-repeat;
-    background-position:top;
-    cursor:pointer
-}
-div#nav li.menu-item-home a{
-    width:89px;
-    background-position:0 0
-}
-div#nav li.page-item-8 a{
-    width:123px;
-    background-position: -104px 0
-}
-div#nav li.page-item-13 a{
-    width:140px;
-    background-position: -227px 0
-}
-div#nav li.page-item-24 a{
-    width:92px;
-    background-position: -367px 0
-}
-div#nav li.page-item-14 a{
-    width:121px;
-    background-position: -459px 0
-}
-div#nav li.menu-item-home a:hover{
-    background-position:0 -228px
-}
-div#nav li.page-item-8 a:hover{
-    background-position: -104px -228px
-}
-div#nav li.page-item-13 a:hover{
-    background-position: -227px -228px
-}
-div#nav li.page-item-24 a:hover{
-    background-position: -367px -228px
-}
-div#nav li.page-item-14 a:hover{
-    background-position: -459px -228px
-}
-div#nav ul.home li.menu-item-home a{
-    background-position:0 -114px
-}
-div#nav li.page-item-8.current_page_item a{
-    background-position: -104px -114px
-}
-div#nav li.page-item-13.current_page_item a{
-    background-position: -227px -114px
-}
-div#nav li.page-item-24.current_page_item a{
-    background-position: -367px -114px
-}
-div#nav li.page-item-14.current_page_item a{
-    background-position: -459px -114px
-}
+
+
+
 
 .wrap_left {
     float:left;

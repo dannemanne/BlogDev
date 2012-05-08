@@ -1,7 +1,9 @@
 <section>
   <h2>ARCHIVE</h2>
-  <% archive_months.each do |date| %>
-    <p><%= link_to Date.new(*date.split("-").map(&:to_i)).strftime("%B %Y"), archive_path(Date.new(*date.split("-").map(&:to_i)).year, Date.new(*date.split("-").map(&:to_i)).month > 9 ? Date.new(*date.split("-").map(&:to_i)).month : "0#{Date.new(*date.split("-").map(&:to_i)).month}"), :title => "View posts made in #{date}" %></p>
-  <% end %>
-  <p style="padding-top: 15px;"><%= link_to "View more Posts", posts_path, :title => "View more Posts" %></p>
+  <ul>
+    <% archive_months.each do |date| %>
+      <li><%= link_to Date.new(*date.split("-").map(&:to_i)).strftime("%B %Y"), archive_path(Date.new(*date.split("-").map(&:to_i)).year, Date.new(*date.split("-").map(&:to_i)).month > 9 ? Date.new(*date.split("-").map(&:to_i)).month : "0#{Date.new(*date.split("-").map(&:to_i)).month}"), :title => "View posts made in #{date}" %></li>
+    <% end %>
+    <li style="padding-top: 15px;"><%= link_to "View more Posts", posts_path, :title => "View more Posts" %></li>
+   </ul>
 </section>

@@ -102,7 +102,11 @@
         <% end %>
 
         <section>
-          <a target="_blank" href="http://affiliate.godaddy.com/redirect/D977424A8125589D47110BFC95D3A75D2B620E732AAE57F8FE9B27C136D8CB7396704B4D47D2D0B7F93FF1C19FBC289A44283E8490B4DE3E3307A3910A18894E"><img src="http://affiliate.godaddy.com/ads/D977424A8125589D47110BFC95D3A75D2B620E732AAE57F8FE9B27C136D8CB7396704B4D47D2D0B7F93FF1C19FBC289A44283E8490B4DE3E3307A3910A18894E" border="0" width="120"  height="240" alt="Go Daddy Deal of the Week: Get Deluxe Web Hosting for just $5/mo! Offer expires 4/24/12"/></a>
+          <% if Rails.env.production? %>
+            <a target="_blank" href="http://affiliate.godaddy.com/redirect/D977424A8125589D47110BFC95D3A75D2B620E732AAE57F8FE9B27C136D8CB7396704B4D47D2D0B7F93FF1C19FBC289A44283E8490B4DE3E3307A3910A18894E"><img src="http://affiliate.godaddy.com/ads/D977424A8125589D47110BFC95D3A75D2B620E732AAE57F8FE9B27C136D8CB7396704B4D47D2D0B7F93FF1C19FBC289A44283E8490B4DE3E3307A3910A18894E" border="0" width="120"  height="240" alt="Go Daddy Deal of the Week: Get Deluxe Web Hosting for just $5/mo! Offer expires 4/24/12"/></a>
+          <% else %>
+            <div style="width: 120px; height: 240px; background-color: #ddd;">Ads</div>
+          <% end %>
         </section>
       </nav>
 

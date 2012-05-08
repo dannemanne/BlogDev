@@ -56,6 +56,7 @@ header.body-header {
     position: relative;
     z-index: 100;
 	height: 100px;
+    width: 100%;
     padding: 10px 0;
     background:-webkit-gradient(linear,0% 0%,0% 100%,
         color-stop(0%, #0062A0),
@@ -144,8 +145,8 @@ nav#left_side li, nav#right_side li {
 article {
     padding: 10px;
 }
-article p {
-
+article li {
+    margin: 0.5em 0 0.5em 1.5em;
 }
 
 div.post-preview {

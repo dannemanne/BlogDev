@@ -21,7 +21,7 @@ class Ability
     end
 
     # Everybody can read and comment on posted Posts
-    can :read, Post, :status => Post::STATUS_POSTED, :allow_comments => true
+    can :read, Post, :status => Post::STATUS_POSTED
     can :comment, Post, :status => Post::STATUS_POSTED, :allow_comments => true
     can :read, Tag
     can :read, CheatSheet

@@ -55,7 +55,7 @@
 
     <div id="main" class="container_12">
 
-      <nav id="left_side" class="grid_2">
+      <div id="left_side" class="grid_2">
         <section>
           <h2>LATEST POSTS</h2>
           <ul>
@@ -74,7 +74,7 @@
             <li><%= link_to "About Me", about_path, :title => "About me" %></li>
           </ul>
         </section>
-      </nav>
+      </div>
 
       <div id="workspace" class="grid_8">
         <div style="padding: 0 10px;">
@@ -82,7 +82,7 @@
         </div>
       </div>
 
-      <nav id="right_side" class="grid_2">
+      <div id="right_side" class="grid_2">
 
         <%= yield :sidebar_right %>
 
@@ -108,7 +108,7 @@
             <div style="width: 120px; height: 240px; background-color: #ddd;">Ads</div>
           <% end %>
         </section>
-      </nav>
+      </div>
 
       <div class="clear"></div>
 

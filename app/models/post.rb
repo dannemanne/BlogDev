@@ -58,6 +58,10 @@ class Post < ActiveRecord::Base
     @newer_post ||= Post.posted.where("posted_at > ?", posted_at).order("posted_at ASC").first
   end
 
+  def title_preview
+    title.length > 40 ? "#{title[0..36]}..." : title
+  end
+
   scope :recent, Proc.new { |limit = 5| order("posts.posted_at DESC").limit(limit) }
   scope :posted, includes(:comments).where("posts.status = ?", STATUS_POSTED)
   scope :drafts, where(:status => STATUS_DRAFT)

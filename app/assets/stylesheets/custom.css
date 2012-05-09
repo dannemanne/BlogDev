@@ -116,11 +116,11 @@ div#left_side p, div#right_side p {
 
 
 /* Navigation */
-nav#left_side ul, nav#right_side ul {
+#left_side ul, #right_side ul {
     list-style-type: none;
 }
 
-nav#left_side li, nav#right_side li {
+#left_side li, #right_side li {
     margin: 0.5em 0;
 }
 
@@ -161,14 +161,16 @@ div.post-preview {
     margin-bottom: 25px;
 }
 
-nav.prev-next {
+section.prev-next {
     text-align: center
 }
 
 
 /* Tag Styles */
-a.postTag {
-
+.postTagContainer {
+    float: right;
+    margin: 1em 0;
+    clear: both;
 }
 
 

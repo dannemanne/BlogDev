@@ -15,7 +15,7 @@
   </section>
 
   <section>
-    <span style="float:right;">
+    <span class="postTagContainer">
       <% if @post.tags.any? %>
         Tags:
         <% @post.tags.each_with_index do |tag, i| %><% if i != 0 %>,<% end %>
@@ -45,8 +45,8 @@
         <%= form_for @comment || @post.comments.new, :url => { :action => :comment } do |f| %>
           <p><%= f.text_field :title, :placeHolder => "Title", :style => "width: 300px;" %></p>
           <p><%= f.text_area :message, :style => "height: 50px; width: 300px; font-family:arial,sans-serif; font-size: 10pt;", :placeHolder => "Message" %></p>
-         <% if user_signed_in? %>
-             <p>As <%= current_user.name %></p>
+          <% if user_signed_in? %>
+            <p>As <%= current_user.name %></p>
           <% else %>
             <p>As Anonymous. <%= link_to "Login", new_user_session_path %> to post personal comment.</p>
           <% end %>
@@ -56,10 +56,10 @@
     <% end %>
 
     <% if @post.newer_post %>
-      <span style="float: left;"><%= link_to "< #{@post.newer_post.title}", post_path(@post.newer_post), :rel => "next", :title => "View the next post: #{@post.newer_post.title}" %></span>
+      <span style="float: left;"><%= link_to "< #{@post.newer_post.title_preview}", post_path(@post.newer_post), :rel => "next", :title => "View the next post: #{@post.newer_post.title}" %></span>
     <% end %>
     <% if @post.older_post %>
-      <span style="float: right;"><%= link_to "#{@post.older_post.title} >", post_path(@post.older_post), :rel => "prev", :title => "View the previous post: #{@post.older_post.title}" %></span>
+      <span style="float: right;"><%= link_to "#{@post.older_post.title_preview} >", post_path(@post.older_post), :rel => "prev", :title => "View the previous post: #{@post.older_post.title}" %></span>
     <% end %>
     <div class="clear"></div>
   </section>

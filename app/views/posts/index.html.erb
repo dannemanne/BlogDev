@@ -5,7 +5,7 @@
 
 <% end %>
 
-<nav class="prev-next">
+<section class="prev-next">
   <% if @page > 1 %>
     <span><%= link_to "< Next", posts_page_path(@page -1), :title => "Go to the next page", :rel => "next" %></span>
   <% else %>
@@ -23,7 +23,7 @@
   <% else %>
     <span>Previous ></span>
   <% end %>
-</nav>
+</section>
 
 <% content_for :sidebar_right do %>
   <%= archive_tag %>

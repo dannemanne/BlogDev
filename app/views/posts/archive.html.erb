@@ -1,3 +1,5 @@
+<% content_for :title do %>Posts from <%= @date1.strftime("%B %Y") %><% end %>
+
 <h1><%= @date1.strftime("%B %Y") %></h1>
 <% @posts.each do |post| %>
 

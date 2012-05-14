@@ -25,6 +25,10 @@
     </span>
     <div class="clear"></div>
 
+    <% if Rails.env.production? %>
+      <%= render "partials/adsense_main_banner" %>
+    <% end %>
+
     <% if @post.allow_comments %>
       <h3>Comments</h3>
       <% if @post.comments.length > 0 %>

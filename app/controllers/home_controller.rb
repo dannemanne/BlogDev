@@ -7,9 +7,6 @@ class HomeController < ApplicationController
   def about
   end
 
-  def cheat_sheets
-  end
-
   def sitemap
     respond_to do |format|
       format.xml

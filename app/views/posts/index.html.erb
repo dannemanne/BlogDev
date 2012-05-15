@@ -1,4 +1,6 @@
 <% content_for :title do %>Posts - Page <%= @page %><% end %>
+<% content_for :meta_description do %>News, tips and tutorials about programming. Listing all posts from page <%= @page %><% end %>
+
 <% @posts.each do |post| %>
 
   <%= render "/posts/post_preview", :post => post %>

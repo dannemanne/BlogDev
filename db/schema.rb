@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120508055221) do
+ActiveRecord::Schema.define(:version => 20120515025648) do
 
   create_table "cheat_sheets", :force => true do |t|
     t.string   "category"
@@ -47,18 +47,19 @@ ActiveRecord::Schema.define(:version => 20120508055221) do
   add_index "post_tags", ["tag_id"], :name => "index_post_tags_on_tag_id"
 
   create_table "posts", :force => true do |t|
-    t.integer  "user_id",                           :null => false
+    t.integer  "user_id",                             :null => false
     t.string   "title"
     t.text     "body"
-    t.integer  "status",         :default => 0,     :null => false
+    t.integer  "status",           :default => 0,     :null => false
     t.datetime "posted_at"
-    t.integer  "comments_count", :default => 0,     :null => false
+    t.integer  "comments_count",   :default => 0,     :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title_url"
-    t.boolean  "allow_comments", :default => false, :null => false
+    t.boolean  "allow_comments",   :default => false, :null => false
     t.text     "parsed_body"
     t.text     "parsed_preview"
+    t.string   "meta_description"
   end
 
   add_index "posts", ["posted_at"], :name => "index_posts_on_posted_at"

@@ -32,6 +32,7 @@ class Post < ActiveRecord::Base
     self.parsed_body = Kramdown::Document.new(body).to_html
     paragraph = Nokogiri::HTML.fragment(parsed_body).children.first
     self.parsed_preview = paragraph.respond_to?(:to_html) && paragraph.to_html || ""
+    self.meta_description = "#{title} | #{paragraph.respond_to?(:text) && paragraph.text || ""}"[0..150]
   end
 
   def display_body

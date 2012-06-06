@@ -12,14 +12,7 @@
   <%= render "/posts/post_preview", :post => post %>
   <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
 
-  <% if i == 0 && Rails.env.production? %>
-    <%= render "partials/adsense_main_banner" %>
-    <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
-  <% end %>
-
 <% end %>
-
-<%= render "partials/adsense_main_banner" %>
 
 <% content_for :sidebar_right do %>
   <%= popular_tags %>

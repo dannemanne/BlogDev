@@ -14,9 +14,16 @@
   <%= stylesheet_link_tag "application" %>
 
   <%= csrf_meta_tag %>
-
   <% if Rails.env.production? %>
     <%= render "partials/google_analytics" %>
+    <script type="text/javascript"><!--
+      google_ad_client = "ca-pub-1507841842116581";
+      /* Main Banner */
+      google_ad_slot = "8960650403";
+      google_ad_width = 468;
+      google_ad_height = 60;
+      //-->
+    </script>
   <% end %>
 </head>
 <body>
@@ -37,9 +44,7 @@
   <header class="body-header">
     <div class="container_12">
 
-      <div class="grid_2">
-        <%= link_to image_tag("/images/logo.png", :class => "header-logo"), root_path %>
-      </div>
+      <div class="grid_2">&nbsp;</div>
 
       <div class="grid_8">
         <%= image_tag "/images/header.png" %>
@@ -54,6 +59,21 @@
   <div id="content">
 
     <div id="main" class="container_12">
+      <div style="position: fixed; top: 0; width:155px; height: 140px; z-index: 50;">
+        <div style="height: 113px; background-color: #EDF5FA;">&nbsp;</div>
+        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.9;">&nbsp;</div>
+        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.8;">&nbsp;</div>
+        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.7;">&nbsp;</div>
+        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.6;">&nbsp;</div>
+        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.5;">&nbsp;</div>
+        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.4;">&nbsp;</div>
+        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.3;">&nbsp;</div>
+        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.2;">&nbsp;</div>
+        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.1;">&nbsp;</div>
+      </div>
+      <div style="position: fixed; top: 47px; padding-left: 10px; width:150px; height: 65px; z-index: 150;">
+          <%= link_to image_tag("/images/logo.png"), root_path %>
+      </div>
 
       <div id="left_side" class="grid_2">
         <section>

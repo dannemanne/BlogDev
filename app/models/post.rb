@@ -10,8 +10,10 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
   has_many :comments
-  has_many :post_tags, :dependent => :destroy
-  has_many :tags, :through => :post_tags
+  has_many :post_tags,    dependent: :destroy
+  has_many :tags,         through: :post_tags
+  has_many :post_images,  dependent: :destroy
+  has_many :images,       through: :post_images
 
   attr_writer :tag_names
   attr_accessible :title, :body, :tag_names, :status, :allow_comments

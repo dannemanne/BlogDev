@@ -4,10 +4,10 @@
 <h1>CHEAT SHEETS</h1>
 
 <section id="table-of-content">
-  <h2>Table of Content</h2>
-  <ul>
+  <ol class="toc">
     <% @cheat_sheet_groups.each do |category_stub, cheat_sheets| %>
-      <li><%= link_to cheat_sheets.first.category, "##{category_stub}" %>
+      <li>
+        <h2><%= link_to cheat_sheets.first.category, "##{category_stub}" %></h2>
         <ol>
           <% cheat_sheets.each do |cheat_sheet| %>
             <li><%= link_to cheat_sheet.title, "##{cheat_sheet.title_stub}" %></li>
@@ -15,13 +15,15 @@
         </ol>
       </li>
     <% end %>
-  </ul>
+  </ol>
 
 </section>
 
 <% @cheat_sheet_groups.each do |category_stub, cheat_sheets| %>
   <section id="<%= category_stub %>">
     <h2><%= cheat_sheets.first.category %></h2>
+    <div class="margin_10"></div>
+
     <% cheat_sheets.each do |cheat_sheet| %>
       <section id="<%= cheat_sheet.title_stub %>">
         <h3><%= cheat_sheet.title %></h3>

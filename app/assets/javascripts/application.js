@@ -12,32 +12,34 @@
 var showdown = new Showdown.converter();
 var prev_text = "";
 var parse_live = function(node, preview) {
-    var input_text = node.val(); //$('#post_body')
+    var input_text = node.val();
     if (input_text != prev_text) {
-        var text = $("<div>"+ showdown.makeHtml(input_text) +"</div>");
-        text.find('pre').addClass('prettyprint linenums');
-        text.find('p code').addClass('prettyprint');
-        text.find('pre').each(function() {
-            $(this).html(prettyPrintOne($(this).html(), undefined, true));
+        var $this = jQuery(this),
+            $text = jQuery("<div>"+ showdown.makeHtml(input_text) +"</div>");
+        $text.find('pre').addClass('prettyprint');
+        $text.find('p code').addClass('prettyprint');
+        $text.find('pre').each(function() {
+            $this.html(prettyPrintOne($this.html(), undefined, $this.hasClass("linenums")));
         });
-        text.find('p code').each(function() {
-            $(this).html(prettyPrintOne($(this).html()));
+        $text.find('p code').each(function() {
+            $this.html(prettyPrintOne($this.html()));
         });
-        preview.html(text); //$('#post_body_preview')
+        preview.html($text);
         prev_text = input_text;
     }
 };
 var parse_once = function(node){
-    var text = $("<div>"+ node.html() +"</div>");
-    text.find('pre').addClass('prettyprint linenums');
-    text.find('p code').addClass('prettyprint');
-    text.find('pre').each(function() {
-        $(this).html(prettyPrintOne($(this).html(), undefined, true));
+    var $this = jQuery(this),
+        $text = jQuery("<div>"+ node.html() +"</div>");
+    $text.find('pre').addClass('prettyprint');
+    $text.find('p code').addClass('prettyprint');
+    $text.find('pre').each(function() {
+        $this.html(prettyPrintOne($this.html(), undefined, $this.hasClass("linenums")));
     });
-    text.find('p code').each(function() {
-        $(this).html(prettyPrintOne($(this).html()));
+    $text.find('p code').each(function() {
+        $this.html(prettyPrintOne($this.html()));
     });
-    node.html(text);
+    node.html($text);
 };
 
 // Setup the WYSIWYM editor!

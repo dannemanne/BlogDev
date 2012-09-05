@@ -17,7 +17,7 @@
       addCommand("ls "+project+" --commits");
       var script=document.createElement('script');
       script.type='text/javascript';
-      script.src="https://api.github.com/repos/dannemanne/"+project+"/commits?callback=showCommits";
+      script.src=["https://api.github.com/repos/dannemanne",project,"commits?callback=showCommits"].join("/");
       jQuery("body").append(script);
   };
   var showCommits = function(response){

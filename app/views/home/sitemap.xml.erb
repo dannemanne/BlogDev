@@ -39,7 +39,7 @@
 		<priority>0.5</priority>
 	</url>
 	<% end %>
-    <% Post.recent(10).each do |post| %>
+    <% Post.posted.recent(10).each do |post| %>
 	<url>
 		<loc><%= post_url(post) %></loc>
 		<changefreq>monthly</changefreq>

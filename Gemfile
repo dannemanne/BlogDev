@@ -4,7 +4,7 @@ gem 'rails', '3.2.1'
 
 group :development, :test do
   gem 'mysql2', '~> 0.3.11'
-  gem "rspec-rails"
+  gem "rspec-rails", '~> 2.0'
   gem 'pry'
 end
 
@@ -18,3 +18,4 @@ gem 'jquery-rails'
 gem 'kramdown'
 gem 'pingback'
 gem 'paperclip'
+gem 'ancestry'

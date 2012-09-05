@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120515025648) do
+ActiveRecord::Schema.define(:version => 20120905021228) do
 
   create_table "cheat_sheets", :force => true do |t|
     t.string   "category"
@@ -28,7 +28,22 @@ ActiveRecord::Schema.define(:version => 20120515025648) do
     t.string   "message"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ancestry"
   end
+
+  add_index "comments", ["ancestry"], :name => "index_comments_on_ancestry"
+
+  create_table "images", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "image_content_type"
+    t.string   "image_file_size"
+    t.string   "image_file_name"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "images", ["user_id"], :name => "index_images_on_user_id"
 
   create_table "linkbacks", :force => true do |t|
     t.string   "source_uri"
@@ -36,6 +51,14 @@ ActiveRecord::Schema.define(:version => 20120515025648) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "post_images", :force => true do |t|
+    t.integer "post_id"
+    t.integer "image_id"
+  end
+
+  add_index "post_images", ["image_id"], :name => "index_post_images_on_image_id"
+  add_index "post_images", ["post_id"], :name => "index_post_images_on_post_id"
 
   create_table "post_tags", :force => true do |t|
     t.integer "post_id"

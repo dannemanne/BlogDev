@@ -1,0 +1,11 @@
+<%= form_for comment, :url => { :action => :comment } do |f| %>
+  <%= f.hidden_field :parent_id %>
+  <p><%= f.text_field :title, :placeHolder => "Title", :style => "width: 300px;" %></p>
+  <p><%= f.text_area :message, :style => "height: 50px; width: 300px; font-family:arial,sans-serif; font-size: 10pt;", :placeHolder => "Message" %></p>
+  <% if user_signed_in? %>
+    <p>As <%= current_user.name %></p>
+  <% else %>
+    <p>As Anonymous. <%= link_to "Login", new_user_session_path %> to post personal comment.</p>
+  <% end %>
+  <p><%= f.submit "Comment" %></p>
+<% end %>

@@ -171,6 +171,11 @@ div.message {
     margin-top: 10px;
 }
 
+div.message h2.message_title span {
+    float: right;
+    font-size: 8pt;
+}
+
 div.message div.actions {
 
 }
@@ -178,6 +183,17 @@ div.message div.actions {
 div.message div.actions div.reply {
     display: none;
     padding-left: 20px;
+}
+
+form.comment input[type=text] {
+    width: 300px;
+}
+
+form.comment textarea {
+    height: 50px;
+    width: 300px;
+    font-family:arial,sans-serif;
+    font-size: 10pt;
 }
 
 div.nested_messages {

@@ -25,4 +25,9 @@ class User < ActiveRecord::Base
   def role?(role)
     ROLES[self.role] == role.to_sym
   end
+
+  def website
+    "http://dannemanne.com" #TODO: Change this to dynamic later
+  end
+
 end

@@ -1,0 +1,17 @@
+<div class="message">
+  <a id="comment_<%= comment.id %>"></a>
+  <h2><%= link_to comment.title, post_path(@post, :anchor => "comment_#{comment.id}") %>
+    <span style="float: right; font-size: 8pt;">
+      <%= comment.created_at.strftime("%a, %Y-%m-%d %H:%M") %><% if comment.user %> - <%= comment.user.display_name %><% end %>
+    </span>
+  </h2>
+  <p><%= comment.message %></p>
+  <div class="actions">
+   <% if can? :comment, @post %>
+      <%= link_to "Reply", "#", "data-toggle" => "message_reply_#{comment.id}" %>
+    <% end %>
+    <div class="reply" id="message_reply_<%= comment.id %>">
+      <%= render "comment_form", comment: @comment && @comment.parent_id == comment.id && @comment || Comment.new(parent_id: comment.id) %>
+    </div>
+  </div>
+</div>

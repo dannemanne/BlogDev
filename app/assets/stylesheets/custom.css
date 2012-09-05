@@ -165,6 +165,24 @@ section.prev-next {
     text-align: center
 }
 
+div.message {
+    border-top: 1px solid rgb(212,212,212);
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+div.message div.actions {
+
+}
+
+div.message div.actions div.reply {
+    display: none;
+    padding-left: 20px;
+}
+
+div.nested_messages {
+    padding-left: 20px;
+}
 
 /* Tag Styles */
 .postTagContainer {

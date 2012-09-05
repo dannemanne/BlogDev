@@ -4,4 +4,5 @@ class Comment < ActiveRecord::Base
 
   #validates_existence_of :user, :post
   validates_presence_of :message, :title
+  validates_length_of :message, maximum: 255
 end

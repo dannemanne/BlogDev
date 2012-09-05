@@ -206,6 +206,9 @@ pre .atn, code .atn { color: #4498DD; font-weight: bold; } /* html/xml attribute
 pre .atv, code .atv { color: #65B042; font-weight: bold; } /* html/xml attribute value - green */
 pre .dec, code .dec { color: #4498DD; } /* decimal - blue */
 
+code.prettyprint .pun { color: #000; } /* punctuation inline - black */
+code.prettyprint .pln { color: #000; } /* plaintext inline - black */
+
 pre.prettyprint {
     background-color: rgba(0, 0, 0, 1);
     border-bottom-right-radius: 4px;

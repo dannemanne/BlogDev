@@ -90,12 +90,14 @@ class PostsController < ApplicationController
   def comment
     @comment = @post.comments.build(params[:comment])
     @comment.user = current_user if current_user
-    if @comment.save
-      @comment = nil
-    end
     respond_to do |format|
-      format.html { render :action => :show  }
-      format.js
+      if @comment.save
+        format.html { redirect_to action: :show }
+        format.js
+      else
+        format.html { render action: :show  }
+        format.js
+      end
     end
   end
 

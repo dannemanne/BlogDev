@@ -88,7 +88,9 @@ class PostsController < ApplicationController
   end
 
   def comment
-    if @comment = @post.comments.create(params[:comment])
+    @comment = @post.comments.build(params[:comment])
+    @comment.user = current_user if current_user
+    if @comment.save
       @comment = nil
     end
     respond_to do |format|

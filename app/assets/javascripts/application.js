@@ -3,6 +3,7 @@
 //= require google-code-prettify/prettify
 //= require showdown/showdown
 //= require wysiwym/wysiwym
+//= require posts
 
 
 // For the Live Preview we want to check the value of

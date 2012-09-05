@@ -20,10 +20,10 @@ var parse_live = function(node, preview) {
         $text.find('pre').addClass('prettyprint');
         $text.find('p code').addClass('prettyprint');
         $text.find('pre').each(function() {
-            $this.html(prettyPrintOne($this.html(), undefined, $this.hasClass("linenums")));
+            $(this).html(prettyPrintOne($(this).html(), undefined, $(this).hasClass("linenums")));
         });
         $text.find('p code').each(function() {
-            $this.html(prettyPrintOne($this.html()));
+            $(this).html(prettyPrintOne($(this).html()));
         });
         preview.html($text);
         prev_text = input_text;
@@ -35,10 +35,10 @@ var parse_once = function(node){
     $text.find('pre').addClass('prettyprint');
     $text.find('p code').addClass('prettyprint');
     $text.find('pre').each(function() {
-        $this.html(prettyPrintOne($this.html(), undefined, $this.hasClass("linenums")));
+        $(this).html(prettyPrintOne($(this).html(), undefined, $(this).hasClass("linenums")));
     });
     $text.find('p code').each(function() {
-        $this.html(prettyPrintOne($this.html()));
+        $(this).html(prettyPrintOne($(this).html()));
     });
     node.html($text);
 };

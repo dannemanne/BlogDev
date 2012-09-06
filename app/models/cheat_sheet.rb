@@ -1,6 +1,5 @@
 class CheatSheet < ActiveRecord::Base
   validates_presence_of :title, :body
-  validates_uniqueness_of :category
 
   def category_stub
     category.downcase.gsub(/[^a-z0-9_\-]/i, "-").gsub(/\-+/, "-")

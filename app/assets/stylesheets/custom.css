@@ -361,15 +361,41 @@ img.align-left {
 
 /* Table of Content Styles
 *******************************/
+ol.toc {
+    list-style-type: none;
+    padding: 0;
+    font-size: 12pt;
+}
 ol.toc li {
     margin-top: 10px;
 }
 
 ol.toc ol {
-	list-style:lower-roman;
-	margin:1.5em 0 1em 5%;
+	list-style:disc;
+	margin-left: 3%;
 	padding:0;
 	float:left;
 	display:block;
-	width:95%;
+	width:97%;
+    font-size: 10pt;
+}
+
+ol.toc ol li {
+    margin: 5px 0;
+}
+
+
+/* Cheat Sheet styles
+*******************************/
+section.cheat_sheet {
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+section.cheat_sheet section {
+    margin-bottom: 20px;
+}
+
+section.cheat_sheet section h3 {
+    text-decoration: underline;
 }

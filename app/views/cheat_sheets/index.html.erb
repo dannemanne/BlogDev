@@ -7,12 +7,13 @@
   <ol class="toc">
     <% @cheat_sheet_groups.each do |category_stub, cheat_sheets| %>
       <li>
-        <h2><%= link_to cheat_sheets.first.category, "##{category_stub}" %></h2>
+        <%= link_to cheat_sheets.first.category, "##{category_stub}" %>
         <ol>
           <% cheat_sheets.each do |cheat_sheet| %>
             <li><%= link_to cheat_sheet.title, "##{cheat_sheet.title_stub}" %></li>
           <% end %>
         </ol>
+        <div class="clear"></div>
       </li>
     <% end %>
   </ol>
@@ -20,17 +21,17 @@
 </section>
 
 <% @cheat_sheet_groups.each do |category_stub, cheat_sheets| %>
-  <section id="<%= category_stub %>">
+  <section id="<%= category_stub %>" class="cheat_sheet">
     <h2><%= cheat_sheets.first.category %></h2>
     <div class="margin_10"></div>
 
     <% cheat_sheets.each do |cheat_sheet| %>
       <section id="<%= cheat_sheet.title_stub %>">
+        <% if can? :update, cheat_sheet %><span style="float: right;"><%= link_to "Edit", edit_cheat_sheet_path(cheat_sheet) %></span><% end %>
         <h3><%= cheat_sheet.title %></h3>
-        <% if can? :update, cheat_sheet %><p><%= link_to "Edit", edit_cheat_sheet_path(cheat_sheet) %></p><% end %>
-        <section data-parse="once">
+        <div data-parse="once">
           <%= cheat_sheet.display_body %>
-        </section>
+        </div>
         <p><%= link_to "Back to Table of Content", "#table-of-content", :rel => "index" %></p>
       </section>
     <% end %>

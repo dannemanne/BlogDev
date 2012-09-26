@@ -87,6 +87,15 @@
         </section>
 
         <section>
+          <h2>LAST COMMENTS</h2>
+          <ul>
+            <% recent_comments.each do |comment| %>
+              <li><%= link_to comment.display_preview, post_path(comment.post, anchor: "comment_#{comment.id}"), :title => "View comment: #{comment.message}" %></li>
+            <% end %>
+          </ul>
+        </section>
+
+        <section>
           <h2>RESOURCES</h2>
           <ul>
             <li><%= link_to "Projects", projects_path, :title => "View all Projects" %></li>

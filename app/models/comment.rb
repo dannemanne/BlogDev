@@ -18,4 +18,13 @@ class Comment < ActiveRecord::Base
     end
   end
 
+  def self.recent(limit = 5)
+    includes(:post).order("comments.created_at DESC").limit(limit)
+  end
+
+  def display_preview
+    preview = message[0..31]
+    preview == message ? preview : "#{preview}..."
+  end
+
 end

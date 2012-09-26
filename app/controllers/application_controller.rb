@@ -4,12 +4,16 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => exception.message
   end
 
-  helper_method :recent_posts, :pingback_server_url
+  helper_method :recent_posts, :recent_comments, :pingback_server_url
 
 protected
 
   def recent_posts(limit = 5)
     Post.posted.recent(limit)
+  end
+
+  def recent_comments(limit = 5)
+    Comment.recent(limit)
   end
 
   def set_xpingback_header

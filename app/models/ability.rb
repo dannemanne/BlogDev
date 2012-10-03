@@ -15,9 +15,10 @@ class Ability
 
     end
 
-    # Users can manage their own Posts
+    # Users can manage their own Posts and Comments
     if user.persisted?
       can :manage, Post, :user_id => user.id
+      can :manage, Comment, :user_id => user.id
     end
 
     # Everybody can read and comment on posted Posts

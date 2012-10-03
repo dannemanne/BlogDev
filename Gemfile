@@ -8,6 +8,10 @@ group :development, :test do
   gem 'pry'
 end
 
+group :test do
+  gem "factory_girl_rails"
+end
+
 group :production do
   gem 'pg'
 end

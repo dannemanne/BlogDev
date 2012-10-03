@@ -9,6 +9,8 @@ Blog::Application.routes.draw do
     post :comment, :on => :member
   end
 
+  resources :comments, only: [:destroy]
+
   resources :tags, :except => [:new, :create]
   resources :drafts, :only => [:index, :show, :update, :destroy]
   resources :projects, :only => [:index]

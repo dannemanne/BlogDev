@@ -4,3 +4,5 @@ db/*.sqlite3
 config/database.yml
 log/*.log
 tmp/**/*
+.env
+.vagrant

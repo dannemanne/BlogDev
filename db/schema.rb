@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(:version => 20120905062510) do
     t.integer  "post_id",     :null => false
     t.string   "title"
     t.string   "message_old"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "ancestry"
     t.string   "name"
     t.string   "website"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(:version => 20120905062510) do
   end
 
   add_index "comments", ["ancestry"], :name => "index_comments_on_ancestry"
+  add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "images", :force => true do |t|
     t.integer  "user_id"
@@ -79,8 +81,8 @@ ActiveRecord::Schema.define(:version => 20120905062510) do
     t.integer  "status",           :default => 0,     :null => false
     t.datetime "posted_at"
     t.integer  "comments_count",   :default => 0,     :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "title_url"
     t.boolean  "allow_comments",   :default => false, :null => false
     t.text     "parsed_body"
@@ -105,7 +107,6 @@ ActiveRecord::Schema.define(:version => 20120905062510) do
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "",    :null => false
     t.string   "encrypted_password",   :limit => 128, :default => "",    :null => false
-    t.string   "password_salt",                       :default => "",    :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
@@ -114,10 +115,10 @@ ActiveRecord::Schema.define(:version => 20120905062510) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
     t.string   "name"
-    t.integer  "role"
+    t.integer  "role",                                :default => 0,     :null => false
     t.boolean  "use_gravatar",                        :default => false, :null => false
   end
 

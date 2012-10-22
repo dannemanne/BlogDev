@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120905062510) do
+ActiveRecord::Schema.define(:version => 20121022143200) do
 
   create_table "cheat_sheets", :force => true do |t|
     t.string   "category"
@@ -23,15 +23,16 @@ ActiveRecord::Schema.define(:version => 20120905062510) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "post_id",     :null => false
+    t.integer  "post_id",                        :null => false
     t.string   "title"
     t.string   "message_old"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.string   "ancestry"
     t.string   "name"
     t.string   "website"
     t.text     "message"
+    t.boolean  "no_follow",   :default => false, :null => false
   end
 
   add_index "comments", ["ancestry"], :name => "index_comments_on_ancestry"

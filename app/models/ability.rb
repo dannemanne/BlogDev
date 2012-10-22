@@ -4,6 +4,13 @@ class Ability
   def initialize(user)
     user ||= User.new
 
+    # Users can manage their own Posts and Comments
+    if user.persisted?
+      can :manage, Post, :user_id => user.id
+      can :manage, Comment, :user_id => user.id
+      cannot :span, Comment, :user_id => user.id
+    end
+
     # Admins can manage all
     if user.role? :admin
       can :manage, :all
@@ -13,12 +20,6 @@ class Ability
       can :manage, Comment
       can :manage, Tag
 
-    end
-
-    # Users can manage their own Posts and Comments
-    if user.persisted?
-      can :manage, Post, :user_id => user.id
-      can :manage, Comment, :user_id => user.id
     end
 
     # Everybody can read and comment on posted Posts

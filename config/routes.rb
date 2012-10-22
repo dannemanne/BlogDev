@@ -9,7 +9,9 @@ Blog::Application.routes.draw do
     post :comment, :on => :member
   end
 
-  resources :comments, only: [:destroy]
+  resources :comments, only: [:destroy] do
+    post :spam, on: :member
+  end
 
   resources :tags, :except => [:new, :create]
   resources :drafts, :only => [:index, :show, :update, :destroy]

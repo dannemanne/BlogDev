@@ -16,7 +16,7 @@ class Post < ActiveRecord::Base
   has_many :images,       through: :post_images
 
   attr_writer :tag_names
-  attr_accessible :title, :body, :tag_names, :status, :allow_comments
+  #attr_accessible :title, :body, :tag_names, :status, :allow_comments
 
   validates_presence_of :title, :title_url, :body
   validates_presence_of :posted_at, :if => Proc.new { |post| post.status == STATUS_POSTED }
@@ -66,8 +66,8 @@ class Post < ActiveRecord::Base
   end
 
   scope :recent, Proc.new { |limit = 5| order("posts.posted_at DESC").limit(limit) }
-  scope :posted, includes(:comments).where("posts.status = ?", STATUS_POSTED)
-  scope :drafts, where(:status => STATUS_DRAFT)
-  scope :archive_months, select(:posted_at).where(:status => STATUS_POSTED).order("1 DESC")
+  scope :posted, -> { includes(:comments).where("posts.status = ?", STATUS_POSTED) }
+  scope :drafts, -> { where(:status => STATUS_DRAFT) }
+  scope :archive_months, -> { select(:posted_at).where(:status => STATUS_POSTED).order("1 DESC") }
 
 end

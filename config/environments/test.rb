@@ -32,4 +32,7 @@ Blog::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Eager Load (Rails 4)
+  config.eager_load = false
 end

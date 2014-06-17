@@ -1,10 +1,10 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '4.1.1'
 
 group :development, :test do
 #  gem 'mysql2', '~> 0.3.11'
-  gem "rspec-rails", '~> 2.0'
+  gem "rspec-rails", '3.0.1'
   gem 'foreman'
   gem 'pry'
 end
@@ -17,8 +17,8 @@ end
   gem 'pg'
 #end
 
-gem 'devise', '~> 1.5'
-gem 'cancan'
+gem 'devise', '3.2.4'
+gem 'cancan', '1.6.10'
 gem 'jquery-rails'
 gem 'kramdown'
 gem 'pingback'

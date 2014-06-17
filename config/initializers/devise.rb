@@ -37,16 +37,21 @@ Devise.setup do |config|
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 10. If
   # using other encryptors, it sets how many times you want the password re-encrypted.
-  config.stretches = 10
+  config.stretches = Rails.env.test? ? 1 : 10
 
   # Define which will be the encryption algorithm. Devise also supports encryptors
   # from others authentication tools as :clearance_sha1, :authlogic_sha512 (then
   # you should set stretches above to 20 for default behavior) and :restful_authentication_sha1
   # (then you should set stretches to 10, and copy REST_AUTH_SITE_KEY to pepper)
-  config.encryptor = :bcrypt
+  #config.encryptor = :bcrypt
 
   # Setup a pepper to generate the encrypted password.
   config.pepper = "6d33dc4954f631bd4287af7591e06454a395e072db5e7318760798e913e49e0448e7995a8ed3eee83acfc91ab55a718e60eddb2cb8ca51a94604a032482b7dbb"
+
+  # The secret key used by Devise. Devise uses this key to generate
+  # random tokens. Changing this key will render invalid all existing
+  # confirmation, reset password and unlock tokens in the database.
+  config.secret_key = 'dpy0azldv698hep6woui35qx7jb29iwk5qul196asxb6ead3la1c978arm2u7zb96qoki8fnj7uvl606zj287q8c4ix342xl2xdsnnfma5nahpab1367kwqv3nvmeywozft5istcfad3863njmfxlspxc8shq8wck6666t6e00igd4p16vuu5wx469dv1pv2l0b7j1hjm'
 
   # ==> Configuration for :confirmable
   # The time you want to give your user to confirm his account. During this time

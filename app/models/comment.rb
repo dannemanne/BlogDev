@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
 
   has_ancestry
 
-  attr_accessible :name, :website, :message, :parent_id
+  #attr_accessible :name, :website, :message, :parent_id
 
   #validates_existence_of :user, :post
   validates_presence_of :message

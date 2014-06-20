@@ -23,12 +23,12 @@ div#container {
 }
 
 div#content {
-	padding:0 0 4em; /* bottom padding for footer */
+	padding:0 0 4rem; /* bottom padding for footer */
 }
 
 footer {
 	position:absolute;
-    height: 3em;
+    height: 4rem;
 	width:100%;
 	bottom:0; /* stick to bottom */
 }

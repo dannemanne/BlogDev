@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><%= content_for?(:title) ? yield(:title) : "Yet another coding Blog" %> | DanneManne.com</title>
   <link rel="pingback" href="<%= pingback_server_url %>" />
   <link rel="sitemap" href="/sitemap.xml" />
@@ -11,11 +11,12 @@
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" %>
   <%= javascript_include_tag "http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js" %>
+  <%= javascript_include_tag "vendor/modernizr" %>
   <%= stylesheet_link_tag "application" %>
 
   <%= csrf_meta_tag %>
   <% if Rails.env.production? %>
-    <%= render "partials/google_analytics" %>
+    <%= render 'partials/google_analytics' %>
     <script type="text/javascript"><!--
       google_ad_client = "ca-pub-1507841842116581";
       /* Main Banner */
@@ -29,53 +30,34 @@
 <body>
 
 <div id="container">
-  <div id="header-top">
-    <div class="container_12">
-      <div class="grid_12">
-        <% if user_signed_in? %>
-          <span class="wrap_right">Logged in as <%= current_user.display_name %>. <%= link_to "Logout", destroy_user_session_path, :title => "Logout user #{current_user.display_name}" %></span>
-        <% else %>
-          <span class="wrap_right"><%= link_to "Login", new_user_session_path, :title => "Login to DanneManne.com" %></span>
-        <% end %>
-      </div>
-    </div>
-  </div>
+  <nav class="top-bar" data-topbar>
+    <ul class="title-area">
+      <li class="name">
+        <h1><%= link_to 'DanneManne.com', root_path %></h1>
+      </li>
+      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
 
-  <header class="body-header">
-    <div class="container_12">
-
-      <div class="grid_2">&nbsp;</div>
-
-      <div class="grid_8">
-        <%= image_tag "/images/header.png" %>
-      </div>
-
-      <div class="grid_2">&nbsp;</div>
-
-      <div class="clear"></div>
-    </div>
-  </header>
+    <section class="top-bar-section">
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li class="active">
+          <% if user_signed_in? %>
+            Logged in as <%= current_user.display_name %>. <%= link_to 'Logout', destroy_user_session_path, title: "Logout user #{current_user.display_name}" %>
+          <% else %>
+            <%= link_to 'Login', new_user_session_path, title: 'Login to DanneManne.com' %>
+          <% end %>
+        </li>
+      </ul>
+    </section>
+  </nav>
 
   <div id="content">
 
-    <div id="main" class="container_12">
-      <div style="position: fixed; top: 0; width:155px; height: 140px; z-index: 50;">
-        <div style="height: 113px; background-color: #EDF5FA;">&nbsp;</div>
-        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.9;">&nbsp;</div>
-        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.8;">&nbsp;</div>
-        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.7;">&nbsp;</div>
-        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.6;">&nbsp;</div>
-        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.5;">&nbsp;</div>
-        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.4;">&nbsp;</div>
-        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.3;">&nbsp;</div>
-        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.2;">&nbsp;</div>
-        <div style="height: 3px; background-color: #EDF5FA; opacity: 0.1;">&nbsp;</div>
-      </div>
-      <div style="position: fixed; top: 47px; padding-left: 10px; width:150px; height: 65px; z-index: 150;">
-          <%= link_to image_tag("/images/logo.png"), root_path %>
-      </div>
-
-      <div id="left_side" class="grid_2">
+    <div id="main" class="row">
+<!--
+      <div id="left_side" class="columns large-2">
         <section>
           <h2>LATEST POSTS</h2>
           <ul>
@@ -104,14 +86,14 @@
           </ul>
         </section>
       </div>
-
-      <div id="workspace" class="grid_8">
+              -->
+      <div id="workspace" class="columns">
         <div style="padding: 0 10px;">
           <%= yield %>
         </div>
       </div>
-
-      <div id="right_side" class="grid_2">
+<!--
+      <div id="right_side" class="large-2 columns">
 
         <%= yield :sidebar_right %>
 
@@ -137,7 +119,7 @@
             <div style="width: 120px; height: 240px; background-color: #ddd;">Ads</div>
           <% end %>
         </section>
-      </div>
+      </div>    -->
 
       <div class="clear"></div>
 

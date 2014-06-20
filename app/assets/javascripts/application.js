@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery_ujs
+//= require foundation
 //= require google-code-prettify/prettify
 //= require showdown/showdown
 //= require wysiwym/wysiwym
@@ -56,3 +57,5 @@ jQuery(window).load(function() {
     }
   });
 });
+
+$(function(){ $(document).foundation(); });

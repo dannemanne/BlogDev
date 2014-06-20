@@ -1,47 +1,6 @@
-/* CSS RESET */
-body{padding:0;margin:0;font:13px Arial,Helvetica,Garuda,sans-serif;*font-size:small;*font:x-small;}
-h1,h2,h3,h4,h5,h6,ul,li,em,strong,pre,code,address{padding:0;margin:0;line-height:1em;font-size:100%;font-weight:normal;font-style: normal;}
-table{font-size:inherit;font:100%;}
-img{border:0;}
-p{margin: 0;}
-address{display: inline;}
-strong{font-weight: bold;}
-
-
 html,body {
-	background-color: #EDF5FA;
-
-	font-family:arial,sans-serif;
-	font-size:small;
-	color:#494949;
+    background-color: #EDF5FA;
 }
-
-h1 {
-    color:#494949;
-	font:1.5em arial,sans-serif;
-	margin: 2em 0 0;
-}
-
-h2 {
-    color:#494949;
-	font:1.25em arial,sans-serif;
-	margin: 1.5em 0 0;
-}
-
-h1, h2 {
-    color:#494949;
-}
-
-p {
-    font-family:arial,sans-serif;
-    color:#494949;
-	line-height:1.5;
-	margin: 1em 0 0;
-    padding: 0;
-}
-
-a:link, a:visited {color:#027AC6; text-decoration: none;}
-a:hover {color:#0062A0; text-decoration: underline;}
 
 div#header-top {
     height: 20px;
@@ -82,36 +41,9 @@ header.body-header .header-logo {
 footer {
     display:block;
 }
-	footer p {
-        font-size: 10px;
-		margin:0;
-	}
-
-div#workspace {
-    background: #fff;
-    padding: 10px 0;
-
-    -webkit-box-shadow: 0 0 6px rgba(160, 160, 160, 1);
-    -moz-box-shadow: 0 0 6px rgba(160, 160, 160, 1);
-     box-shadow: 0 0 6px rgba(160, 160, 160, 1);
-
-    -webkit-border-bottom-left-radius: 3px;
-    -webkit-border-bottom-right-radius: 3px;
-    -moz-border-radius-bottomleft: 3px;
-    -moz-border-radius-bottomright: 3px;
-}
-
-div#left_side, div#right_side {
-    padding: 10px 0;
-}
-
-div#left_side section, div#right_side section {
-    padding: 0 0 20px;
-}
-
-div#left_side p, div#right_side p {
-    line-height: 0.9;
-    margin: 0 0 8px;
+footer p {
+    font-size: 10px;
+    margin:0;
 }
 
 
@@ -123,8 +55,6 @@ div#left_side p, div#right_side p {
 #left_side li, #right_side li {
     margin: 0.5em 0;
 }
-
-
 
 
 .wrap_left {

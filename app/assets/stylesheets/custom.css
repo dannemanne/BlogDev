@@ -1,11 +1,4 @@
-html,body {
-    background-color: #EDF5FA;
-}
 
-div#header-top {
-    height: 20px;
-    font-size: 8pt;
-}
 
 header, article, footer, nav, section {
     display: block;

@@ -1,16 +1,6 @@
-<h1>Welcome to DanneManne.com</h1>
+<% recent_posts.each do |post| %>
 
-<p>
-  These posts will mainly have a coding focus. Most of it will be about Rails but as I try other things,
-  I will try to share anything I find valuable, weird or just fun.
-</p>
-
-<div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
-
-<% recent_posts.each_with_index do |post, i| %>
-
-  <%= render "/posts/post_preview", :post => post %>
-  <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
+  <%= render '/posts/post_preview', post: post %>
 
 <% end %>
 

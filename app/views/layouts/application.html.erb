@@ -30,28 +30,43 @@
 <body>
 
 <div id="container">
-  <nav class="top-bar" data-topbar>
-    <ul class="title-area">
-      <li class="name">
-        <h1><%= link_to 'DanneManne.com', root_path %></h1>
-      </li>
-      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-    </ul>
+  <div id="splash"<% if current_page?(root_url) %> class="intro"<% end %>>
 
-    <section class="top-bar-section">
-      <!-- Right Nav Section -->
-      <ul class="right">
-        <li class="active">
-          <% if user_signed_in? %>
-            Logged in as <%= current_user.display_name %>. <%= link_to 'Logout', destroy_user_session_path, title: "Logout user #{current_user.display_name}" %>
-          <% else %>
-            <%= link_to 'Login', new_user_session_path, title: 'Login to DanneManne.com' %>
-          <% end %>
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><%= link_to 'DanneManne.com', root_path %></h1>
         </li>
+        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
       </ul>
-    </section>
-  </nav>
+
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <% if user_signed_in? %>
+            <li style="background: none;"><p>Logged in as <%= current_user.display_name %>.</p></li>
+            <li class="active">
+              <%= link_to 'Logout', destroy_user_session_path, title: "Logout user #{current_user.display_name}" %>
+            </li>
+          <% else %>
+            <li class="active">
+              <%= link_to 'Login', new_user_session_path, title: 'Login to DanneManne.com' %>
+            </li>
+          <% end %>
+        </ul>
+      </section>
+    </nav>
+
+    <% if current_page? root_url %>
+
+    <div class="profile">
+      <%= image_tag image_url('profile.png') %>
+    </div>
+
+    <% end %>
+
+  </div>
 
   <div id="content">
 
@@ -121,7 +136,6 @@
         </section>
       </div>    -->
 
-      <div class="clear"></div>
 
     </div>
 
@@ -129,11 +143,11 @@
 
   <footer>
 
-    <div class="container_12">
+    <div class="row">
 
-      <div class="grid_2">&nbsp;</div>
-      <div class="grid_8">
-        <p style="text-align: center">
+      <div class="large-2 columns">&nbsp;</div>
+      <div class="large-8 columns">
+        <p class="text-center">
           <span>Copyright © <%= DateTime.now.year %></span>
           <span style="margin: 0 3px;">|</span>
           <span><%= link_to 'About', about_path %></span>
@@ -143,8 +157,7 @@
           <span><a href="http://affiliate.godaddy.com/redirect/0B39B79C3D795D72A3EDC7DB46A9DF44EBA179C0E9E1E9C4451059E3E737319A48DC102E020DE638F5311AABFE92330C20A5357462FE79A49CA3DE36679B1A10" target="_blank" title="GoDaddy.com">GoDaddy.com</a><img src="http://affiliate.godaddy.com/content/spacer.png?q=0B39B79C3D795D72A3EDC7DB46A9DF44EBA179C0E9E1E9C4451059E3E737319A48DC102E020DE638F5311AABFE92330C20A5357462FE79A49CA3DE36679B1A10" width="0" height="0" alt=""/></span>
         </p>
       </div>
-      <div class="grid_2">&nbsp;</div>
-      <div class="clear"></div>
+      <div class="large-2 columns">&nbsp;</div>
     </div>
 
   </footer>

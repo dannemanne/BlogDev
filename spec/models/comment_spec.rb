@@ -1,14 +1,20 @@
 require 'spec_helper'
 
 describe Comment do
-  it "cannot have a message that is longer than 512 characters" do
-    comment = Comment.new
+  let(:comment) { FactoryGirl.build(:comment) }
+  it 'validates message presence' do
+    expect(comment).to be_valid
+
+    comment.message = ''
+    expect(comment).to be_invalid
+  end
+  it 'validates that message is not longer than 512 characters' do
+    expect(comment).to be_valid
+
     comment.message = (1..513).inject { |acc,n| "#{acc}a" }
-    comment.should_not be_valid
-    comment.errors_on(:message).should be_present
+    expect(comment).to be_invalid
 
     comment.message = (1..512).inject { |acc,n| "#{acc}a" }
-    comment.valid?
-    comment.errors_on(:message).should_not be_present
+    expect(comment).to be_valid
   end
 end

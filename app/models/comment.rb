@@ -18,10 +18,6 @@ class Comment < ActiveRecord::Base
     end
   end
 
-  validate do
-    errors.add(:website, :invalid) if website.match(/crorkservice/) # spam
-  end
-
   def self.recent(limit = 5)
     includes(:post).order("comments.created_at DESC").limit(limit)
   end

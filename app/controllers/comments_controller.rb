@@ -17,10 +17,10 @@ class CommentsController < ApplicationController
   def destroy
     respond_to do |format|
       if @comment.destroy
-        format.html { redirect_to post_path(@comment.post) }
+        format.html { redirect_to post_path(@comment.post.to_param) }
         format.js
       else
-        format.html { redirect_to post_path(@comment.post) }
+        format.html { redirect_to post_path(@comment.post.to_param) }
         format.js
       end
     end

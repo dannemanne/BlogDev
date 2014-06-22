@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 ruby '2.1.2'
 
+gem 'unicorn'
 gem 'rails', '4.1.1'
 
 group :development, :test do

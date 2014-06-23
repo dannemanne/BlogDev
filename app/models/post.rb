@@ -45,8 +45,9 @@ class Post < ActiveRecord::Base
     parsed_preview.html_safe
   end
 
+  # To param always needs to return a String!
   def to_param
-    status == STATUS_DRAFT ? id : title_url
+    status == STATUS_DRAFT ? id.to_s : title_url
   end
 
   def tag_names

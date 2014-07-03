@@ -47,6 +47,12 @@
           <% if user_signed_in? %>
             <li style="background: none;"><p>Logged in as <%= current_user.display_name %>.</p></li>
             <li class="active">
+              <%= link_to 'View Drafts', drafts_path %>
+            </li>
+            <li class="active">
+              <%= link_to 'New Post', new_post_path %>
+            </li>
+            <li class="active">
               <%= link_to 'Logout', destroy_user_session_path, title: "Logout user #{current_user.display_name}" %>
             </li>
           <% else %>

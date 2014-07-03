@@ -18,7 +18,7 @@ describe PostsController do
     login_admin
 
     it 'should create a new Post' do
-      attr = { title: 'New Post', body: 'This is the post body', status: Post::STATUS_POSTED }
+      attr = { title: 'New Post', body: 'This is the post body', status: Post::STATUS_POSTED, tag_names: 'Tag-Name' }
       expect(current_user.role).to eq(User::ROLE_ADMIN)
       count = current_user.posts.count
 

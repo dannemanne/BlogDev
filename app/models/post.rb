@@ -18,9 +18,11 @@ class Post < ActiveRecord::Base
   attr_writer :tag_names
   #attr_accessible :title, :body, :tag_names, :status, :allow_comments
 
-  validates_presence_of :title, :title_url, :body
-  validates_presence_of :posted_at, :if => Proc.new { |post| post.status == STATUS_POSTED }
-  validates_inclusion_of :status, :in => STATUSES.keys
+  validates :title,     presence: true
+  validates :title_url, presence: true
+  validates :body,      presence: true
+  validates :posted_at, presence: true,     if: Proc.new { |p| p.status == STATUS_POSTED }
+  validates :status,    inclusion: { in: STATUSES.keys }
 
   before_validation do
     self.posted_at ||= Time.now if status == STATUS_POSTED && changes[:status].present?
@@ -29,7 +31,7 @@ class Post < ActiveRecord::Base
 
   before_save do
     if @tag_names && @tag_names.strip != tags.map(&:name).join(", ").strip
-      self.tags = @tag_names.split(",").map{ |tag| Tag.find_or_create_by_name(tag.strip) }
+      self.tags = @tag_names.split(",").map{ |tag| Tag.find_or_create_by(name: tag.strip) }
     end
     self.parsed_body = Kramdown::Document.new(body).to_html
     paragraph = Nokogiri::HTML.fragment(parsed_body).children.first

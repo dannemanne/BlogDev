@@ -1338,3 +1338,25 @@
 .t8 { padding-top: 8rem !important; }
 .t9 { padding-top: 9rem !important; }
 .t10 { padding-top: 10rem !important; }
+
+
+.clear:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clear {
+    display: inline-block;
+}
+
+html[xmlns] .clear {
+    display: block;
+}
+
+* html .clear {
+    height: 1%;
+}

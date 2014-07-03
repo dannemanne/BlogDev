@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   load_and_authorize_resource     find_by: :title_url, except: [:index, :archive]
   before_filter :find_by_date,    :only => :archive
+  before_filter :anti_spam,       only: [:comment]
 
   def archive
     respond_to do |format|
@@ -87,7 +88,7 @@ class PostsController < ApplicationController
   end
 
   def comment
-    @comment = @post.comments.build(params[:comment])
+    @comment = @post.comments.build(comment_params)
     @comment.user = current_user if current_user
     respond_to do |format|
       if @comment.save
@@ -109,6 +110,16 @@ private
 
   def post_params
     params.require(:post).permit(:title, :body, :status, :tag_names, :allow_comments)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:parent_id, :name, :website, :message)
+  end
+
+  def anti_spam
+    if params.fetch(:comment, {}).fetch(:website_url, nil).present?
+      redirect_to action: :show
+    end
   end
 
 end

@@ -1,11 +1,12 @@
-<%= form_for comment, :url => { :action => :comment }, html: { class: "comment" } do |f| %>
+<%= form_for comment, :url => { :action => :comment }, html: { class: 'comment' } do |f| %>
   <%= f.hidden_field :parent_id %>
   <% if user_signed_in? %>
     <p>As <%= current_user.name %></p>
   <% else %>
-    <p><%= f.text_field :name, :placeHolder => "Name" %></p>
-    <p><%= f.text_field :website, :placeHolder => "Website URL" %></p>
+    <p><%= f.text_field :name, placeHolder: 'Name' %></p>
+    <p style="display: none;"><%= f.text_field :website_url, placeHolder: 'Leave this blank' %></p>
+    <p><%= f.text_field :website, placeHolder: 'Website URL' %></p>
   <% end %>
-  <p><%= f.text_area :message, :placeHolder => "Message" %></p>
-  <p><%= f.submit "Comment" %></p>
+  <p><%= f.text_area :message, placeHolder: 'Message' %></p>
+  <p><%= f.submit 'Comment' %></p>
 <% end %>

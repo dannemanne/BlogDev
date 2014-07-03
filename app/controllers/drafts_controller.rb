@@ -18,7 +18,7 @@ class DraftsController < ApplicationController
   end
 
   def update
-    if @post.update_attributes(params[:post])
+    if @post.update_attributes(post_params)
       if @post.status == Post::STATUS_POSTED
         respond_to do |format|
           format.html { redirect_to post_path(@post) }
@@ -26,7 +26,7 @@ class DraftsController < ApplicationController
         end
       else
         respond_to do |format|
-          format.html { render :action => :show }
+          format.html { redirect_to draft_path(@post) }
           format.js
         end
       end
@@ -60,6 +60,10 @@ private
     authorize! params[:action], @post
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :body, :status, :tag_names, :allow_comments)
   end
 
 end

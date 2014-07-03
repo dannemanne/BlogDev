@@ -1,14 +1,12 @@
 class Tag < ActiveRecord::Base
-  has_many :post_tags, :dependent => :destroy
-  has_many :posts, :through => :post_tags
+  has_many :post_tags,  dependent: :destroy
+  has_many :posts,      through: :post_tags
 
-  #attr_accessible :name
-  validates_presence_of :name
-  validates_format_of :stub, :with => /\A[a-z0-9_\-]*\Z/i
-  validates_uniqueness_of :name, :stub
+  validates :name, presence: true,              uniqueness: true
+  validates :stub, format: /\A[a-z0-9_\-]*\Z/i, uniqueness: true
 
   before_validation do
-    self.stub = name && name.downcase.gsub(/[^a-z0-9_\-]/i, "_").gsub(/_+/, "_")
+    self.stub = name && name.downcase.gsub(/[^a-z0-9_\-]/i, '_').gsub(/_+/, '_')
   end
 
   # If save failed, reset it to previous value. Otherwise path helpers

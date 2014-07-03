@@ -4,6 +4,13 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => exception.message
   end
 
+  # Workaround to make cancan work with Rails 4 strong parameters
+  before_filter do
+    resource = controller_name.singularize.to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
   helper_method :recent_posts, :recent_comments, :pingback_server_url
 
 protected

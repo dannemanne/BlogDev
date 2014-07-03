@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  load_and_authorize_resource     :find_by => :title_url, :except => [:index, :archive]
+  load_and_authorize_resource     find_by: :title_url, except: [:index, :archive]
   before_filter :find_by_date,    :only => :archive
 
   def archive
@@ -37,7 +37,6 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post.attributes = params[:post]
     @post.user = current_user
     if @post.save
       flash[:notice] = "Post successfully created!"
@@ -60,7 +59,7 @@ class PostsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @post.update_attributes(params[:post])
+      if @post.update_attributes(post_params)
         if @post.status == Post::STATUS_POSTED
           format.html { render :action => :show }
           format.js
@@ -106,6 +105,10 @@ private
     @date1 = Date.new(params[:year].to_i,params[:month].to_i)
     @date2 = Date.new(params[:year].to_i+params[:month].to_i/12,(params[:month].to_i%12)+1)
     @posts = Post.where("posted_at > ? and posted_at < ?", @date1, @date2)
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :body, :status, :tag_names, :allow_comments)
   end
 
 end

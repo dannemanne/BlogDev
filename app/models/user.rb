@@ -1,7 +1,10 @@
 class User < ActiveRecord::Base
-  ROLES = { 0 => :guest,
-            1 => :op,
-            9 => :admin
+  ROLE_GUEST = 0
+  ROLE_OP = 1
+  ROLE_ADMIN = 9
+  ROLES = { ROLE_GUEST  => :guest,
+            ROLE_OP     => :op,
+            ROLE_ADMIN  => :admin
           }.freeze
 
   # Include default devise modules. Others available are:

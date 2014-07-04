@@ -9,27 +9,11 @@ class Post < ActiveRecord::Base
   attr_writer :tag_names
 
   validates :title,     presence: true
-  validates :title_url, presence: true
   validates :body,      presence: true
-  validates :posted_at, presence: true,     if: Proc.new { |p| p.post_status.is_posted? }
 
   handles_value_of :status, with: PostStatus
 
-  before_validation do
-    self.posted_at ||= Time.now if post_status.is_posted?
-    self.posted_at = nil if post_status.is_draft?
-    self.title_url = title.gsub(/[^A-Za-z0-9_\-]/i, '_').gsub(/_+/, '_').downcase
-  end
-
-  before_save do
-    if @tag_names && @tag_names.strip != tags.map(&:name).join(', ').strip
-      self.tags = @tag_names.split(',').map{ |tag| Tag.find_or_create_by(name: tag.strip) }
-    end
-    self.parsed_body = Kramdown::Document.new(body).to_html
-    paragraph = Nokogiri::HTML.fragment(parsed_body).children.first
-    self.parsed_preview = paragraph.respond_to?(:to_html) && paragraph.to_html || ''
-    self.meta_description = "#{title} | #{ paragraph.respond_to?(:text) && paragraph.text || '' }"[0..150]
-  end
+  before_save :set_attributes
 
   scope :posted, -> { includes(:comments).where('posts.status = ?', PostStatus::POSTED) }
   scope :drafts, -> { where(status: PostStatus::DRAFT) }
@@ -52,6 +36,27 @@ class Post < ActiveRecord::Base
 
   def tag_names
     @tag_names ||= tags.map(&:name).join ', '
+  end
+
+private
+  def set_attributes
+    # If the post is posted, then make sure that posted_at is set
+    self.posted_at ||= Time.now if post_status.is_posted?
+    self.posted_at = nil if post_status.is_draft?
+
+    # Parses title into a url-friendly format
+    self.title_url = title.gsub(/[^A-Za-z0-9_\-]/i, '_').gsub(/_+/, '_').downcase
+
+    # Parses @tag_names ans assigns appropriate Tags
+    if @tag_names && @tag_names.strip != tags.map(&:name).join(', ').strip
+      self.tags = @tag_names.split(',').map{ |tag| Tag.find_or_create_by(name: tag.strip) }
+    end
+
+    # Parses the body into different formats to be used in different places on the site
+    self.parsed_body = Kramdown::Document.new(body).to_html
+    paragraph = Nokogiri::HTML.fragment(parsed_body).children.first
+    self.parsed_preview = paragraph.respond_to?(:to_html) && paragraph.to_html || ''
+    self.meta_description = "#{title} | #{ paragraph.respond_to?(:text) && paragraph.text || '' }"[0..150]
   end
 
 end

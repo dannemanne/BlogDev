@@ -18,11 +18,11 @@ describe Post do
   end
 
   describe 'assignments' do
-    it 'assigns title_url based on title before validation' do
+    it 'assigns title_url based on title upon save' do
       expect(post.title).to be_present
       expect(post.title_url).to be_blank
 
-      post.valid?
+      expect(post.save).to eq(true)
       expect(post.title_url).to be_present
     end
     it 'creates/adds Tags based on tag_names upon save' do

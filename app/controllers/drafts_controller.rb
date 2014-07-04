@@ -52,7 +52,7 @@ class DraftsController < ApplicationController
 
 private
   def load_posts
-    @posts = current_user.posts.drafts
+    @posts = current_user.posts.drafts.decorate
   end
 
   def load_post

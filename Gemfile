@@ -26,5 +26,6 @@ gem 'kramdown'
 gem 'pingback'
 gem 'paperclip'
 gem 'ancestry'
+gem 'draper'
 
 gem 'foundation-rails'

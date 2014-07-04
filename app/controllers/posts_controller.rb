@@ -23,6 +23,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = @post.decorate
     set_xpingback_header
     respond_to do |format|
       format.html
@@ -103,11 +104,11 @@ class PostsController < ApplicationController
 
 private
   def find_posts
-    @posts = Post.posted.order('posted_at DESC').limit(POSTS_PER_PAGE).offset( (page-1) * POSTS_PER_PAGE )
+    @posts = Post.posted.order('posted_at DESC').limit(POSTS_PER_PAGE).offset( (page-1) * POSTS_PER_PAGE ).decorate
   end
 
   def find_by_date
-    @posts = Post.from_archive params[:year], params[:month]
+    @posts = Post.from_archive(params[:year], params[:month]).decorate
   end
 
   def post_params

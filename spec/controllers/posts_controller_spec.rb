@@ -47,6 +47,23 @@ describe PostsController do
     end
   end
 
+  describe "GET 'show'" do
+    let(:post_with_comments) { FactoryGirl.create(:post_with_comments) }
+    describe 'for guests' do
+      it 'can show a post with comments' do
+        expect(post_with_comments.comments).not_to be_empty
+
+        get 'show', id: post_with_comments.to_param
+        expect(response).to be_success
+      end
+    end
+
+    describe 'for admins' do
+      login_admin
+
+    end
+  end
+
   describe "POST 'comment'" do
     it 'should add a Comment when commenting is allowed' do
       attr = { name: 'John Doe', message: 'Great Post', website: 'http://my.web.com' }

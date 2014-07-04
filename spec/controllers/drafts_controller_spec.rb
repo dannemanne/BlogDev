@@ -36,4 +36,32 @@ describe DraftsController do
     end
   end
 
+  describe "DELETE 'destroy'" do
+    describe 'for admins' do
+      login_admin
+
+      it 'should delete a post that has status draft' do
+        expect(current_user.role).to eq(User::ROLE_ADMIN)
+        expect(user_draft.user).to eq(current_user)
+        expect(user_draft.status).to eq(PostStatus::DRAFT)
+
+        delete 'destroy', id: user_draft.to_param
+        expect(response).to be_redirect
+        expect(Post.find_by_id(user_draft.id)).to be_nil
+      end
+    end
+
+    describe 'for guests' do
+      let(:other_draft) { FactoryGirl.create(:draft) }
+      it 'should NOT delete a post' do
+        expect(current_user).to be_nil
+        expect(other_draft.status).to eq(PostStatus::DRAFT)
+
+        delete 'destroy', id: other_draft.to_param
+        expect(response).to be_redirect # redirect to root path
+        expect(Post.find_by_id(other_draft.id)).to be_present
+      end
+    end
+  end
+
 end

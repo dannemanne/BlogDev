@@ -76,18 +76,6 @@ class PostsController < ApplicationController
     end
   end
 
-  def destroy
-    respond_to do |format|
-      if @post.destroy
-        format.html { redirect_to posts_path }
-        format.js
-      else
-        format.html { redirect_to posts_path }
-        format.js
-      end
-    end
-  end
-
   def comment
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user if current_user

@@ -41,13 +41,13 @@ class PostsController < ApplicationController
     @post.user = current_user
     if @post.save
       flash[:notice] = 'Post successfully created!'
-      if @post.status == Post::STATUS_POSTED
+      if @post.post_status.is_posted?
         redirect_to @post
       else
         redirect_to draft_path(@post)
       end
     else
-      render :action => :new
+      render action: :new
     end
   end
 
@@ -61,15 +61,15 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update_attributes(post_params)
-        if @post.status == Post::STATUS_POSTED
-          format.html { render :action => :show }
+        if @post.post_status.is_posted?
+          format.html { render action: :show }
           format.js
         else
           format.html { redirect_to draft_path(@post) }
           format.js
         end
       else
-        format.html { render :action => :edit }
+        format.html { render action: :edit }
         format.js
       end
     end

@@ -3,11 +3,11 @@ FactoryGirl.define do
     user
     sequence(:title) { |n| "Post title #{n}" }
     body 'Here is the post body'
-    status Post::STATUS_POSTED
+    status PostStatus::POSTED
     allow_comments true
 
     factory :draft do
-      status Post::STATUS_DRAFT
+      status PostStatus::DRAFT
     end
   end
 end

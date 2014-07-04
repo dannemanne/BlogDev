@@ -17,7 +17,7 @@ describe PostsController do
 
   describe "GET 'index'" do
     it 'should list the posts' do
-      expect(blog_post.status).to eq(Post::STATUS_POSTED)
+      expect(blog_post.status).to eq(PostStatus::POSTED)
 
       get 'index'
       expect(response).to be_success
@@ -26,7 +26,7 @@ describe PostsController do
 
   describe "GET 'archive'" do
     it 'should list the posts for that month' do
-      expect(blog_post.status).to eq(Post::STATUS_POSTED)
+      expect(blog_post.status).to eq(PostStatus::POSTED)
 
       get 'archive', year: blog_post.posted_at.strftime('%Y'), month: blog_post.posted_at.strftime('%m')
       expect(response).to be_success
@@ -37,7 +37,7 @@ describe PostsController do
     login_admin
 
     it 'should create a new Post' do
-      attr = { title: 'New Post', body: 'This is the post body', status: Post::STATUS_POSTED, tag_names: 'Tag-Name' }
+      attr = { title: 'New Post', body: 'This is the post body', status: PostStatus::POSTED, tag_names: 'Tag-Name' }
       expect(current_user.role).to eq(User::ROLE_ADMIN)
       count = current_user.posts.count
 

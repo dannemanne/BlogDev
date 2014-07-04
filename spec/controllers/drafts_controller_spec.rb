@@ -25,10 +25,10 @@ describe DraftsController do
     login_admin
 
     it 'should update an existing draft' do
-      attr = { title: 'Updated Post', body: 'This is the updated post body', status: Post::STATUS_POSTED, tag_names: 'Tag-Name' }
+      attr = { title: 'Updated Post', body: 'This is the updated post body', status: PostStatus::POSTED, tag_names: 'Tag-Name' }
       expect(current_user.role).to eq(User::ROLE_ADMIN)
       expect(user_draft.user).to eq(current_user)
-      expect(user_draft.status).to eq(Post::STATUS_DRAFT)
+      expect(user_draft.status).to eq(PostStatus::DRAFT)
 
       put 'update', id: user_draft.to_param, post: attr
       expect(response).to be_redirect

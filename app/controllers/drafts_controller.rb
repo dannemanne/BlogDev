@@ -19,7 +19,7 @@ class DraftsController < ApplicationController
 
   def update
     if @post.update_attributes(post_params)
-      if @post.status == Post::STATUS_POSTED
+      if @post.post_status.is_posted?
         respond_to do |format|
           format.html { redirect_to post_path(@post) }
           format.js

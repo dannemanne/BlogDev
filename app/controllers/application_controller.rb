@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 protected
 
   def recent_posts(limit = 5)
-    Post.posted.recent(limit)
+    Post.posted.recent(limit).decorate
   end
 
   def recent_comments(limit = 5)

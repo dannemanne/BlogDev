@@ -15,6 +15,24 @@ describe PostsController do
     end
   end
 
+  describe "GET 'index'" do
+    it 'should list the posts' do
+      expect(blog_post.status).to eq(Post::STATUS_POSTED)
+
+      get 'index'
+      expect(response).to be_success
+    end
+  end
+
+  describe "GET 'archive'" do
+    it 'should list the posts for that month' do
+      expect(blog_post.status).to eq(Post::STATUS_POSTED)
+
+      get 'archive', year: blog_post.posted_at.strftime('%Y'), month: blog_post.posted_at.strftime('%m')
+      expect(response).to be_success
+    end
+  end
+
   describe "POST 'create' for admins" do
     login_admin
 

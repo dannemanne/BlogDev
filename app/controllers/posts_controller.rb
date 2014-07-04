@@ -1,7 +1,12 @@
 class PostsController < ApplicationController
+  POSTS_PER_PAGE = 5
+
   load_and_authorize_resource     find_by: :title_url, except: [:index, :archive]
-  before_filter :find_by_date,    :only => :archive
+  before_filter :find_posts,      only: [:index]
+  before_filter :find_by_date,    only: [:archive]
   before_filter :anti_spam,       only: [:comment]
+
+  helper_method :no_of_pages, :page, :archive_date
 
   def archive
     respond_to do |format|
@@ -11,11 +16,6 @@ class PostsController < ApplicationController
   end
 
   def index
-    posts_per_page = 5
-    @no_of_pages = Post.posted.count / posts_per_page + ( (Post.posted.count % posts_per_page) > 0 ? 1 : 0)
-    @page = params[:page] && params[:page].to_i || 1
-    @page = 1 if @page <= 0
-    @posts = Post.posted.order("posted_at DESC").limit(posts_per_page).offset( (@page-1) * posts_per_page )
     respond_to do |format|
       format.html
       format.js
@@ -40,7 +40,7 @@ class PostsController < ApplicationController
   def create
     @post.user = current_user
     if @post.save
-      flash[:notice] = "Post successfully created!"
+      flash[:notice] = 'Post successfully created!'
       if @post.status == Post::STATUS_POSTED
         redirect_to @post
       else
@@ -78,10 +78,10 @@ class PostsController < ApplicationController
   def destroy
     respond_to do |format|
       if @post.destroy
-        format.html { redirect_to drafts_path }
+        format.html { redirect_to posts_path }
         format.js
       else
-        format.html { redirect_to drafts_path }
+        format.html { redirect_to posts_path }
         format.js
       end
     end
@@ -102,10 +102,12 @@ class PostsController < ApplicationController
   end
 
 private
+  def find_posts
+    @posts = Post.posted.order('posted_at DESC').limit(POSTS_PER_PAGE).offset( (page-1) * POSTS_PER_PAGE )
+  end
+
   def find_by_date
-    @date1 = Date.new(params[:year].to_i,params[:month].to_i)
-    @date2 = Date.new(params[:year].to_i+params[:month].to_i/12,(params[:month].to_i%12)+1)
-    @posts = Post.where("posted_at > ? and posted_at < ?", @date1, @date2)
+    @posts = Post.from_archive params[:year], params[:month]
   end
 
   def post_params
@@ -120,6 +122,19 @@ private
     if params.fetch(:comment, {}).fetch(:website_url, nil).present?
       redirect_to action: :show
     end
+  end
+
+  # Helper methods
+  def no_of_pages
+    @_no_of_pages ||= (count = Post.posted.count) / POSTS_PER_PAGE + ( (count % POSTS_PER_PAGE) > 0 ? 1 : 0)
+  end
+
+  def page
+    @_page ||= (page = (params[:page] && params[:page].to_i || 1)) <= 0 ? 1 : page
+  end
+
+  def archive_date
+    Date.new(params[:year].to_i, params[:month].to_i)
   end
 
 end

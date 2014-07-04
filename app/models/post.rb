@@ -25,7 +25,8 @@ class Post < ActiveRecord::Base
   validates :status,    inclusion: { in: STATUSES.keys }
 
   before_validation do
-    self.posted_at ||= Time.now if status == STATUS_POSTED && changes[:status].present?
+    self.posted_at ||= Time.now if status == STATUS_POSTED
+    self.posted_at = nil if status == STATUS_DRAFT
     self.title_url = title.gsub(/[^A-Za-z0-9_\-]/i, "_").gsub(/_+/, "_").downcase
   end
 
@@ -37,6 +38,12 @@ class Post < ActiveRecord::Base
     paragraph = Nokogiri::HTML.fragment(parsed_body).children.first
     self.parsed_preview = paragraph.respond_to?(:to_html) && paragraph.to_html || ""
     self.meta_description = "#{title} | #{paragraph.respond_to?(:text) && paragraph.text || ""}"[0..150]
+  end
+
+  def self.from_archive(year, month)
+    date1 = Date.new(year.to_i,month.to_i)
+    date2 = Date.new(year.to_i+month.to_i/12,(month.to_i%12)+1)
+    where('posted_at > ? and posted_at < ?', date1, date2)
   end
 
   def display_body

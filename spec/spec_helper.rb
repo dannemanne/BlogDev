@@ -30,8 +30,6 @@ RSpec.configure do |config|
   # Makes sure that specs in the folder controllers will be handles as a controller, etc
   config.infer_spec_type_from_file_location!
 
-  puts ControllerMacros.inspect
-
   config.include Devise::TestHelpers, type: :controller
   config.extend ControllerMacros,     type: :controller
   config.include ControllerHelpers,   type: :controller

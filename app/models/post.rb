@@ -34,10 +34,6 @@ class Post < ActiveRecord::Base
     post_status.is_draft? ? id.to_s : title_url
   end
 
-  def tag_names
-    @tag_names ||= tags.map(&:name).join ', '
-  end
-
 private
   def set_attributes
     # If the post is posted, then make sure that posted_at is set
@@ -46,11 +42,6 @@ private
 
     # Parses title into a url-friendly format
     self.title_url = title.gsub(/[^A-Za-z0-9_\-]/i, '_').gsub(/_+/, '_').downcase
-
-    # Parses @tag_names ans assigns appropriate Tags
-    if @tag_names && @tag_names.strip != tags.map(&:name).join(', ').strip
-      self.tags = @tag_names.split(',').map{ |tag| Tag.find_or_create_by(name: tag.strip) }
-    end
 
     # Parses the body into different formats to be used in different places on the site
     self.parsed_body = Kramdown::Document.new(body).to_html

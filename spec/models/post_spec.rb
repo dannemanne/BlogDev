@@ -25,12 +25,5 @@ describe Post do
       expect(post.save).to eq(true)
       expect(post.title_url).to be_present
     end
-    it 'creates/adds Tags based on tag_names upon save' do
-      expect(post.tags).to be_empty
-
-      post.tag_names = 'Tag'
-      expect(post.save).to eq(true)
-      expect(post.tags(true)).to be_any
-    end
   end
 end

@@ -32,6 +32,7 @@ class PostsController < ApplicationController
   end
 
   def new
+    @post_form = PostForm.new_in_model(Post.new)
     respond_to do |format|
       format.html
       format.js
@@ -39,13 +40,13 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post.user = current_user
-    if @post.save
+    @post_form = PostForm.new_in_model(Post.new, params[:post], current_user)
+    if @post_form.save
       flash[:notice] = 'Post successfully created!'
-      if @post.post_status.is_posted?
-        redirect_to @post
+      if @post_form.post.post_status.is_posted?
+        redirect_to @post_form.post
       else
-        redirect_to draft_path(@post)
+        redirect_to draft_path(@post_form.post)
       end
     else
       render action: :new

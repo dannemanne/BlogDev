@@ -13,6 +13,10 @@ class PostDecorator < Draper::Decorator
     parsed_preview.html_safe
   end
 
+  def tag_names
+    @tag_names ||= tags.map(&:name).join ', '
+  end
+
   def older_post
     @older_post ||= (p = Post.posted.where('posted_at < ?', posted_at).order('posted_at DESC').first) && p.decorate
   end

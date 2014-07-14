@@ -42,7 +42,7 @@ describe PostsController do
       count = current_user.posts.count
 
       post 'create', post: attr
-      expect(response).to be_redirect
+      expect(response.redirect?).to be true
       expect(current_user.posts(true).count).to eq(count+1)
     end
   end

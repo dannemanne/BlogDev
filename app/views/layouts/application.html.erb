@@ -30,8 +30,11 @@
 <body>
 
 <div id="container">
-  <div id="splash"<% if current_page?(root_url) %> class="intro"<% end %>>
+  <% if content_for?(:splash) %>
+    <%= yield :splash %>
+  <% end %>
 
+  <div class="sticky">
     <nav class="top-bar" data-topbar>
       <ul class="title-area">
         <li class="name">
@@ -63,15 +66,6 @@
         </ul>
       </section>
     </nav>
-
-    <% if current_page? root_url %>
-
-    <div class="profile">
-      <%= image_tag image_url('profile.png') %>
-    </div>
-
-    <% end %>
-
   </div>
 
   <div id="content">

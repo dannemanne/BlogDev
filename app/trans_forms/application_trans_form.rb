@@ -13,7 +13,7 @@ class ApplicationTransForm < TransForms::FormBase
   attr_accessor :current_user
 
   def self.new_in_model(model, params = {}, current_user = nil)
-    new(params.merge(model: model, current_user: current_user))
+    new((params || {}).merge(model: model, current_user: current_user))
   end
 
 end

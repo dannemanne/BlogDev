@@ -64,6 +64,22 @@ describe PostsController do
     end
   end
 
+  describe "PUT 'update' for admins" do
+    login_admin
+    let(:user_post) { FactoryGirl.create(:post, user: current_user) }
+    it 'should create a new Post' do
+      attr = { title: 'Updated Title', body: 'Body is now updated', status: PostStatus::POSTED, tag_names: 'Altered-Tag, And-Another' }
+      expect(current_user.role).to eq(User::ROLE_ADMIN)
+      expect(user_post.user).to eq current_user
+
+      put 'update', id: user_post.to_param, post: attr
+      expect(response.redirect?).to be true
+      expect(user_post.reload.title).to eq attr[:title]
+      expect(user_post.body).to eq attr[:body]
+      expect(user_post.status).to eq attr[:status]
+    end
+  end
+
   describe "POST 'comment'" do
     it 'should add a Comment when commenting is allowed' do
       attr = { name: 'John Doe', message: 'Great Post', website: 'http://my.web.com' }

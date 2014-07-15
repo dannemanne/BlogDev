@@ -1,5 +1,5 @@
 class PostForm < ApplicationTransForm
-  set_main_model :post
+  set_main_model :post, proxy: true
 
   # Define the attributes available for this specific form model. The attributes
   # are declared according to the Virtus standard
@@ -7,11 +7,11 @@ class PostForm < ApplicationTransForm
   #   attribute :name,      String
   #   attribute :age,       Numeric
   #   attribute :phone_no,  Array
-  attribute :title,           String
-  attribute :body,            String
-  attribute :status,          Integer
-  attribute :tag_names,       String
-  attribute :allow_comments,  Boolean, default: false
+  attribute :title,           String,   default: proc { |f| f.post.title }
+  attribute :body,            String,   default: proc { |f| f.post.body }
+  attribute :status,          Integer,  default: proc { |f| f.post.status }
+  attribute :tag_names,       String,   default: proc { |f| f.post.tags.map(&:name).join(', ') }
+  attribute :allow_comments,  Boolean,  default: proc { |f| f.post.allow_comments }
 
 
   # Define validations according to the ActiveModel conventions

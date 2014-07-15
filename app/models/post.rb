@@ -34,6 +34,10 @@ class Post < ActiveRecord::Base
     post_status.is_draft? ? id.to_s : title_url
   end
 
+  def post_form(attr = {}, current_user = nil)
+    @post_form ||= PostForm.new_in_model(self, attr, current_user)
+  end
+
 private
   def set_attributes
     # If the post is posted, then make sure that posted_at is set

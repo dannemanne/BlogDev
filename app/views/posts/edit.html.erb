@@ -1,8 +1,8 @@
 <% content_for :title do %>Edit Post - <%= @post.title %><% end %>
 <h1>Edit Post</h1>
 
-<%= form_for @post do |f| %>
+<%= form_for @post.post_form do |f| %>
 
-  <%= render "post_form", :f => f %>
+  <%= render 'post_form', f: f %>
 
 <% end %>

@@ -6,6 +6,8 @@ class Post < ActiveRecord::Base
   has_many :post_images,  dependent: :destroy
   has_many :images,       through: :post_images
 
+  # Because of CanCan automatic resource instances, we
+  # need to define this attribute here. Fix later!
   attr_writer :tag_names
 
   validates :title,     presence: true

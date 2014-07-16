@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/dannemanne/trans_forms.git
-  revision: 3630d96eb36ee1a5ad3e2feed57aa6a3645e121f
+  revision: 9a0dcc3746e39237766b2d06e0aeb918bedf850f
   specs:
     trans_forms (0.1.0)
       activemodel (>= 3.0.0)

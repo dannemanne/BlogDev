@@ -1,7 +1,7 @@
 class DraftsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_posts, :only => :index
-  before_filter :load_post,  :except => :index
+  before_filter :load_posts, only: :index
+  before_filter :load_post,  except: :index
 
   def index
     respond_to do |format|
@@ -18,7 +18,7 @@ class DraftsController < ApplicationController
   end
 
   def update
-    if @post.update_attributes(post_params)
+    if @post.post_form(post_params, current_user).save
       if @post.post_status.is_posted?
         respond_to do |format|
           format.html { redirect_to post_path(@post) }
@@ -32,7 +32,7 @@ class DraftsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render :action => :show }
+        format.html { render action: :show }
         format.js
       end
     end

@@ -12,6 +12,7 @@ group :development, :test do
 end
 
 group :test do
+  gem "codeclimate-test-reporter", require: nil
   gem "factory_girl_rails"
 end
 

@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 ruby '2.1.2'
 
 gem 'unicorn'
-gem 'rails', '4.1.1'
+gem 'rails', '~> 4.1.1'
 
 group :development, :test do
 #  gem 'mysql2', '~> 0.3.11'
@@ -20,7 +20,7 @@ end
 #end
 
 gem 'devise', '3.2.4'
-gem 'cancan', '1.6.10'
+gem 'cancancan', '~> 1.8.4'
 gem 'jquery-rails'
 gem 'kramdown'
 gem 'pingback'

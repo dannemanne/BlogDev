@@ -10,7 +10,7 @@
 
 <section class="prev-next">
   <% if page > 1 %>
-    <span><%= link_to '< Next', posts_page_path(page -1), title: 'Go to the next page', rel: 'next' %></span>
+    <span><%= link_to '< Next', posts_page_path(page-1), title: 'Go to the next page', rel: 'next' %></span>
   <% else %>
     <span>< Next</span>
   <% end %>

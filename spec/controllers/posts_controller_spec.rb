@@ -28,6 +28,14 @@ describe PostsController do
       get 'index'
       expect(response).to be_success
     end
+    it 'should be able to show multiple pages of posts' do
+      10.times { FactoryGirl.create(:post) }
+
+      expect(Post.count).to be > PostsController::POSTS_PER_PAGE
+
+      get 'index', page: 2
+      expect(response).to be_success
+    end
   end
 
   describe "GET 'archive'" do

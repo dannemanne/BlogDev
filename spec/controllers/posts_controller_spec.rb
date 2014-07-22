@@ -22,6 +22,12 @@ describe PostsController do
       get 'index'
       expect(response).to be_success
     end
+    it 'should list all the latest posts' do
+      10.times { FactoryGirl.create(:post) }
+
+      get 'index'
+      expect(response).to be_success
+    end
   end
 
   describe "GET 'archive'" do

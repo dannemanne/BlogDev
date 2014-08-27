@@ -4,8 +4,8 @@ class Ability
   def initialize(user)
     user ||= User.new
 
-    # Users can manage their own Posts and Comments
     if user.persisted?
+      # Users can manage their own Posts and Comments
       can :manage, Post, :user_id => user.id
       can :manage, Comment, :user_id => user.id
       cannot :span, Comment, :user_id => user.id

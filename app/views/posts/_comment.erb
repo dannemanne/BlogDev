@@ -9,13 +9,6 @@
     <% if can? :destroy, comment %>
       <%= link_to "Delete", comment_path(comment), method: :delete %>
     <% end %>
-    <% if can? :span, comment %>
-      <% if comment.no_follow %>
-        <span>Marked as spam.</span>
-      <% else %>
-        <%= link_to "Spam", spam_comment_path(comment), method: :post %>
-      <% end %>
-    <% end %>
     <div class="reply" id="message_reply_<%= comment.id %>">
       <%= render "comment_form", comment: @comment && @comment.parent_id == comment.id && @comment || Comment.new(parent_id: comment.id) %>
     </div>

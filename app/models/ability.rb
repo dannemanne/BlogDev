@@ -8,7 +8,6 @@ class Ability
       # Users can manage their own Posts and Comments
       can :manage, Post, :user_id => user.id
       can :manage, Comment, :user_id => user.id
-      cannot :span, Comment, :user_id => user.id
     end
 
     # Admins can manage all

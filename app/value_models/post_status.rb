@@ -3,9 +3,8 @@ class PostStatus < BaseValue
   POSTED = 1
   ARCHIVED = 2
 
-  set_values({ DRAFT    => { label: :draft },
-               POSTED   => { label: :posted },
-               ARCHIVED => { label: :archived }
-             })
+  add_value DRAFT,    :draft
+  add_value POSTED,   :posted
+  add_value ARCHIVED, :archived
 
 end

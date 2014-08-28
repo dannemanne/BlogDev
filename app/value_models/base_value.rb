@@ -35,7 +35,7 @@ class BaseValue
   end
 
   def as_json(*args)
-    { id: id, name: display_name }
+    value_hash.merge(id: id, name: display_name)
   end
 
   # Methods +hash+ and +eql?+ makes it possible to use
@@ -66,11 +66,12 @@ class BaseValue
 
 protected
   def value_hash
-    self.class.values[id] || {}
+    values[id] || {}
   end
 
-  def self.set_values(values)
-    self.values = values.freeze
+  def self.add_value(id, label, attr = {})
+    self.values ||= {}
+    values[id] = attr.merge(label: label)
   end
 
 end

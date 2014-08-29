@@ -28,6 +28,7 @@ gem 'pingback'
 gem 'paperclip'
 gem 'ancestry'
 gem 'draper'
+gem 'cloudinary'
 gem 'trans_forms', git: 'git://github.com/dannemanne/trans_forms.git'
 
 gem 'foundation-rails'

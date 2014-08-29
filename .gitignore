@@ -2,6 +2,7 @@
 .bundle
 db/*.sqlite3
 config/database.yml
+config/cloudinary.yml
 log/*.log
 tmp/**/*
 .env

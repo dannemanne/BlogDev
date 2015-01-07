@@ -67,7 +67,7 @@ jQuery(window).load(function() {
 <p><%= f.text_field :tag_names %></p>
 
 <h2><%= f.label :status %></h2>
-<p><%= f.radio_button :status, PostStatus::POSTED %> Draft</p>
+<p><%= f.radio_button :status, PostStatus::DRAFT %> Draft</p>
 <p><%= f.radio_button :status, PostStatus::POSTED %> Published</p>
 
 <h2><%= f.label :allow_comments %></h2>

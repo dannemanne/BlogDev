@@ -27,14 +27,20 @@
     <div class="clear"></div>
 
     <% if @post.allow_comments %>
-      <h3>COMMENTS</h3>
-      <% if @post.comments.any? %>
-        <%= nested_comments @post.comments.arrange(order: :created_at) %>
-      <% else %>
-        <p style="font-style: italic;">No comments yet</p>
-      <% end %>
-      <% if can? :comment, @post %>
-        <%= render "comment_form", comment: @comment && @comment.parent_id.nil? && @comment || Comment.new %>
+      <% if Rails.env.production? %>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+          var disqus_shortname = 'dannemanne'; // required: replace example with your forum shortname
+
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
       <% end %>
     <% end %>
 

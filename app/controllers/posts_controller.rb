@@ -4,7 +4,6 @@ class PostsController < ApplicationController
   load_and_authorize_resource     find_by: :title_url, except: [:index, :archive]
   before_filter :find_posts,      only: [:index]
   before_filter :find_by_date,    only: [:archive]
-  before_filter :anti_spam,       only: [:comment]
 
   helper_method :no_of_pages, :page, :archive_date
 
@@ -75,20 +74,6 @@ class PostsController < ApplicationController
     end
   end
 
-  def comment
-    @comment = @post.comments.build(comment_params)
-    @comment.user = current_user if current_user
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to action: :show }
-        format.js
-      else
-        format.html { render action: :show  }
-        format.js
-      end
-    end
-  end
-
 private
   def find_posts
     @posts = Post.posted.order('posted_at DESC').limit(POSTS_PER_PAGE).offset( (page-1) * POSTS_PER_PAGE ).decorate
@@ -100,16 +85,6 @@ private
 
   def post_params
     params.require(:post).permit(:title, :body, :status, :tag_names, :allow_comments)
-  end
-
-  def comment_params
-    params.require(:comment).permit(:parent_id, :name, :website, :message)
-  end
-
-  def anti_spam
-    if params.fetch(:comment, {}).fetch(:website_url, nil).present?
-      redirect_to action: :show
-    end
   end
 
   # Helper methods

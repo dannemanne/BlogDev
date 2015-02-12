@@ -62,12 +62,10 @@ describe PostsController do
   end
 
   describe "GET 'show'" do
-    let(:post_with_comments) { FactoryGirl.create(:post_with_comments) }
+    let(:post) { FactoryGirl.create(:post) }
     describe 'for guests' do
-      it 'can show a post with comments' do
-        expect(post_with_comments.comments).not_to be_empty
-
-        get 'show', id: post_with_comments.to_param
+      it 'can show a post' do
+        get 'show', id: post.to_param
         expect(response).to be_success
       end
     end
@@ -91,28 +89,6 @@ describe PostsController do
       expect(user_post.reload.title).to eq attr[:title]
       expect(user_post.body).to eq attr[:body]
       expect(user_post.status).to eq attr[:status]
-    end
-  end
-
-  describe "POST 'comment'" do
-    it 'should add a Comment when commenting is allowed' do
-      attr = { name: 'John Doe', message: 'Great Post', website: 'http://my.web.com' }
-      expect(blog_post.allow_comments).to eq(true)
-      count = blog_post.comments.count
-
-      post 'comment', id: blog_post.to_param, comment: attr
-      expect(response).to be_redirect
-      expect(blog_post.comments(true).count).to eq(count+1)
-    end
-
-    it 'should not add a Comment when spam is detected' do
-      attr = { name: 'John Doe', message: 'Great Post', website: 'http://my.web.com', website_url: 'not blank value' }
-      expect(blog_post.allow_comments).to eq(true)
-      count = blog_post.comments.count
-
-      post 'comment', id: blog_post.to_param, comment: attr
-      expect(response).to be_redirect
-      expect(blog_post.comments(true).count).to eq(count)
     end
   end
 

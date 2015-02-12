@@ -1,6 +1,5 @@
 class Post < ActiveRecord::Base
   belongs_to :user
-  has_many :comments
   has_many :post_tags,    dependent: :destroy
   has_many :tags,         through: :post_tags
   has_many :post_images,  dependent: :destroy
@@ -17,7 +16,7 @@ class Post < ActiveRecord::Base
 
   before_save :set_attributes
 
-  scope :posted, -> { includes(:comments).where('posts.status = ?', PostStatus::POSTED) }
+  scope :posted, -> { where('posts.status = ?', PostStatus::POSTED) }
   scope :drafts, -> { where(status: PostStatus::DRAFT) }
   scope :archive_months, -> { select(:posted_at).where(status: PostStatus::POSTED).order('1 DESC') }
 

@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :posts
-  has_many :comments
 
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :email, :name, :password, :password_confirmation, :remember_me
@@ -27,10 +26,6 @@ class User < ActiveRecord::Base
 
   def role?(role)
     ROLES[self.role] == role.to_sym
-  end
-
-  def website
-    "http://dannemanne.com" #TODO: Change this to dynamic later
   end
 
 end

@@ -7,13 +7,7 @@ Blog::Application.routes.draw do
 
   get "posts/:page" => "posts#index", :as => :posts_page, :constraints => { :page => /[0-9]+/ }
   get ":year/:month" => "posts#archive", :as => :archive, :constraints => { :year => /\d{4}/, :month => /\d{2}/ }
-  resources :posts do
-    post :comment, :on => :member
-  end
-
-  resources :comments, only: [:destroy] do
-    post :spam, on: :member
-  end
+  resources :posts
 
   resources :tags, :except => [:new, :create]
   resources :drafts, :only => [:index, :show, :update, :destroy]

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Comment do
+describe Linkback do
   let(:linkback) { FactoryGirl.build(:linkback) }
   it 'validates source_uri presence' do
     expect(linkback).to be_valid

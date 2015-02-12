@@ -7,6 +7,7 @@ gem 'rails', '~> 4.1.1'
 group :development, :test do
 #  gem 'mysql2', '~> 0.3.11'
   gem "rspec-rails", '3.0.1'
+  gem 'capybara'
   gem 'foreman'
   gem 'pry'
 end

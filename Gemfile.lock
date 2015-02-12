@@ -1,10 +1,10 @@
 GIT
   remote: git://github.com/dannemanne/trans_forms.git
-  revision: 9a0dcc3746e39237766b2d06e0aeb918bedf850f
+  revision: 47c3791319257f0dccae8e2d26570580f9deaaa5
   specs:
     trans_forms (0.1.0)
-      activemodel (>= 3.0.0)
-      activesupport (>= 3.0.0)
+      activemodel (>= 3.1.0)
+      activesupport (>= 3.1.0)
       virtus
 
 GEM
@@ -48,6 +48,12 @@ GEM
     bcrypt (3.1.7-x86-mingw32)
     builder (3.2.2)
     cancancan (1.8.4)
+    capybara (2.4.4)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
     cloudinary (1.0.76)
       aws_cf_signer
       rest-client
@@ -86,12 +92,12 @@ GEM
       railties (>= 3.1.0)
       sass (>= 3.2.0)
     hike (1.2.3)
-    i18n (0.6.11)
-    ice_nine (0.11.0)
+    i18n (0.7.0)
+    ice_nine (0.11.1)
     jquery-rails (2.0.1)
       railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
-    json (1.8.1)
+    json (1.8.2)
     kgio (2.9.2)
     kramdown (0.13.3)
     mail (2.5.4)
@@ -99,7 +105,7 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25.1)
-    minitest (5.4.0)
+    minitest (5.5.1)
     multi_json (1.10.1)
     netrc (0.7.7)
     nokogiri (1.5.2)
@@ -192,20 +198,22 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (1.2.1)
+    tzinfo (1.2.2)
       thread_safe (~> 0.1)
     unicorn (4.8.3)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    virtus (1.0.2)
+    virtus (1.0.4)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
-      descendants_tracker (~> 0.0.3)
-      equalizer (~> 0.0.9)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.3)
       rack (>= 1.0)
     win32console (1.3.2-x86-mingw32)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -214,6 +222,7 @@ PLATFORMS
 DEPENDENCIES
   ancestry
   cancancan (~> 1.8.4)
+  capybara
   cloudinary
   codeclimate-test-reporter
   devise (= 3.2.4)

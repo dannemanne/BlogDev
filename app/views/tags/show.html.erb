@@ -4,13 +4,15 @@
 <h1><%= @tag.name %></h1>
 
 <% if can? :update, @tag %>
-  <p><%= link_to "Edit", edit_tag_path(@tag) %></p>
+  <p><%= link_to 'Edit', edit_tag_path(@tag) %></p>
 <% end %>
 
 <h2>Tagged posts</h2>
 <% @tag.posts.posted.each do |post| %>
 
-  <%= render "/posts/post_preview", :post => post %>
+  <%= render '/posts/post_preview', post: post %>
   <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
 
 <% end %>
+
+<%= render 'partials/disqus_count' %>

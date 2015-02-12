@@ -10,6 +10,8 @@
   <%= render '/posts/post_preview', post: post %>
 <% end %>
 
+<%= render 'partials/disqus_count' %>
+
 <% content_for :sidebar_right do %>
   <%= popular_tags %>
 <% end %>

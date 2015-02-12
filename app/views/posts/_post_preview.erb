@@ -15,7 +15,7 @@
     <p><%= link_to "Read More >>", post_path(post) %></p>
     <p>
       <% if post.allow_comments %>
-        <span style="float:left;"><%= post.comments_count %> Comments</span>
+        <span style="float:left;" class="disqus-comment-count" data-disqus-url="<%= post_url(post) %>"></span>
       <% end %>
       <span style="float:right;">
         <% if post.tags.any? %>

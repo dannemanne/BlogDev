@@ -23,11 +23,11 @@ end
 
 gem 'devise', '~> 4.0.0'
 gem 'cancancan', '~> 1.8.4'
-gem 'jquery-rails', '~> 2.0.1'
+gem 'jquery-rails', '~> 3.1.3'
 gem 'kramdown'
 gem 'xmlrpc'
 gem 'pingback'
-gem 'paperclip', '~> 3.0.4'
+gem 'paperclip', '~> 4.3'
 gem 'ancestry'
 gem 'draper', '~> 1.3.1'
 gem 'cloudinary', '~> 1.0.76'

@@ -5,6 +5,10 @@ gem 'unicorn'
 gem 'rails', '4.2.10'
 gem 'pg', '~> 0.15'
 
+group :production do
+  gem 'rails_12factor'
+end
+
 group :development, :test do
   gem "rspec-rails", '3.8.0'
   gem 'capybara', '2.4.4'

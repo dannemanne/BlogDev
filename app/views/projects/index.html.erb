@@ -1,6 +1,6 @@
 <% content_for :title do %>Projects<% end %>
 
-<script type="text/javascript">
+<% content_for :javascript_code do %>
   var promptTemplate = "<div class=\"project-prompt\"><p>DanneManne.com:Projects DanneManne$ </p></div>";
   var commandTemplate = "<div class=\"project-command\"><p>${command}</p></div>";
   var projectTemplate = "<div class=\"project-output\"><h1><a href=\"#\" onclick=\"listProject(event,'${name}');\">${name}</a></h1><div class=\"project-indent\"><table><tr><th>Created:</th><td>${((new Date(created_at)).toLocaleFormat())}</td></tr><tr><th>Updated:</th><td>${((new Date(updated_at)).toLocaleFormat())}</td></tr><tr><th>Description:</th><td>${description}</td></tr></table></div></div>";
@@ -40,7 +40,7 @@
       script.src="https://api.github.com/users/dannemanne/repos?callback=showProjects";
       jQuery("body").append(script);
   });
-</script>
+<% end %>
 
 <div id="my_projects">
   <div class="project-header">

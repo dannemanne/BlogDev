@@ -1,16 +1,16 @@
-<script type="text/javascript">
-// Setup the WYSIWYM editor!
-jQuery(window).load(function() {
-  jQuery('#cheat_sheet_body').wysiwym(Wysiwym.Markdown, {});
+<% content_for :javascript_code do %>
+  jQuery(window).load(function() {
+    jQuery('#cheat_sheet_body').wysiwym(Wysiwym.Markdown, {});
 
-  $(function() {
-	var availableTags = <%= CheatSheet.select("DISTINCT category").map(&:category).to_json.html_safe %>;
-		$( "#cheat_sheet_category" ).autocomplete({
-			source: availableTags
-		});
-	});
-});
-</script>
+    $(function() {
+    var availableTags = <%= CheatSheet.select("DISTINCT category").map(&:category).to_json.html_safe %>;
+      $( "#cheat_sheet_category" ).autocomplete({
+        source: availableTags
+      });
+    });
+  });
+<% end %>
+
 <% if f.object.errors.any? %>
   <ul>
     <% f.object.errors.full_messages.each do |msg| %>

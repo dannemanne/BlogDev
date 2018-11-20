@@ -99,6 +99,12 @@
 <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js' %>
 <%= javascript_include_tag 'http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' %>
 
+<script type="text/javascript">
+  <% if content_for? :javascript_code %>
+  <%= yield :javascript_code %>
+  <% end %>
+</script>
+
 <% if Rails.env.production? %>
   <%= render 'partials/google_analytics' %>
   <script type="text/javascript"><!--

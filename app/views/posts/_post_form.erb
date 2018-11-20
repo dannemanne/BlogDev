@@ -1,5 +1,4 @@
-<script type="text/javascript">
-// Setup the WYSIWYM editor!
+<% content_for :javascript_code do %>
 jQuery(window).load(function() {
     jQuery('#post_body').wysiwym(Wysiwym.Markdown, {});
 
@@ -44,7 +43,8 @@ jQuery(window).load(function() {
             }
         });
 });
-</script>
+<% end %>
+
 <% if f.object.errors.any? %>
   <ul>
     <% f.object.errors.full_messages.each do |msg| %>

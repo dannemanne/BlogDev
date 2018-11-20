@@ -1,4 +1,3 @@
-//= require jquery
 //= require jquery_ujs
 //= require foundation
 //= require google-code-prettify/prettify
@@ -10,20 +9,20 @@
 // textarea changes as some set interval.  If it's
 // changed, we'll call Showdown to convert the textarea
 // input to HTML then prettify to colorize code blocks.
-var showdown = new Showdown.converter();
 var prev_text = "";
 var parse_live = function(node, preview) {
     var input_text = node.val();
     if (input_text != prev_text) {
+        var showdown = new Showdown.converter();
         var $this = jQuery(this),
             $text = jQuery("<div>"+ showdown.makeHtml(input_text) +"</div>");
         $text.find('pre').addClass('prettyprint');
         $text.find('p code').addClass('prettyprint');
         $text.find('pre').each(function() {
-            $(this).html(prettyPrintOne($(this).html(), undefined, $(this).hasClass("linenums")));
+            $this.html(prettyPrintOne($this.html(), undefined, $this.hasClass("linenums")));
         });
         $text.find('p code').each(function() {
-            $(this).html(prettyPrintOne($(this).html()));
+          $this.html(prettyPrintOne($this.html()));
         });
         preview.html($text);
         prev_text = input_text;
@@ -35,10 +34,10 @@ var parse_once = function(node){
     $text.find('pre').addClass('prettyprint');
     $text.find('p code').addClass('prettyprint');
     $text.find('pre').each(function() {
-        $(this).html(prettyPrintOne($(this).html(), undefined, $(this).hasClass("linenums")));
+        $this.html(prettyPrintOne($this.html(), undefined, $this.hasClass("linenums")));
     });
     $text.find('p code').each(function() {
-        $(this).html(prettyPrintOne($(this).html()));
+        $this.html(prettyPrintOne($this.html()));
     });
     node.html($text);
 };

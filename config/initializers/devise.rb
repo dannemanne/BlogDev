@@ -78,6 +78,13 @@ Devise.setup do |config|
 
   # Regex to use to validate the email address
   # config.email_regexp = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
+  config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+
+  config.reconfirmable = true
+
+  config.skip_session_storage = [:http_auth]
+
+  config.strip_whitespace_keys = [:email]
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
@@ -122,6 +129,7 @@ Devise.setup do |config|
   # By default sign_out is scoped (i.e. /users/sign_out affects only :user scope).
   # In case of sign_out_all_scopes set to true any logout action will sign out all active scopes.
   # config.sign_out_all_scopes = false
+  config.sign_out_via = :get
 
   # ==> Navigation configuration
   # Lists the formats that should be treated as navigational. Formats like

@@ -25,5 +25,7 @@ Blog::Application.configure do
 
   # Eager Load (Rails 4)
   config.eager_load = false
+
+  config.assets.prefix = '/dev-assets'
 end
 

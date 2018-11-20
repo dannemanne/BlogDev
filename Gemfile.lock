@@ -93,6 +93,7 @@ GEM
       request_store (~> 1.0.3)
     equalizer (0.0.11)
     erubis (2.7.0)
+    execjs (2.7.0)
     factory_girl (4.9.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.9.0)
@@ -242,6 +243,8 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    uglifier (3.2.0)
+      execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5)
@@ -286,6 +289,7 @@ DEPENDENCIES
   rails_12factor
   rspec-rails (= 3.8.0)
   trans_forms!
+  uglifier (= 3.2.0)
   unicorn
   xmlrpc
 

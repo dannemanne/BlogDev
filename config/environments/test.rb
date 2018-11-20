@@ -35,4 +35,9 @@ Blog::Application.configure do
 
   # Eager Load (Rails 4)
   config.eager_load = false
+
+  # Compress and Digest the assets
+  config.assets.compress = true
+  config.assets.js_compressor = :uglifier
+  config.assets.digest = true
 end

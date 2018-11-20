@@ -8,24 +8,9 @@
   <link rel="sitemap" href="/sitemap.xml" />
   <link rel="shortcut icon" href="/images/favicon.ico">
   <%= tag :meta, name: 'description', content: (content_for?(:meta_description) ? yield(:meta_description) : 'News, tips and tutorials about programming. Mostly about Ruby, Rails and Node.js but anything can come up.') %>
-  <%= javascript_include_tag 'application' %>
-  <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js' %>
-  <%= javascript_include_tag 'http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' %>
-  <%= javascript_include_tag 'vendor/modernizr' %>
   <%= stylesheet_link_tag 'application' %>
 
   <%= csrf_meta_tag %>
-  <% if Rails.env.production? %>
-    <%= render 'partials/google_analytics' %>
-    <script type="text/javascript"><!--
-      google_ad_client = "ca-pub-1507841842116581";
-      /* Main Banner */
-      google_ad_slot = "8960650403";
-      google_ad_width = 468;
-      google_ad_height = 60;
-      //-->
-    </script>
-  <% end %>
 </head>
 <body>
 
@@ -108,5 +93,22 @@
 
 </div>
 
+<%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/showdown/0.1.0/showdown.min.js' %>
+<%= javascript_include_tag 'application' %>
+<%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js' %>
+<%= javascript_include_tag 'http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' %>
+<%= javascript_include_tag 'vendor/modernizr' %>
+
+<% if Rails.env.production? %>
+  <%= render 'partials/google_analytics' %>
+  <script type="text/javascript"><!--
+  google_ad_client = "ca-pub-1507841842116581";
+  /* Main Banner */
+  google_ad_slot = "8960650403";
+  google_ad_width = 468;
+  google_ad_height = 60;
+  //-->
+  </script>
+<% end %>
 </body>
 </html>

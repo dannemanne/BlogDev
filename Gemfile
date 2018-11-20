@@ -24,6 +24,7 @@ end
 gem 'devise', '~> 4.0.0'
 gem 'cancancan', '~> 1.8.4'
 gem 'jquery-rails', '~> 3.1.3'
+gem 'uglifier', '3.2.0'
 gem 'kramdown'
 gem 'xmlrpc'
 gem 'pingback'

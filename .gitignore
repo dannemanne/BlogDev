@@ -1,12 +1,110 @@
-.idea/*
+spec/dummy
+*.gem# Rails
+spec/dummy
 .bundle
 db/*.sqlite3
+db/*.sqlite3-journal
+*.log
+tmp
+tmp/**/*
+
+# Documentation
+doc/api
+doc/app
+.yardoc
+.yardopts
+coverage
+
+# Public Uploads
+public/system/*
+public/themes/*
+
+# Public Cache
+public/javascripts/cache
+public/stylesheets/cache
+
+# Vendor Cache
+vendor/cache
+
+# Acts as Indexed
+index/**/*
+
+# Refinery Specific
+*.tmproj
+*.autobackupbyrefinery.*
+refinerycms-*.gem
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# NetBeans
+nbproject
+
+# Eclipse
+.project
+
+# Redcar
+.redcar
+
+# Rubinius
+*.rbc
+
+# Vim
+*.swp
+*.swo
+
+# RubyMine
+.idea
+
+# E-texteditor
+.eprj
+
+# Vagrant
+Vagrantfile
+.vagrant
+
+# Foreman
+.env
+.env.test
+Procfile
+
+# Backup
+*~
+
+# Capybara Bug
+capybara-*html
+
+# sass
+.sass-cache
+.sass-cache/*
+
+#rvm
+.rvmrc
+.rvmrc.*
+
+# vendor/extensions dummy applications.
+vendor/extensions/**/spec/dummy
+
+Gemfile.lock
+
+# Dev or Test pem-file folder
+.pem
+.pem/*
+
+# Application configurations
 config/database.yml
 config/cloudinary.yml
-log/*.log
-tmp/**/*
-.env
-.vagrant
-Vagrantfile
-*.json
-*.json.lock
+
+# Guard
+Guardfile
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+## Node modules
+/node_modules/

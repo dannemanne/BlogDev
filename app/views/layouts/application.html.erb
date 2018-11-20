@@ -11,6 +11,8 @@
   <%= stylesheet_link_tag 'application' %>
 
   <%= csrf_meta_tag %>
+
+  <%= javascript_include_tag 'vendor/modernizr' %>
 </head>
 <body>
 
@@ -94,10 +96,9 @@
 </div>
 
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/showdown/0.1.0/showdown.min.js' %>
-<%= javascript_include_tag 'application' %>
 <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js' %>
 <%= javascript_include_tag 'http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' %>
-<%= javascript_include_tag 'vendor/modernizr' %>
+<%= javascript_include_tag 'application' %>
 
 <% if Rails.env.production? %>
   <%= render 'partials/google_analytics' %>

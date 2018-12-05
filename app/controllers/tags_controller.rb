@@ -5,6 +5,7 @@ class TagsController < ApplicationController
   end
 
   def show
+    @tag = @tag.decorate
   end
 
   def edit

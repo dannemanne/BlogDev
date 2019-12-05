@@ -21,7 +21,7 @@ group :test do
   gem "factory_girl_rails"
 end
 
-gem 'devise', '~> 4.0.0'
+gem 'devise', '~> 4.7.1'
 gem 'cancancan', '~> 1.8.4'
 gem 'jquery-rails', '~> 3.1.3'
 gem 'sass-rails', '~> 5.0.0'

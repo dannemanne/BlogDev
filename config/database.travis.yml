@@ -2,5 +2,5 @@ test:
   adapter: postgresql
   username: postgres
   password:
-  database: Blog_test
+  database: travis_ci_test
   min_messages: ERROR

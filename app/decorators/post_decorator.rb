@@ -6,7 +6,7 @@ class PostDecorator < Draper::Decorator
   end
 
   def display_body
-    parsed_body.html_safe
+    body
   end
 
   def display_preview

@@ -1,8 +1,6 @@
 //= require jquery_ujs
 //= require foundation
-//= require google-code-prettify/prettify
 //= require wysiwym/wysiwym
-//= require posts
 
 
 // For the Live Preview we want to check the value of
@@ -12,34 +10,17 @@
 var prev_text = "";
 var parse_live = function(node, preview) {
     var input_text = node.val();
-    if (input_text != prev_text) {
+    if (input_text !== prev_text) {
         var showdown = new Showdown.converter();
-        var $this = jQuery(this),
-            $text = jQuery("<div>"+ showdown.makeHtml(input_text) +"</div>");
-        $text.find('pre').addClass('prettyprint');
-        $text.find('p code').addClass('prettyprint');
-        $text.find('pre').each(function() {
-            $this.html(prettyPrintOne($this.html(), undefined, $this.hasClass("linenums")));
-        });
-        $text.find('p code').each(function() {
-          $this.html(prettyPrintOne($this.html()));
-        });
-        preview.html($text);
+        preview.html(showdown.makeHtml(input_text));
+        Prism.highlightAll()
         prev_text = input_text;
     }
 };
 var parse_once = function(node){
-    var $this = jQuery(this),
-        $text = jQuery("<div>"+ node.html() +"</div>");
-    $text.find('pre').addClass('prettyprint');
-    $text.find('p code').addClass('prettyprint');
-    $text.find('pre').each(function() {
-        $this.html(prettyPrintOne($this.html(), undefined, $this.hasClass("linenums")));
-    });
-    $text.find('p code').each(function() {
-        $this.html(prettyPrintOne($this.html()));
-    });
-    node.html($text);
+    var showdown = new Showdown.converter();
+    node.html(showdown.makeHtml(node.text()));
+    Prism.highlightAll()
 };
 
 // Setup the WYSIWYM editor!

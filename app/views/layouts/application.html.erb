@@ -8,6 +8,7 @@
   <link rel="sitemap" href="/sitemap.xml" />
   <link rel="shortcut icon" href="/images/favicon.ico">
   <%= tag :meta, name: 'description', content: (content_for?(:meta_description) ? yield(:meta_description) : 'News, tips and tutorials about programming. Mostly about Ruby, Rails and Node.js but anything can come up.') %>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.min.css" rel="stylesheet" />
   <%= stylesheet_link_tag 'application' %>
 
   <%= csrf_meta_tag %>
@@ -16,7 +17,7 @@
 </head>
 <body>
 
-<div id="container">
+<div id="container language-ruby">
   <% if content_for?(:splash) %>
     <%= yield :splash %>
   <% end %>
@@ -92,6 +93,9 @@
   </footer>
 
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-qore.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
 
 <%= javascript_include_tag '//code.jquery.com/jquery-1.10.2.min.js' %>
 <%= javascript_include_tag 'application' %>

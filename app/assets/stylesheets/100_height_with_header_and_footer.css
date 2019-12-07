@@ -3,12 +3,9 @@
  * ----------------------------------------------
  * Feel free to copy/use/change/improve
  */
-
-html,body {
-	margin:0;
-	padding:0;
-	height:100%; /* needed for container min-height */
-    width: 100%;
+body {
+    height: auto;
+    min-height: 100%;
 }
 
 div#container {

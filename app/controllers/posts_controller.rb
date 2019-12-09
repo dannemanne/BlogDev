@@ -60,17 +60,11 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.post_form(post_params, current_user).save
-        if @post.post_status.is_posted?
-          format.html { redirect_to post_path(@post) }
-          format.js
-        else
-          format.html { redirect_to draft_path(@post) }
-          format.js
-        end
+        format.html { redirect_to @post.post_status.is_posted? ? post_path(@post) : draft_path(@post) }
       else
         format.html { render action: :edit }
-        format.js
       end
+      format.js
     end
   end
 

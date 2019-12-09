@@ -1,6 +1,6 @@
 //= require jquery_ujs
 //= require foundation
-//= require wysiwym/wysiwym
+//= require wysiwym/wysiwym.min
 
 
 // For the Live Preview we want to check the value of

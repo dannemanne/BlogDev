@@ -20,4 +20,6 @@ Blog::Application.routes.draw do
 
   get "tag/:tagname" => redirect("/tags/%{tagname}")
 
+  get ".well-known/acme-challenge/:challenge", to: "home#acme_challenge"
+
 end

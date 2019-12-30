@@ -13,4 +13,12 @@ class HomeController < ApplicationController
     end
   end
 
+  def acme_challenge
+    if params[:challenge] == ENV['ACME_CHALLENGE']
+      render text: ENV['ACME_SECRET'], status: :ok
+    else
+      head :not_found
+    end
+  end
+
 end

@@ -19,6 +19,7 @@ end
 group :test do
   gem 'simplecov'
   gem "factory_girl_rails"
+  gem 'climate_control'
 end
 
 gem 'devise', '~> 4.7.1'

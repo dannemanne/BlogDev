@@ -1,7 +1,9 @@
 class PostForm < ApplicationTransForm
-  set_main_model :post, proxy: { attributes: %w(title body status allow_comments) }
+  PROXY_ATTR = %w(title body status allow_comments)
 
-  attribute :tag_names,       String,   default: proc { |f| f.post.tags.map(&:name).join(', ') }
+  set_main_model :post, proxy: { attributes: PROXY_ATTR }
+
+  attribute :tag_names,       String,   default: proc { |f| f.post && f.post.tags.map(&:name).join(', ') }
 
   validates :current_user,  presence: true
   validates :post,          presence: true

@@ -4,7 +4,7 @@
 
 <%= image_tag '/images/about.jpeg', alt: 'Profile Picture', class: 'align-left' %>
 <p>
-  I am a Softward Developer currently living in Hong Kong.
+  I am a Software Developer currently living in Hong Kong.
   I have been here since end of 2009 and will stay here until... who knows?
 </p>
 
@@ -21,8 +21,10 @@
 </p>
 
 <h2>Where am I active?</h2>
-<ul>
+<ul style="list-style: none; margin-left: 0;">
   <li><%= link_to 'StackOverflow', 'http://stackoverflow.com/users/511558/dannemanne' %></li>
   <li><%= link_to 'GitHub', 'https://github.com/dannemanne' %></li>
-  <li><%= link_to 'Google+', 'https://profiles.google.com/106197048505429051160', rel: 'me' %></li>
+  <li><%= link_to 'https://twitter.com/dannemanne84', rel: 'me' do %>
+    Twitter
+  <% end %></li>
 </ul>

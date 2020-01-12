@@ -10,6 +10,8 @@
   <%= render '/posts/post_preview', post: post %>
 <% end %>
 
+<p><%= link_to 'View all posts', posts_path, rel: 'index' %></p>
+
 <%= render 'partials/disqus_count' %>
 
 <% content_for :sidebar_right do %>

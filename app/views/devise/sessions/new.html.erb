@@ -1,17 +1,17 @@
 <h2>Sign in</h2>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <p><%= f.label :email %><br />
-  <%= f.text_field :email %></p>
+  <h5><%= f.label :email %></h5>
+  <%= f.text_field :email %>
 
-  <p><%= f.label :password %><br />
-  <%= f.password_field :password %></p>
+  <h5><%= f.label :password %></h5>
+  <%= f.password_field :password %>
 
   <% if devise_mapping.rememberable? -%>
     <p><%= f.check_box :remember_me %> <%= f.label :remember_me %></p>
   <% end -%>
 
-  <p><%= f.submit "Sign in" %></p>
+  <p><%= f.submit "Sign in", class: 'button' %></p>
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>

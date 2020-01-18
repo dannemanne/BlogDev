@@ -8,8 +8,9 @@
   <link rel="sitemap" href="/sitemap.xml" />
   <link rel="shortcut icon" href="/favicon.ico">
   <%= tag :meta, name: 'description', content: (content_for?(:meta_description) ? yield(:meta_description) : 'News, tips and tutorials about programming. Mostly about Ruby, Rails and Node.js but anything can come up.') %>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.min.css" rel="stylesheet" />
   <%= stylesheet_link_tag 'application' %>
+  <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' %>
+  <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-dark.min.css' %>
 
   <%= csrf_meta_tag %>
 
@@ -17,88 +18,85 @@
 </head>
 <body>
 
-<div id="container language-ruby">
-  <% if content_for?(:splash) %>
-    <%= yield :splash %>
-  <% end %>
+<div id="wrap">
+  <div class="top-bar-container" data-sticky-container>
+    <div class="sticky-topbar sticky" data-sticky data-sticky-on="small" data-options="marginTop: 0;">
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <ul class="dropdown menu" data-dropdown-menu>
+            <li class="menu-text"><%= link_to 'DanneManne', root_path %></li>
+          </ul>
+        </div>
 
-  <div class="sticky">
-    <nav class="top-bar" data-topbar>
-      <ul class="title-area">
-        <li class="name">
-          <h1><%= link_to 'DanneManne', root_path %></h1>
-        </li>
-        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-      </ul>
-
-      <section class="top-bar-section">
-        <!-- Right Nav Section -->
-        <ul class="right">
-          <% if user_signed_in? %>
-            <li style="background: none;"><p>Logged in as <%= current_user.display_name %>.</p></li>
-            <li class="active">
-              <%= link_to 'View Drafts', drafts_path %>
-            </li>
-            <li class="active">
-              <%= link_to 'New Post', new_post_path %>
-            </li>
-            <li class="active">
-              <%= link_to 'Profile', profiles_path %>
-            </li>
-            <li class="active">
-              <%= link_to 'Logout', destroy_user_session_path, title: "Logout user #{current_user.display_name}" %>
-            </li>
-          <% else %>
-            <li class="active">
-              <%= link_to 'Login', new_user_session_path, title: 'Login to DanneManne.com' %>
-            </li>
-          <% end %>
-        </ul>
-      </section>
-    </nav>
-  </div>
-
-  <div id="content">
-
-    <div id="main" class="row">
-
-      <div id="workspace" class="columns">
-        <div style="padding: 0 10px;">
-          <%= yield %>
+        <div class="top-bar-right">
+          <ul class="menu">
+            <% if user_signed_in? %>
+              <li style="background: none;"><p>Logged in as <%= current_user.display_name %>.</p></li>
+              <li class="active">
+                <%= link_to 'View Drafts', drafts_path %>
+              </li>
+              <li class="active">
+                <%= link_to 'New Post', new_post_path %>
+              </li>
+              <li class="active">
+                <%= link_to 'Profile', profiles_path %>
+              </li>
+              <li class="active">
+                <%= link_to 'Logout', destroy_user_session_path, title: "Logout user #{current_user.display_name}" %>
+              </li>
+            <% else %>
+              <li class="active">
+                <%= link_to new_user_session_path, title: 'Login to DanneManne.com' do -%>
+                  <i class="fa fa-sign-in-alt"></i>
+                <% end -%>
+              </li>
+            <% end %>
+          </ul>
         </div>
       </div>
-
     </div>
-
   </div>
 
-  <footer>
+  <main>
+    <div class="grid-container">
+      <div class="grid-x grid-padding-x">
+        <div class="cell medium-3 large-2">
+          <%= render 'partials/side_menu' %>
+        </div>
 
-    <div class="row">
+        <div class="cell medium-9 large-8">
+          <%= yield %>
+        </div>
 
-      <div class="large-2 columns">&nbsp;</div>
-      <div class="large-8 columns">
-        <p class="text-center">
-          <span>Copyright © <%= DateTime.now.year %></span>
-          <span style="margin: 0 3px;">|</span>
-          <span><%= link_to 'About', about_path %></span>
-          <span style="margin: 0 3px;">|</span>
-          <span><%= link_to 'info@dannemanne.com', 'mailto:info@dannemanne.com' %></span>
-        </p>
+        <div class="cell large-2 hide-for-medium-down">
+
+        </div>
       </div>
-      <div class="large-2 columns">&nbsp;</div>
     </div>
-
-  </footer>
-
+  </main>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-qore.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
 
+<footer class="page-footer">
+
+  <div class="grid-x">
+    <div class="cell large-offset-2 large-8 end">
+      <p class="text-center">
+        <span>Copyright © <%= Date.today.year %></span>
+        <span style="margin: 0 3px;">|</span>
+        <span><%= link_to 'About', about_path %></span>
+        <span style="margin: 0 3px;">|</span>
+        <span><%= link_to 'info@dannemanne.com', 'mailto:info@dannemanne.com' %></span>
+      </p>
+    </div>
+  </div>
+
+</footer>
+
+<%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js' %>
+<%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-qore.min.js' %>
+<%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js' %>
 <%= javascript_include_tag 'https://code.jquery.com/jquery-1.10.2.min.js' %>
-<%= javascript_include_tag 'application' %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/showdown/0.1.0/showdown.min.js' %>
 <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js' %>
 <%= javascript_include_tag 'https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' %>

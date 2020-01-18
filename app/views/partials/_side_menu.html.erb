@@ -1,0 +1,13 @@
+<aside class="side-menu">
+  <h5>Links</h5>
+  <ul class="vertical menu">
+    <li><%= link_to 'List all Posts', posts_path %></li>
+  </ul>
+
+  <h5>Tags</h5>
+  <ul class="vertical menu">
+    <% popular_tags.each do |tag| %>
+      <li><%= link_to tag.name, tag_path(tag) %></li>
+    <% end %>
+  </ul>
+</aside>

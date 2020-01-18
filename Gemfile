@@ -37,4 +37,4 @@ gem 'cloudinary', '~> 1.0.76'
 gem 'trans_forms', git: 'https://github.com/dannemanne/trans_forms.git'
 
 gem 'sass', '3.4'
-gem 'foundation-rails', '~> 5.5.3.2'
+gem 'foundation-rails', '6.5.3.0'

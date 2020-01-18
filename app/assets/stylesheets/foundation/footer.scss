@@ -1,0 +1,28 @@
+$footer-small-height: 4rem;
+$footer-medium-height: 4rem;
+
+footer.page-footer {
+    position: absolute;
+    clear:both;
+    bottom: 0;
+    width: 100%;
+
+    background-color: $body-background;
+    color: $white;
+}
+
+/* Small view */
+footer.page-footer {
+    margin-top: -$footer-small-height; /* negative value of footer height */
+    height: $footer-small-height;
+}
+main { padding-bottom: $footer-small-height; }
+
+/* Medium and up view */
+@media print, screen and (min-width: 40rem) {
+    footer.page-footer {
+        margin-top: -$footer-medium-height; /* negative value of footer height */
+        height: $footer-medium-height;
+    }
+    main { padding-bottom: $footer-medium-height; }
+}

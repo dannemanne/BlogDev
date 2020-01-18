@@ -1,0 +1,8 @@
+/* Form Error Styles */
+.field_with_errors {
+    display: inline;
+
+    label { color: $alert-color; }
+    input { border: 1px solid $alert-color; }
+    textarea { border: 1px solid $alert-color; }
+}

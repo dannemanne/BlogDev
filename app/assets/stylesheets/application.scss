@@ -1,13 +1,14 @@
 /* ...
 *= require foundation_and_overrides
-
-*= require 100_height_with_header_and_footer
 *= require cupertino/jquery-ui-1.8.19.custom
 *= require wysiwym/wysiwym
-*= require custom
 
 *= require_self
 */
+
+html { height: 100%; }
+body, #wrap {min-height: 100%; position: relative;}
+body #wrap {height: auto; min-height: 100vh;}
 
 code {
     border: none;

@@ -1,0 +1,13 @@
+aside.side-menu {
+    padding: 1rem;
+    margin: .5rem 0;
+    overflow: auto;
+    border-radius: 1rem;
+    background-color: $dark-gray;
+
+    .menu {
+        margin: 0 0 1rem;
+
+        a { padding: 0.2rem 0; }
+    }
+}

@@ -1,0 +1,13 @@
+section.prev-next {
+    text-align: center;
+    
+    .current {
+        text-decoration: underline;
+    }
+
+    .prev, .next {
+        &.disabled {
+            color: $medium-gray;
+        }
+    }
+}

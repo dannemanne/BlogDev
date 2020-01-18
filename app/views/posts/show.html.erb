@@ -13,15 +13,17 @@
 
   <section data-parse="once"><%= @post.body %></section>
 
-  <section>
-    <span class="postTagContainer">
-      <% if @post.tags.any? %>
-        Tags:
-        <% @post.tags.each_with_index do |tag, i| %><% if i != 0 %>,<% end %>
-          <%= link_to tag_path(tag), :class => "postTag", :title => "View posts tagged with #{tag.name}", :rel => "tag" do %>
-            <span class="postTagText"><%= tag.name %></span><% end %><% end %>
-      <% end %>
-    </span>
+  <footer>
+    <div class="grid-x grid-padding-x">
+      <div class="cell text-right">
+        <% if @post.tags.any? %>
+          Tags:
+          <% @post.tags.each_with_index do |tag, i| %><% if i != 0 %>,<% end %>
+            <%= link_to tag_path(tag), :class => "postTag", :title => "View posts tagged with #{tag.name}", :rel => "tag" do %>
+              <span class="postTagText"><%= tag.name %></span><% end %><% end %>
+        <% end %>
+      </div>
+    </div>
     <div class="clear"></div>
 
     <% if @post.allow_comments %>
@@ -49,7 +51,7 @@
       <span style="float: right;"><%= link_to "#{@post.older_post.title_preview} >", post_path(@post.older_post), :rel => "prev", :title => "View the previous post: #{@post.older_post.title}" %></span>
     <% end %>
     <div class="clear"></div>
-  </section>
+  </footer>
 </article>
 
 <% content_for :sidebar_right do %>

@@ -17,6 +17,8 @@ class Tag < ActiveRecord::Base
     end
   end
 
+  scope :most_used, -> { order(posts_count: :desc) }
+
   def to_param
     stub
   end

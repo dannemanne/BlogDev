@@ -1,21 +1,3 @@
-#splash.intro {
-    position: relative;
-    height: 40rem;
-
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-size: cover;
-    background-attachment: scroll;
-    background-image: image-url("dannemanne-splash.jpg");
-
-    .profile {
-        position: absolute;
-        width: 100%;
-        top: 22rem;
-        text-align: center;
-    }
-}
-
 .p1 { margin-bottom: 1rem !important; }
 .p2 { margin-bottom: 2rem !important; }
 .p3 { margin-bottom: 3rem !important; }
@@ -116,37 +98,6 @@ footer p {
     float:right;
 }
 
-
-/* Form Error Styles */
-.field_with_errors {display: inline;}
-.field_with_errors label {color: #f00;}
-.field_with_errors input {border: 1px solid #f00;}
-.field_with_errors textarea {border: 1px solid #f00;}
-
-
-/* Post Styles */
-article {
-    padding: 10px;
-}
-article li {
-    margin: 0.5em 0 0.5em 1.5em;
-}
-
-div.post-preview {
-    -webkit-border-top-left-radius: 3px;
-    -webkit-border-top-right-radius: 3px;
-    -webkit-border-bottom-left-radius: 3px;
-    -webkit-border-bottom-right-radius: 3px;
-    -moz-border-radius: 3px;
-    border: 2px dashed #ccc;
-    padding: 4px 2px;
-    margin-bottom: 25px;
-}
-
-section.prev-next {
-    text-align: center
-}
-
 div.message {
     padding-top: 10px;
     margin-top: 10px;
@@ -173,13 +124,6 @@ div.message div.actions {
 div.message div.actions div.reply {
     display: none;
     padding-left: 20px;
-}
-
-/* Tag Styles */
-.postTagContainer {
-    float: right;
-    margin: 1em 0;
-    clear: both;
 }
 
 /* Project Styles

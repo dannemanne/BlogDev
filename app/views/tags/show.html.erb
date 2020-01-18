@@ -10,8 +10,7 @@
 <h2>Tagged posts</h2>
 <% @tag.posts.each do |post| %>
 
-  <%= render '/posts/post_preview', post: post %>
-  <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
+  <%= render '/posts/post_teaser', post: post %>
 
 <% end %>
 

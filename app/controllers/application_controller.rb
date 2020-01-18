@@ -11,12 +11,16 @@ class ApplicationController < ActionController::Base
     params[resource] &&= send(method) if respond_to?(method, true)
   end
 
-  helper_method :recent_posts, :pingback_server_url
+  helper_method :recent_posts, :popular_tags, :pingback_server_url
 
 protected
 
   def recent_posts(limit = 5)
     Post.posted.recent(limit).decorate
+  end
+
+  def popular_tags
+    Tag.most_used.limit(10)
   end
 
   def set_xpingback_header

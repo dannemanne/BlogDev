@@ -2,13 +2,6 @@
 
 @import 'settings';
 @import 'foundation';
-@import 'foundation/field_with_errors';
-@import 'foundation/footer';
-@import 'foundation/post';
-@import 'foundation/prev_next';
-@import 'foundation/side_menu';
-@import 'foundation/top_bar';
-@import 'foundation/custom';
 
 // If you'd like to include motion-ui the foundation-rails gem comes prepackaged with it, uncomment the 3 @imports, if you are not using the gem you need to install the motion-ui sass package.
 //
@@ -61,3 +54,11 @@
 //
 // @include motion-ui-transitions;
 // @include motion-ui-animations;
+
+@import 'foundation/field_with_errors';
+@import 'foundation/footer';
+@import 'foundation/post';
+@import 'foundation/prev_next';
+@import 'foundation/side_menu';
+@import 'foundation/top_bar';
+@import 'foundation/custom';

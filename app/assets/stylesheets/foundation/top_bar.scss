@@ -1,3 +1,11 @@
 .top-bar {
     border-bottom: 1px solid rgb(47, 51, 54);
+
+    .top-bar-left {
+        flex: 1 1 auto;
+    }
+
+    .top-bar-right {
+        flex: 0 1 auto;
+    }
 }

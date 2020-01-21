@@ -1,0 +1,45 @@
+section.welcome {
+    margin-bottom: 2rem;
+
+    .title {
+        margin: 2rem 0;
+
+        h1, h2, h3 {
+            margin: 0;
+        }
+    }
+
+    .intro {
+        p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+
+            @include breakpoint(small only){
+                font-size: 1.1rem;
+            }
+        }
+    }
+
+    .profile {
+        img {
+            border-radius: 1rem;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        @include breakpoint(small only){
+            text-align: center;
+        }
+    }
+
+    ul.social {
+        list-style: none;
+        margin: 0 0 2rem;
+
+        li {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+    }
+}

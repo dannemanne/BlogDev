@@ -1,17 +1,37 @@
-<% content_for :splash do %>
-  <div id="splash" class="intro">
-    <div class="profile">
-      <%= image_tag image_url('profiles.png') %>
+<section class="welcome">
+  <div class="grid-x grid-padding-x">
+    <div class="cell title">
+      <h1>I'm Daniel Viklund.</h1>
+      <h2>Developer by day, Father & Husband as much as I can!</h2>
+    </div>
+
+    <div class="cell medium-6 intro">
+      <p>I'm a Software Developer, based in Hong Kong, specialising in retail
+        and supply chain solutions.</p>
+      <p>I divide my time between Happy Rabbit, a tech-focused service provider
+        for fashion companies, and Fabriqo, our initiative for open sourcing
+        product data.</p>
+      <p>When I'm not working, I exercise (I wish), study new things (definitely
+        not on Twitter), and spend time with my kids (this is true!)</p>
+
+      <ul class="social">
+        <li><%= link_to 'https://twitter.com/dannemanne84' do -%>
+          <i class="fab fa-twitter"></i>
+        <%- end %></li>
+        <li><%= link_to 'https://www.linkedin.com/in/daniel-viklund-83231793/' do -%>
+          <i class="fab fa-linkedin"></i>
+        <%- end %></li>
+        <li><%= link_to 'https://stackoverflow.com/users/511558/dannemanne' do -%>
+          <i class="fab fa-stack-overflow"></i>
+        <%- end %></li>
+        <li><%= link_to 'https://dev.to/dannemanne' do -%>
+          <i class="fab fa-dev"></i>
+        <%- end %></li>
+      </ul>
+    </div>
+
+    <div class="cell medium-6 profile">
+      <%= image_tag 'Daniel_Viklund' %>
     </div>
   </div>
-<% end %>
-
-<% recent_posts.each do |post| %>
-  <%= render '/posts/post_teaser', post: post %>
-<% end %>
-
-<%= render 'partials/disqus_count' %>
-
-<% content_for :sidebar_right do %>
-  <%= popular_tags %>
-<% end %>
+</section>

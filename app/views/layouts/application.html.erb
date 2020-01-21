@@ -8,6 +8,7 @@
   <link rel="sitemap" href="/sitemap.xml" />
   <link rel="shortcut icon" href="/favicon.ico">
   <%= tag :meta, name: 'description', content: (content_for?(:meta_description) ? yield(:meta_description) : 'News, tips and tutorials about programming. Mostly about Ruby, Rails and Node.js but anything can come up.') %>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
   <%= stylesheet_link_tag 'application' %>
   <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' %>
   <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-dark.min.css' %>
@@ -30,19 +31,19 @@
 
         <div class="top-bar-right">
           <ul class="menu">
+            <li class="active"><%= link_to 'Blog', posts_path %></li>
             <% if user_signed_in? %>
               <li style="background: none;"><p>Logged in as <%= current_user.display_name %>.</p></li>
               <li class="active">
-                <%= link_to 'View Drafts', drafts_path %>
+                <%= link_to 'Drafts', drafts_path %>
               </li>
               <li class="active">
                 <%= link_to 'New Post', new_post_path %>
               </li>
               <li class="active">
-                <%= link_to 'Profile', profiles_path %>
-              </li>
-              <li class="active">
-                <%= link_to 'Logout', destroy_user_session_path, title: "Logout user #{current_user.display_name}" %>
+                <%= link_to destroy_user_session_path, title: "Logout user #{current_user.display_name}" do %>
+                  <i class="fa fa-sign-out-alt"></i>
+                <% end %>
               </li>
             <% else %>
               <li class="active">
@@ -60,16 +61,8 @@
   <main>
     <div class="grid-container">
       <div class="grid-x grid-padding-x">
-        <div class="cell medium-9 large-8 medium-order-2">
+        <div class="cell">
           <%= yield %>
-        </div>
-
-        <div class="cell medium-3 large-2 medium-order-1">
-          <%= render 'partials/side_menu' %>
-        </div>
-
-        <div class="cell large-2 hide-for-medium-down medium-order-3">
-
         </div>
       </div>
     </div>

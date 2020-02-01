@@ -10,8 +10,13 @@
   <%= tag :meta, name: 'description', content: (content_for?(:meta_description) ? yield(:meta_description) : 'News, tips and tutorials about programming. Mostly about Ruby, Rails and Node.js but anything can come up.') %>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
   <%= stylesheet_link_tag 'application' %>
-  <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' %>
-  <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-dark.min.css' %>
+
+  <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css', rel: 'preload', as: 'style', onload: "this.onload=null;this.rel='stylesheet'" %>
+  <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' # Duplicate declaration afterwards because no support for preload in FireFox
+  %>
+  <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-dark.min.css', rel: 'preload', as: 'style', onload: "this.onload=null;this.rel='stylesheet'" %>
+  <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-dark.min.css' # Duplicate declaration afterwards because no support for preload in FireFox
+  %>
 
   <%= csrf_meta_tag %>
 

@@ -100,14 +100,14 @@ private
                       title: :title,
                       description: :description,
                       site_name: :site,
-                      url: post_path(@post)
+                      url: post_url(@post)
                   },
                   twitter: {
                       card: 'summary',
                       title: :title,
                       description: :description,
                       site_name: :site,
-                      url: post_path(@post)
+                      url: post_url(@post)
                   }
   end
 

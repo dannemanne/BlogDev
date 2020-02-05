@@ -1,10 +1,10 @@
-<% content_for :title do %>Browse Tags for specific content<% end %>
-<% content_for :meta_description do %>News, tips and tutorials about programming. Browse all Tags for specific content<% end %>
+<div class="grid-x grid-padding-x">
+  <div class="cell medium-offset-2 medium-8">
+    <h2 class="page-title"><%= title "Tags" %></h2>
+    <% description "Browse Blog Posts by Tag" %>
 
-<h1>All Tags</h1>
-
-<% @tags.each do |tag| %>
-
-  <p><%= link_to tag.name, tag_path(tag) %></p>
-
-<% end %>
+    <% @tags.each do |tag| %>
+      <p><%= link_to tag.name, tag_path(tag) %></p>
+    <% end %>
+  </div>
+</div>

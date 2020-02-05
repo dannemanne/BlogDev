@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title><%= content_for?(:title) ? yield(:title) : "Code" %> | DanneManne.com</title>
+
+  <%= display_meta_tags site: 'DanneManne' %>
+
   <link rel="pingback" href="<%= pingback_server_url %>" />
   <link rel="sitemap" href="/sitemap.xml" />
   <link rel="shortcut icon" href="/favicon.ico">
-  <%= tag :meta, name: 'description', content: (content_for?(:meta_description) ? yield(:meta_description) : 'News, tips and tutorials about programming. Mostly about Ruby, Rails and Node.js but anything can come up.') %>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
   <%= stylesheet_link_tag 'application' %>
 

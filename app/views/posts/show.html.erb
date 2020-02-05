@@ -1,8 +1,8 @@
-<% content_for :title do %><%= @post.title %><% end %>
-<% content_for :meta_description do %><%= @post.meta_description %><% end %>
 <article>
   <header>
-    <h1><%= @post.title %></h1>
+    <h1><%= title @post.title %></h1>
+    <% description @post.meta_description %>
+
     <p style="color: rgb(169,169,169); margin-bottom: 3px;">
       <%= @post.posted_at.strftime("%b %e, %Y") %>
       <% if can? :update, @post %>

@@ -4,6 +4,7 @@ ruby '2.4.5'
 gem 'unicorn'
 gem 'rails', '4.2.11.1'
 gem 'pg', '~> 0.15'
+gem 'meta-tags'
 
 group :production do
   gem 'rails_12factor'

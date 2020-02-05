@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   load_and_authorize_resource     find_by: :title_url, except: [:index, :archive]
   before_filter :find_posts,      only: [:index]
   before_filter :find_by_date,    only: [:archive]
+  before_action :set_meta,        only: [:show]
 
   helper_method :no_of_pages, :page, :archive_date
 
@@ -92,6 +93,22 @@ private
 
   def archive_date
     Date.new(params[:year].to_i, params[:month].to_i)
+  end
+
+  def set_meta
+    set_meta_tags og: {
+                      title: :title,
+                      description: :description,
+                      site_name: :site,
+                      url: post_path(@post)
+                  },
+                  twitter: {
+                      card: 'summary',
+                      title: :title,
+                      description: :description,
+                      site_name: :site,
+                      url: post_path(@post)
+                  }
   end
 
 end

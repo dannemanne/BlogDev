@@ -5,10 +5,14 @@ class ApplicationController < ActionController::Base
   end
 
   # Workaround to make cancan work with Rails 4 strong parameters
-  before_filter do
+  before_action do
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
+  before_action do
+    set_meta_tags site: 'DanneManne', author: 'Daniel Viklund'
   end
 
   helper_method :recent_posts, :popular_tags, :pingback_server_url

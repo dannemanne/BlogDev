@@ -1,17 +1,19 @@
-<% content_for :title do %>Posts tagged with <%= @tag.name %><% end %>
-<% content_for :meta_description do %>News, tips and tutorials about programming. Here are posts tagged with <%= @tag.name %><% end %>
+<div class="grid-x grid-padding-x">
+  <div class="cell medium-offset-2 medium-8">
+    <h2><%= title @tag.name %></h2>
+    <% description "Here are posts tagged with #{@tag.name}" %>
 
-<h1><%= @tag.name %></h1>
+    <% if can? :update, @tag %>
+      <p><%= link_to 'Edit', edit_tag_path(@tag) %></p>
+    <% end %>
 
-<% if can? :update, @tag %>
-  <p><%= link_to 'Edit', edit_tag_path(@tag) %></p>
-<% end %>
+    <h2>Tagged posts</h2>
+    <% @tag.posts.each do |post| %>
 
-<h2>Tagged posts</h2>
-<% @tag.posts.each do |post| %>
+      <%= render '/posts/post_teaser', post: post %>
 
-  <%= render '/posts/post_teaser', post: post %>
+    <% end %>
 
-<% end %>
-
-<%= render 'partials/disqus_count' %>
+    <%= render 'partials/disqus_count' %>
+  </div>
+</div>

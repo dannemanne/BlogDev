@@ -1,17 +1,15 @@
-<% content_for :title do %>Posts from <%= archive_date.strftime('%B %Y') %><% end %>
-<% content_for :meta_description do %>News, tips and tutorials about programming. Listing all posts from <%= archive_date.strftime('%B %Y') %><% end %>
+<div class="grid-x grid-padding-x">
+  <div class="cell medium-offset-2 medium-8">
+    <h2 class="page-title"><%= title "Blog Posts: #{archive_date.strftime('%B %Y')}" %></h2>
+    <% description "Listing all posts from #{archive_date.strftime('%B %Y')}" %>
 
-<h1><%= archive_date.strftime('%B %Y') %></h1>
-<% @posts.each do |post| %>
+    <% @posts.each do |post| %>
 
-  <%= render '/posts/post_teaser', post: post %>
-  <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
+      <%= render '/posts/post_teaser', post: post %>
+      <div style="height: 1px; background-color: rgb(212,212,212); margin: 10px 0;"></div>
 
-<% end %>
+    <% end %>
 
-<%= render 'partials/disqus_count' %>
-
-<% content_for :sidebar_right do %>
-  <%= archive_tag %>
-  <%= popular_tags %>
-<% end %>
+    <%= render 'partials/disqus_count' %>
+  </div>
+</div>

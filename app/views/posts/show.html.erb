@@ -1,3 +1,4 @@
+<% content_for :grid_container_class, -> { 'narrow' } %>
 <article>
   <header>
     <h1><%= title @post.title %></h1>
@@ -53,8 +54,3 @@
     <div class="clear"></div>
   </footer>
 </article>
-
-<% content_for :sidebar_right do %>
-  <%= archive_tag %>
-  <%= popular_tags %>
-<% end %>

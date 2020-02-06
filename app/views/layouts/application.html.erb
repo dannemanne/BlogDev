@@ -64,7 +64,7 @@
   </div>
 
   <main>
-    <div class="grid-container">
+    <div class="grid-container <%= content_for?(:grid_container_class) ? yield(:grid_container_class) : '' %>">
       <div class="grid-x grid-padding-x">
         <div class="cell">
           <%= yield %>

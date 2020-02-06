@@ -63,3 +63,7 @@
 @import 'foundation/top_bar';
 @import 'foundation/custom';
 @import 'foundation/welcome';
+
+.grid-container.narrow {
+    max-width: rem-calc(800);
+}

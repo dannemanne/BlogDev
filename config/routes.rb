@@ -22,4 +22,8 @@ Blog::Application.routes.draw do
 
   get ".well-known/acme-challenge/:challenge", to: "home#acme_challenge"
 
+  get '/404', to: 'errors#not_found'
+  get '/422', to: 'errors#unacceptable'
+  get '/500', to: 'errors#internal_error'
+
 end

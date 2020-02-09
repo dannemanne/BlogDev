@@ -38,6 +38,7 @@
         <div class="top-bar-right">
           <ul class="menu">
             <li class="active"><%= link_to 'Blog', posts_path %></li>
+            <li class="active"><%= link_to 'Sandbox', 'https://viklund.dev', target: '_blank' %></li>
             <% if user_signed_in? %>
               <li class="active">
                 <%= link_to 'Drafts', drafts_path %>

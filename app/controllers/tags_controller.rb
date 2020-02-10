@@ -2,6 +2,7 @@ class TagsController < ApplicationController
   load_and_authorize_resource     :find_by => :stub
 
   def index
+    @tags = @tags.order(:name)
   end
 
   def show

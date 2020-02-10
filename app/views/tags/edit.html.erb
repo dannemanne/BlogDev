@@ -1,4 +1,9 @@
 <%= form_for @tag do |f| %>
+  <h5><%= f.label :name %></h5>
   <p><%= f.text_field :name %></p>
+
+  <h5><%= f.label :stub %></h5>
+  <p><%= f.text_field :stub %></p>
+
   <p><%= f.submit "Save" %></p>
 <% end %>

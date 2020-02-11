@@ -54,4 +54,6 @@ Blog::Application.configure do
 
   # Eager Load (Rails 4)
   config.eager_load = true
+
+  config.force_ssl = true
 end

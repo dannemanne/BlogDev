@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   before_filter :find_by_date,    only: [:archive]
   before_action :set_meta,        only: [:show]
 
-  helper_method :no_of_pages, :page, :archive_date
+  helper_method :archive_date
 
   def archive
     respond_to do |format|
@@ -71,7 +71,7 @@ class PostsController < ApplicationController
 
 private
   def find_posts
-    @posts = Post.posted.order('posted_at DESC').limit(POSTS_PER_PAGE).offset( (page-1) * POSTS_PER_PAGE ).decorate
+    @posts = Post.posted.order('posted_at DESC').decorate
   end
 
   def find_by_date
@@ -80,15 +80,6 @@ private
 
   def post_params
     params.require(:post).permit(:title, :body, :status, :tag_names, :allow_comments)
-  end
-
-  # Helper methods
-  def no_of_pages
-    @_no_of_pages ||= (count = Post.posted.count) / POSTS_PER_PAGE + ( (count % POSTS_PER_PAGE) > 0 ? 1 : 0)
-  end
-
-  def page
-    @_page ||= (page = (params[:page] && params[:page].to_i || 1)) <= 0 ? 1 : page
   end
 
   def archive_date

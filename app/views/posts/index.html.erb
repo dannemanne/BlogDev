@@ -1,30 +1,10 @@
 <% content_for :grid_container_class do %>narrow<% end %>
 
 <h2 class="page-title"><%= title "Blog Posts" %></h2>
-<% description "Listing all posts from page #{page}" %>
+<% description "Listing all blog posts" %>
 
 <% @posts.each do |post| %>
   <%= render '/posts/post_teaser', post: post %>
 <% end %>
-
-<section class="prev-next">
-  <% if page < no_of_pages %>
-    <span class="prev"><%= link_to '< Previous', posts_page_path(page+1), title: 'Go to the previous page', rel: 'prev' %></span>
-  <% else %>
-    <span class="prev disabled">< Previous</span>
-  <% end %>
-  <% (1..no_of_pages).each do |p| %>
-    <% if p == page %>
-      <span class="current"><%= p %></span>
-    <% else %>
-      <span><%= link_to p, posts_page_path(p), title: "Go to page #{p}", rel: 'index' %></span>
-    <% end %>
-  <% end %>
-  <% if page > 1 %>
-    <span class="next"><%= link_to 'Next >', posts_page_path(page-1), title: 'Go to the next page', rel: 'next' %></span>
-  <% else %>
-    <span class="next disabled">Next ></span>
-  <% end %>
-</section>
 
 <%= render 'partials/disqus_count' %>

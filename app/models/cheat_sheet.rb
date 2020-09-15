@@ -1,4 +1,4 @@
-class CheatSheet < ActiveRecord::Base
+class CheatSheet < ApplicationRecord
   validates :title,   presence: true, uniqueness: true
   validates :body,    presence: true
 

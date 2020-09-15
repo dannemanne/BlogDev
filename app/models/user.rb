@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   ROLE_GUEST = 0
   ROLE_OP = 1
   ROLE_ADMIN = 9

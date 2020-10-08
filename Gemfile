@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby '2.4.5'
+ruby '2.6.6'
 
 gem 'unicorn'
 gem 'rails', '5.1.7'

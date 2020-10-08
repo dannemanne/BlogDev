@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 ruby '2.4.5'
 
 gem 'unicorn'
-gem 'rails', '5.0.7.2'
+gem 'rails', '5.1.7'
 gem 'pg', '~> 0.15'
 gem 'meta-tags'
 
@@ -15,6 +15,7 @@ group :development, :test do
   gem 'capybara', '2.4.4'
   gem 'foreman'
   gem 'pry'
+  gem 'listen'
 end
 
 group :test do
@@ -24,7 +25,7 @@ group :test do
 end
 
 gem 'devise', '~> 4.7.1'
-gem 'cancancan', '~> 1.8.4'
+gem 'cancancan'
 gem 'jquery-rails'
 gem 'sass-rails', '5.0.7'
 gem 'uglifier', '3.2.0'

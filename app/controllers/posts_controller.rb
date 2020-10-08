@@ -2,8 +2,8 @@ class PostsController < ApplicationController
   POSTS_PER_PAGE = 5
 
   load_and_authorize_resource     find_by: :title_url, except: [:index, :archive]
-  before_filter :find_posts,      only: [:index]
-  before_filter :find_by_date,    only: [:archive]
+  before_action :find_posts,      only: [:index]
+  before_action :find_by_date,    only: [:archive]
   before_action :set_meta,        only: [:show]
 
   helper_method :archive_date

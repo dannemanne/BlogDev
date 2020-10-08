@@ -1,7 +1,7 @@
 class DraftsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :load_posts, only: :index
-  before_filter :load_post,  except: :index
+  before_action :authenticate_user!
+  before_action :load_posts, only: :index
+  before_action :load_post,  except: :index
 
   def index
     respond_to do |format|

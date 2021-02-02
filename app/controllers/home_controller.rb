@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
 
+  helper_method :latest_post
+
   def index
     set_xpingback_header
   end
@@ -19,6 +21,12 @@ class HomeController < ApplicationController
     else
       head :not_found
     end
+  end
+
+  private
+
+  def latest_post
+    @latest_post ||= Post.posted.recent.first
   end
 
 end

@@ -31,6 +31,14 @@
           <i class="fab fa-dev"></i>
         <%- end %></li>
       </ul>
+
+      <% if latest_post %>
+        <h2>Latest Blog Article</h2>
+        <p>
+          <%= link_to latest_post.title, post_path(latest_post) %><br/>
+          Posted at <%= latest_post.posted_at.strftime("%b %e, %Y") %>
+        </p>
+      <% end %>
     </div>
 
     <div class="cell medium-6 profile">

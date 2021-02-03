@@ -34,7 +34,7 @@ protected
   def pingback_server_url
     #url_for(:controller => :pingback,
 #      :action => :xmlrpc, :only_path => false)
-    "http://dannemanne.com/xmlrpc" #TODO:Fix this later. The former syntax is causing errors in devise controllers
+    "https://dannemanne.com/xmlrpc" #TODO:Fix this later. The former syntax is causing errors in devise controllers
   end
 
 end

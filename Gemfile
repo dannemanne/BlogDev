@@ -6,6 +6,7 @@ gem 'rails', '5.2.4.4'
 gem 'pg', '1.2.3'
 gem 'meta-tags'
 gem 'bootsnap'
+gem 'canonical-rails'
 
 group :production do
   gem 'rails_12factor'

@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   resources :cheat_sheets, :except => :show
 
   get "about" => "home#about", :as => :about
-  post "xmlrpc" => "pingback#xmlrpc"
   get "sitemap" => "home#sitemap"
 
   get "tag/:tagname" => redirect("/tags/%{tagname}")

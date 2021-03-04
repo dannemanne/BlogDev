@@ -6,6 +6,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+require_relative '../lib/../lib/pingback_rack'
+
 module Blog
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -21,6 +23,8 @@ module Blog
       g.fixture_replacement :factory_girl, dir: 'spec/factories', suffix: 'factory'
       g.assets false
     end
+
+    config.middleware.use PingbackRack
 
     config.exceptions_app = self.routes
 

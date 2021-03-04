@@ -27,7 +27,7 @@ describe TagsController do
     describe 'for guests' do
       context 'when Tag has no posts' do
         it 'shows an empty page' do
-          get 'show', id: tag.to_param
+          get 'show', params: { id: tag.to_param }
           expect(response).to render_template :show
         end
       end
@@ -36,7 +36,7 @@ describe TagsController do
         before { FactoryGirl.create(:post_tag, tag: tag) }
 
         it 'shows an empty page' do
-          get 'show', id: tag.to_param
+          get 'show', params: { id: tag.to_param }
           expect(response).to render_template :show
         end
       end

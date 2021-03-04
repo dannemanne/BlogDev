@@ -11,7 +11,7 @@ describe ProfilesController do
         expect( current_user ).to be_present
 
         get 'show'
-        expect( response ).to be_success
+        expect( response ).to be_successful
       end
     end
 
@@ -33,7 +33,7 @@ describe ProfilesController do
         expect( current_user ).to be_present
 
         get 'edit'
-        expect( response ).to be_success
+        expect( response ).to be_successful
       end
     end
 

@@ -11,13 +11,13 @@ describe DraftsController do
       expect(user_draft.user).to eq(current_user)
 
       get 'index'
-      expect(response).to be_success
+      expect(response).to be_successful
     end
     it 'should still work when there are no Drafts present' do
       expect(current_user.posts.drafts).to be_empty
 
       get 'index'
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -30,7 +30,7 @@ describe DraftsController do
       expect(user_draft.user).to eq(current_user)
       expect(user_draft.status).to eq(PostStatus::DRAFT)
 
-      put 'update', id: user_draft.to_param, post: attr
+      put 'update', params: { id: user_draft.to_param, post: attr }
       expect(response).to be_redirect
       expect(user_draft.reload.body).to eq(attr[:body])
     end
@@ -45,7 +45,7 @@ describe DraftsController do
         expect(user_draft.user).to eq(current_user)
         expect(user_draft.status).to eq(PostStatus::DRAFT)
 
-        delete 'destroy', id: user_draft.to_param
+        delete 'destroy', params: { id: user_draft.to_param }
         expect(response).to be_redirect
         expect(Post.find_by_id(user_draft.id)).to be_nil
       end
@@ -57,7 +57,7 @@ describe DraftsController do
         expect(current_user).to be_nil
         expect(other_draft.status).to eq(PostStatus::DRAFT)
 
-        delete 'destroy', id: other_draft.to_param
+        delete 'destroy', params: { id: other_draft.to_param }
         expect(response).to be_redirect # redirect to root path
         expect(Post.find_by_id(other_draft.id)).to be_present
       end

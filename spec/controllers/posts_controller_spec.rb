@@ -11,7 +11,7 @@ describe PostsController do
       expect(current_user.role).to eq(User::ROLE_ADMIN)
 
       get 'new'
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -20,21 +20,21 @@ describe PostsController do
       expect(blog_post.status).to eq(PostStatus::POSTED)
 
       get 'index'
-      expect(response).to be_success
+      expect(response).to be_successful
     end
     it 'should list all the latest posts' do
       10.times { FactoryGirl.create(:post) }
 
       get 'index'
-      expect(response).to be_success
+      expect(response).to be_successful
     end
     it 'should be able to show multiple pages of posts' do
       10.times { FactoryGirl.create(:post) }
 
       expect(Post.count).to be > PostsController::POSTS_PER_PAGE
 
-      get 'index', page: 2
-      expect(response).to be_success
+      get 'index', params: { page: 2 }
+      expect(response).to be_successful
     end
   end
 
@@ -42,8 +42,8 @@ describe PostsController do
     it 'should list the posts for that month' do
       expect(blog_post.status).to eq(PostStatus::POSTED)
 
-      get 'archive', year: blog_post.posted_at.strftime('%Y'), month: blog_post.posted_at.strftime('%m')
-      expect(response).to be_success
+      get 'archive', params: { year: blog_post.posted_at.strftime('%Y'), month: blog_post.posted_at.strftime('%m') }
+      expect(response).to be_successful
     end
   end
 
@@ -55,9 +55,9 @@ describe PostsController do
       expect(current_user.role).to eq(User::ROLE_ADMIN)
       count = current_user.posts.count
 
-      post 'create', post: attr
+      post 'create', params: { post: attr }
       expect(response.redirect?).to be true
-      expect(current_user.posts(true).count).to eq(count+1)
+      expect(current_user.posts.count).to eq(count+1)
     end
   end
 
@@ -65,8 +65,8 @@ describe PostsController do
     let(:post) { FactoryGirl.create(:post) }
     describe 'for guests' do
       it 'can show a post' do
-        get 'show', id: post.to_param
-        expect(response).to be_success
+        get 'show', params: { id: post.to_param }
+        expect(response).to be_successful
       end
     end
 
@@ -84,7 +84,7 @@ describe PostsController do
       expect(current_user.role).to eq(User::ROLE_ADMIN)
       expect(user_post.user).to eq current_user
 
-      put 'update', id: user_post.to_param, post: attr
+      put 'update', params: { id: user_post.to_param, post: attr }
       expect(response.redirect?).to be true
       expect(user_post.reload.title).to eq attr[:title]
       expect(user_post.body).to eq attr[:body]

@@ -13,7 +13,7 @@ group :production do
 end
 
 group :development, :test do
-  gem "rspec-rails", '3.8.0'
+  gem "rspec-rails"
   gem 'capybara', '3.35.3'
   gem 'foreman'
   gem 'pry'
@@ -23,7 +23,7 @@ end
 group :test do
   gem 'simplecov'
   gem 'rails-controller-testing', '1.0.5'
-  gem "factory_girl_rails"
+  gem 'factory_bot_rails'
   gem 'climate_control'
 end
 

@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe PostForm do
-  let(:user) { FactoryGirl.create(:admin) }
+  let(:user) { FactoryBot.create(:admin) }
   let(:attr) { {} }
   let(:form) { PostForm.new(attr) }
 
   it { expect(form).to be_an_instance_of PostForm }
 
   describe 'validations' do
-    let(:post) { FactoryGirl.create(:post) }
+    let(:post) { FactoryBot.create(:post) }
     let(:form) { PostForm.new_in_model(post, attr, user) }
 
     subject { form.valid? }
@@ -23,7 +23,7 @@ describe PostForm do
   end
 
   describe '#save' do
-    let(:post) { FactoryGirl.create(:post) }
+    let(:post) { FactoryBot.create(:post) }
     let(:form) { PostForm.new_in_model(post, attr, user) }
 
     subject { form.save }

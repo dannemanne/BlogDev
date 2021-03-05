@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Post do
-  let(:post) { FactoryGirl.build(:post) }
+  let(:post) { FactoryBot.build(:post) }
   describe 'validations' do
     it 'validates title presence' do
       expect(post).to be_valid

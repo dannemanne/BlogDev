@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe DraftsController do
   render_views
-  let(:user_draft) { FactoryGirl.create(:draft, user: current_user) }
+  let(:user_draft) { FactoryBot.create(:draft, user: current_user) }
 
   describe "GET 'index' for admins" do
     login_admin
@@ -52,7 +52,7 @@ describe DraftsController do
     end
 
     describe 'for guests' do
-      let(:other_draft) { FactoryGirl.create(:draft) }
+      let(:other_draft) { FactoryBot.create(:draft) }
       it 'should NOT delete a post' do
         expect(current_user).to be_nil
         expect(other_draft.status).to eq(PostStatus::DRAFT)

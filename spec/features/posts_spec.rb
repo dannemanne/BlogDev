@@ -8,7 +8,7 @@ describe 'posts' do
       login(:admin)
     end
 
-    let(:post) { FactoryGirl.create(:post) }
+    let(:post) { FactoryBot.create(:post) }
 
     it 'should succeed' do
       visit post_path(post)

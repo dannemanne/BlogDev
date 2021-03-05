@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe HomeController do
   render_views
-  let(:blog_post) { FactoryGirl.create(:post) }
+  let(:blog_post) { FactoryBot.create(:post) }
 
   describe "GET 'index'" do
     it 'should list the posts' do

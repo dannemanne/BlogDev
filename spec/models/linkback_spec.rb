@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Linkback do
-  let(:linkback) { FactoryGirl.build(:linkback) }
+  let(:linkback) { FactoryBot.build(:linkback) }
   it 'validates source_uri presence' do
     expect(linkback).to be_valid
 
@@ -17,7 +17,7 @@ describe Linkback do
   it 'validates source_uri and target_uri uniqueness' do
     expect(linkback).to be_valid
 
-    FactoryGirl.create(:linkback, source_uri: linkback.source_uri, target_uri: linkback.target_uri)
+    FactoryBot.create(:linkback, source_uri: linkback.source_uri, target_uri: linkback.target_uri)
     expect(linkback).to be_invalid
   end
 end

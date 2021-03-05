@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe PostsController do
   render_views
-  let(:blog_post) { FactoryGirl.create(:post) }
+  let(:blog_post) { FactoryBot.create(:post) }
 
   describe "GET 'new' for admins" do
     login_admin
@@ -23,13 +23,13 @@ describe PostsController do
       expect(response).to be_successful
     end
     it 'should list all the latest posts' do
-      10.times { FactoryGirl.create(:post) }
+      10.times { FactoryBot.create(:post) }
 
       get 'index'
       expect(response).to be_successful
     end
     it 'should be able to show multiple pages of posts' do
-      10.times { FactoryGirl.create(:post) }
+      10.times { FactoryBot.create(:post) }
 
       expect(Post.count).to be > PostsController::POSTS_PER_PAGE
 
@@ -62,7 +62,7 @@ describe PostsController do
   end
 
   describe "GET 'show'" do
-    let(:post) { FactoryGirl.create(:post) }
+    let(:post) { FactoryBot.create(:post) }
     describe 'for guests' do
       it 'can show a post' do
         get 'show', params: { id: post.to_param }
@@ -78,7 +78,7 @@ describe PostsController do
 
   describe "PUT 'update' for admins" do
     login_admin
-    let(:user_post) { FactoryGirl.create(:post, user: current_user) }
+    let(:user_post) { FactoryBot.create(:post, user: current_user) }
     it 'should create a new Post' do
       attr = { title: 'Updated Title', body: 'Body is now updated', status: PostStatus::POSTED, tag_names: 'Altered-Tag, And-Another' }
       expect(current_user.role).to eq(User::ROLE_ADMIN)

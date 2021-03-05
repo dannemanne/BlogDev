@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Tag do
-  let(:tag) { FactoryGirl.build(:tag) }
+  let(:tag) { FactoryBot.build(:tag) }
   describe 'validations' do
     it 'validates name presence' do
       expect(tag).to be_valid
@@ -12,7 +12,7 @@ describe Tag do
     it 'validates name uniqueness' do
       expect(tag).to be_valid
 
-      FactoryGirl.create(:tag, name: tag.name)
+      FactoryBot.create(:tag, name: tag.name)
       expect(tag).to be_invalid
     end
   end

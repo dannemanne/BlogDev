@@ -12,7 +12,7 @@ describe TagsController do
     end
 
     context 'when there are tags present' do
-      before { FactoryGirl.create_list(:tag, 3) }
+      before { FactoryBot.create_list(:tag, 3) }
 
       it 'should list the tags' do
         get 'index'
@@ -22,7 +22,7 @@ describe TagsController do
   end
 
   describe "GET 'show'" do
-    let(:tag) { FactoryGirl.create(:tag) }
+    let(:tag) { FactoryBot.create(:tag) }
 
     describe 'for guests' do
       context 'when Tag has no posts' do
@@ -33,7 +33,7 @@ describe TagsController do
       end
 
       context 'when Tag has posts' do
-        before { FactoryGirl.create(:post_tag, tag: tag) }
+        before { FactoryBot.create(:post_tag, tag: tag) }
 
         it 'shows an empty page' do
           get 'show', params: { id: tag.to_param }

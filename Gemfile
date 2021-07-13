@@ -14,7 +14,7 @@ end
 
 group :development, :test do
   gem "rspec-rails"
-  gem 'capybara', '3.35.3'
+  gem 'capybara'
   gem 'foreman'
   gem 'pry'
   gem 'listen'

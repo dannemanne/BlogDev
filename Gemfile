@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
-ruby '2.6.6'
+#ruby '2.6.6'
 
 gem 'unicorn'
-gem 'rails', '5.2.4.4'
+gem 'rails', '~>5.2.4.4'
 gem 'pg', '1.2.3'
 gem 'meta-tags'
 gem 'bootsnap'

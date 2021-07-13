@@ -1,4 +1,4 @@
-class CreateCheatSheets < ActiveRecord::Migration
+class CreateCheatSheets < ActiveRecord::Migration[4.2]
   def change
     create_table :cheat_sheets do |t|
       t.string :category

@@ -1,4 +1,4 @@
-class AddNameAndWebsiteToComment < ActiveRecord::Migration
+class AddNameAndWebsiteToComment < ActiveRecord::Migration[4.2]
   def up
     add_column :comments, :name, :string
     add_column :comments, :website, :string

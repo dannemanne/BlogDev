@@ -1,4 +1,4 @@
-class RemoveCommentModel < ActiveRecord::Migration
+class RemoveCommentModel < ActiveRecord::Migration[5.1]
   def up
     remove_index 'comments', ['ancestry']
     remove_index 'comments', ['post_id']

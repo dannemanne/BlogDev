@@ -31,7 +31,7 @@ class Post < ApplicationRecord
   end
 
   def self.each_year_and_month(&block)
-    year_months = archive_months.select(:updated_at).inject({}) { |acc, post|
+    year_months = archive_months.select(:updated_at).each_with_object({}) { |post, acc|
       year_month = post.posted_at.strftime("%Y-%m").split('-')
       acc[year_month] = [acc[year_month], post.updated_at].compact.max
     }

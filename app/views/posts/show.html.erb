@@ -1,4 +1,37 @@
 <% content_for :grid_container_class do %>narrow<% end %>
+<% content_for :head do %>
+  <script type="application/ld+json">
+    <%=
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": headline,
+        "description": @post.meta_description,
+        "datePublished": @post.posted_at&.strftime("%Y-%m-%d"),
+        "dateModified": @post.updated_at&.strftime("%Y-%m-%d"),
+        "keywords": @post.tags.map(&:name).join(', '),
+        "mainEntityOfPage": canonical_href,
+        "url": canonical_href,
+        "author": {
+          "@type": "Person",
+          "familyName": "Viklund",
+          "givenName": "Daniel",
+          "name": "Daniel Viklund",
+          "alternateName": "DanneManne",
+          "sameAs": [
+            "https://twitter.com/dannemanne84",
+            "https://www.linkedin.com/in/daniel-viklund-83231793/",
+            "https://github.com/dannemanne",
+            "https://stackoverflow.com/users/511558/dannemanne",
+            "https://dev.to/dannemanne",
+            "https://www.buymeacoffee.com/dannemanne",
+          ],
+        },
+      }.to_json.html_safe
+    %>
+  </script>
+<% end %>
+
 <article>
   <header>
     <h1><%= title @post.title %></h1>

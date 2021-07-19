@@ -1,4 +1,7 @@
 <% content_for :title do %>About Me<% end %>
+<% content_for :head do %>
+  <%= render 'structured_data/me' %>
+<% end %>
 
 <section class="welcome">
   <div class="grid-x grid-padding-x">

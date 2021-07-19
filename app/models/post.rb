@@ -30,6 +30,17 @@ class Post < ApplicationRecord
     order('posts.posted_at DESC').limit(limit)
   end
 
+  def self.each_year_and_month(&block)
+    year_months = archive_months.select(:updated_at).inject({}) { |acc, post|
+      year_month = post.posted_at.strftime("%Y-%m").split('-')
+      acc[year_month] = [acc[year_month], post.updated_at].compact.max
+    }
+
+    year_months.each_pair do |(year, month), last_updated_at|
+      block.call(year, month, last_updated_at)
+    end
+  end
+
   # To param always needs to return a String!
   def to_param
     post_status.is_draft? ? id.to_s : title_url

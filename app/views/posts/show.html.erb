@@ -5,7 +5,7 @@
       {
         "@context": "http://schema.org",
         "@type": "Article",
-        "headline": headline,
+        "headline": @post.title,
         "description": @post.meta_description,
         "datePublished": @post.posted_at&.strftime("%Y-%m-%d"),
         "dateModified": @post.updated_at&.strftime("%Y-%m-%d"),

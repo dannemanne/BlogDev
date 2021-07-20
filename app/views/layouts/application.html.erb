@@ -10,7 +10,7 @@
   <%= canonical_tag -%>
   <link rel="sitemap" href="/sitemap.xml" />
   <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap">
   <%= stylesheet_link_tag 'application' %>
 
   <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css', rel: 'preload', as: 'style', onload: "this.onload=null;this.rel='stylesheet'" %>
@@ -64,7 +64,7 @@
         <div class="top-bar-right">
           <ul class="menu">
             <li class="active"><%= link_to 'Blog', posts_path %></li>
-            <li class="active"><%= link_to 'Sandbox', 'https://viklund.dev', target: '_blank' %></li>
+            <li class="active"><%= link_to 'Sandbox', 'https://viklund.dev', target: '_blank', rel: 'noopener' %></li>
             <% if user_signed_in? %>
               <li class="active">
                 <%= link_to 'Drafts', drafts_path %>
@@ -120,10 +120,10 @@
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js' %>
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-qore.min.js' %>
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js' %>
-<%= javascript_include_tag 'https://code.jquery.com/jquery-1.10.2.min.js' %>
+<%= javascript_include_tag 'https://code.jquery.com/jquery-1.12.4.min.js' %>
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/showdown/0.1.0/showdown.min.js' %>
-<%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js' %>
+<%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js' %>
 <%= javascript_include_tag 'https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' %>
 
 <script type="text/javascript">

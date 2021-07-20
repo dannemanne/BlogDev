@@ -7,6 +7,11 @@
         "@type": "Article",
         "headline": @post.full_title,
         "description": @post.meta_description,
+        "image": @post.cover.attached? ? [
+          @post.cover.variant(resize_to_limit: [1280, 720]).url,
+          @post.cover.variant(resize_to_limit: [1024, 768]).url,
+          @post.cover.variant(resize_to_limit: [640, 640]).url,
+        ] : [],
         "datePublished": @post.posted_at&.strftime("%Y-%m-%d"),
         "dateModified": @post.updated_at&.strftime("%Y-%m-%d"),
         "keywords": @post.tags.map(&:name).join(', '),

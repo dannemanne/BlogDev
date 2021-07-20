@@ -34,6 +34,11 @@
 
 <article>
   <header>
+    <% if @post.cover.attached? %>
+      <div style="margin-bottom: 1rem; width: 100%; height: 0; overflow: hidden; padding-top: <%= "%d" % (@post.cover.blob.metadata[:height].to_d / @post.cover.blob.metadata[:width] * 100) %>%">
+        <%= image_tag @post.cover, style: 'width: 100%; position: absolute; top: 0; left: 0;' %>
+      </div>
+    <% end %>
     <h1><%= title @post.title %></h1>
     <% description @post.meta_description %>
 

@@ -51,6 +51,18 @@ class Post < ApplicationRecord
     @post_form ||= PostForm.new_in_model(self, attr, current_user)
   end
 
+  def display_series_part
+    series_part.presence && "Part #{series_part}"
+  end
+
+  def display_series
+    [series_title, display_series_part].reject(&:blank?).join(' - ')
+  end
+
+  def full_title
+    [display_series, title].reject(&:blank?).join(': ')
+  end
+
 private
   def set_attributes
     # If the post is posted, then make sure that posted_at is set
@@ -58,7 +70,7 @@ private
     self.posted_at = nil if post_status.is_draft?
 
     # Parses title into a url-friendly format
-    self.title_url = title.gsub(/[^A-Za-z0-9_\-]/i, '_').gsub(/_+/, '_').downcase
+    self.title_url = [series_title, display_series_part, title].reject(&:blank?).join(' ').gsub(/[^A-Za-z0-9_\-]/i, '_').gsub(/_+/, '_').downcase
 
     # Parses the body into different formats to be used in different places on the site
     self.parsed_body = Kramdown::Document.new(body).to_html

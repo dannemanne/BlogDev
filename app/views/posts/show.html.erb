@@ -5,7 +5,7 @@
       {
         "@context": "http://schema.org",
         "@type": "Article",
-        "headline": @post.title,
+        "headline": @post.full_title,
         "description": @post.meta_description,
         "datePublished": @post.posted_at&.strftime("%Y-%m-%d"),
         "dateModified": @post.updated_at&.strftime("%Y-%m-%d"),
@@ -47,7 +47,13 @@
         <%= image_tag @post.cover, style: 'width: 100%; position: absolute; top: 0; left: 0;' %>
       </div>
     <% end %>
-    <h1><%= title @post.title %></h1>
+    <% title @post.full_title %>
+    <h1>
+      <% if @post.series_title.present? %>
+        <small><%= @post.display_series %></small><br/>
+      <% end %>
+      <%= @post.title %>
+    </h1>
     <% description @post.meta_description %>
 
     <p style="color: rgb(169,169,169); margin-bottom: 3px;">

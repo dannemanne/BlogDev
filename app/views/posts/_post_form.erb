@@ -56,12 +56,22 @@ jQuery(window).load(function() {
 <h2><%= f.label :title %></h2>
 <p><%= f.text_field :title %></p>
 
-<h2><%= f.label :body %></h2>
-<p><%= f.text_area :body, :style => "height: 200px; resize: vertical;", "data-parse" => "live", "data-parse-preview" => "#post_body_preview" %></p>
+<h2><%= f.label :cover %></h2>
+<p><%= f.file_field :cover %></p>
+
+<div class="grid-x grid-x-padding">
+  <div class="cell large-6">
+    <h2><%= f.label :body %></h2>
+    <p><%= f.text_area :body, :style => "height: 200px; resize: vertical;", "data-parse" => "live", "data-parse-preview" => "#post_body_preview" %></p>
+  </div>
+
+  <div class="cell large-6">
+    <h2>Preview of post</h2>
+    <div id="post_body_preview" class="post-preview"></div>
+  </div>
+</div>
 
 <div class="clear"></div>
-<h2>Preview of post</h2>
-<div id="post_body_preview" class="post-preview"></div>
 
 <h2><%= f.label :tag_names %></h2>
 <p><%= f.text_field :tag_names %></p>

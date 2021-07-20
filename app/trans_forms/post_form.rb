@@ -4,12 +4,14 @@ class PostForm < ApplicationTransForm
   set_main_model :post, proxy: { attributes: PROXY_ATTR }
 
   attribute :tag_names,       String,   default: proc { |f| f.post && f.post.tags.map(&:name).join(', ') }
+  attr_accessor :cover
 
   validates :current_user,  presence: true
   validates :post,          presence: true
 
   transaction do
     save_post!
+    save_cover!
     save_tags!
   end
 
@@ -18,6 +20,10 @@ private
     post.attributes = { title: title, body: body, status: status, allow_comments: allow_comments }
     post.user = current_user
     post.save!
+  end
+
+  def save_cover!
+    post.cover.attach(cover) if cover.present?
   end
 
   def save_tags!

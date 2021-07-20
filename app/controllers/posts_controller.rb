@@ -79,7 +79,7 @@ private
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :status, :tag_names, :allow_comments)
+    params.require(:post).permit(:title, :cover, :body, :status, :tag_names, :allow_comments)
   end
 
   def archive_date

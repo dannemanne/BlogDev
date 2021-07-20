@@ -2,8 +2,9 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :post_tags,    dependent: :destroy
   has_many :tags,         through: :post_tags
-  has_many :post_images,  dependent: :destroy
-  has_many :images,       through: :post_images
+  # has_many :post_images,  dependent: :destroy
+  # has_many :images,       through: :post_images
+  has_one_attached :cover
 
   # Because of CanCan automatic resource instances, we
   # need to define this attribute here. Fix later!

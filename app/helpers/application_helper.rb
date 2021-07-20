@@ -10,4 +10,8 @@ module ApplicationHelper
     render "partials/archive", :archive_months => months
   end
 
+  def thumb_url(variant)
+    Rails.application.routes.url_helpers.rails_representation_url(variant.processed, only_path: true)
+  end
+
 end

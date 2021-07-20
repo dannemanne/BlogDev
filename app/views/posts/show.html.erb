@@ -30,12 +30,20 @@
       }.to_json.html_safe
     %>
   </script>
+  <style type="text/css">
+    h1,h2,h3,h4 {
+      margin-top: 2rem;
+    }
+    code {
+      padding: 0 2px;
+    }
+  </style>
 <% end %>
 
 <article>
   <header>
     <% if @post.cover.attached? %>
-      <div style="margin-bottom: 1rem; width: 100%; height: 0; overflow: hidden; padding-top: <%= "%d" % (@post.cover.blob.metadata[:height].to_d / @post.cover.blob.metadata[:width] * 100) %>%">
+      <div style="margin-bottom: 2rem; position: relative; width: 100%; height: 0; overflow: hidden; padding-top: <%= "%d" % (@post.cover.blob.metadata[:height].to_d / @post.cover.blob.metadata[:width] * 100) %>%">
         <%= image_tag @post.cover, style: 'width: 100%; position: absolute; top: 0; left: 0;' %>
       </div>
     <% end %>

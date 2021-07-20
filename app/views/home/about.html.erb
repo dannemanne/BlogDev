@@ -18,26 +18,7 @@
       <p>When I'm not working, I exercise (I wish), study new things (definitely
         not on Twitter), and spend time with my kids (this is true!)</p>
 
-      <ul class="social">
-        <li><%= link_to 'https://twitter.com/dannemanne84', rel: 'me' do -%>
-            <i class="fab fa-twitter"></i>
-          <%- end %></li>
-        <li><%= link_to 'https://www.linkedin.com/in/daniel-viklund-83231793/', rel: 'me' do -%>
-            <i class="fab fa-linkedin"></i>
-          <%- end %></li>
-        <li><%= link_to 'https://github.com/dannemanne', rel: 'me' do -%>
-            <i class="fab fa-github"></i>
-          <%- end %></li>
-        <li><%= link_to 'https://stackoverflow.com/users/511558/dannemanne', rel: 'me' do -%>
-            <i class="fab fa-stack-overflow"></i>
-          <%- end %></li>
-        <li><%= link_to 'https://dev.to/dannemanne', rel: 'me' do -%>
-            <i class="fab fa-dev"></i>
-          <%- end %></li>
-        <li><%= link_to 'https://www.buymeacoffee.com/dannemanne', rel: 'me' do -%>
-          <i class="fa fa-coffee"></i>
-        <%- end %></li>
-      </ul>
+      <%= render 'partials/social' %>
 
       <h2>Projects I'm involved in</h2>
       <p>
@@ -49,10 +30,15 @@
         <%= link_to 'Fabriqo Organisation', 'https://fabriqo.org' %><br/>
         An initiative on how to collaborate around Product Data and how it should be described in the digital world.
       </p>
+
+      <p>
+        <%= link_to 'DePalma Workwear', 'https://depalmaworkwear.com' %><br/>
+        A workwear brand that makes stylish workwear for professionals and home carpenters.
+      </p>
     </div>
 
     <div class="cell medium-6 profile">
-      <%= image_tag 'Daniel_Viklund.png' %>
+      <%= image_tag 'Daniel_Viklund.png', alt: 'Profile picture' %>
     </div>
   </div>
 </section>

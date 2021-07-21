@@ -87,20 +87,21 @@ private
   end
 
   def set_meta
+    image = @post.cover.attached? ? @post.cover.variant(resize_to_fill: [1200, 630]) : nil
     set_meta_tags og: {
                       title: :title,
                       description: :description,
                       site_name: :site,
                       url: post_url(@post),
-                      image: @post.cover.attached? ? thumb_url(@post.cover.variant(resize_to_fill: [1200, 630])) : nil,
+                      image: image ? thumb_url(image) : nil,
                   }.compact,
                   twitter: {
-                      card: @post.cover.attached? ? 'summary_large_image' : 'summary',
+                      card: image ? 'summary_large_image' : 'summary',
                       title: :title,
                       description: :description,
                       site_name: :site,
                       url: post_url(@post),
-                      image: @post.cover.attached? ? thumb_url(@post.cover.variant(resize_to_fill: [1200, 1200])) : nil,
+                      image: image ? thumb_url(image) : nil,
                   }.compact
   end
 

@@ -11,7 +11,7 @@ module ApplicationHelper
   end
 
   def thumb_url(variant)
-    Rails.application.routes.url_helpers.rails_representation_url(variant, host: request.host)
+    Rails.application.routes.url_helpers.rails_representation_url(variant, host: request.host, protocol: Rails.env.production? ? 'https' : 'http')
   end
 
 end

@@ -2,15 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `rails
+# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_20_054301) do
+ActiveRecord::Schema.define(version: 2021_07_20_133936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,7 +91,11 @@ ActiveRecord::Schema.define(version: 2021_07_20_054301) do
     t.text "parsed_body"
     t.text "parsed_preview"
     t.string "meta_description"
+    t.string "series_title"
+    t.integer "series_part"
     t.index ["posted_at"], name: "index_posts_on_posted_at"
+    t.index ["series_part"], name: "index_posts_on_series_part"
+    t.index ["series_title"], name: "index_posts_on_series_title"
     t.index ["status"], name: "index_posts_on_status"
     t.index ["title_url"], name: "index_posts_on_title_url", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"

@@ -8,9 +8,9 @@
         "headline": @post.full_title,
         "description": @post.meta_description,
         "image": @post.cover.attached? ? [
-          # thumb_url(@post.cover.variant(resize_to_limit: [1280, 720])),
-          # thumb_url(@post.cover.variant(resize_to_limit: [1024, 768])),
-          # thumb_url(@post.cover.variant(resize_to_limit: [640, 640])),
+          thumb_url(@post.cover.variant(resize_to_fill: [1280, 720])),
+          thumb_url(@post.cover.variant(resize_to_fill: [1024, 768])),
+          thumb_url(@post.cover.variant(resize_to_fill: [640, 640])),
         ] : [],
         "datePublished": @post.posted_at&.strftime("%Y-%m-%d"),
         "dateModified": @post.updated_at&.strftime("%Y-%m-%d"),

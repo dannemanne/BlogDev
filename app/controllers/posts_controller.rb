@@ -91,15 +91,17 @@ private
                       title: :title,
                       description: :description,
                       site_name: :site,
-                      url: post_url(@post)
-                  },
+                      url: post_url(@post),
+                      image: @post.cover.attached? ? thumb_url(@post.cover.variant(resize_to_fill: [1200, 630])) : nil,
+                  }.compact,
                   twitter: {
-                      card: 'summary',
+                      card: @post.cover.attached? ? 'summary_large_image' : 'summary',
                       title: :title,
                       description: :description,
                       site_name: :site,
-                      url: post_url(@post)
-                  }
+                      url: post_url(@post),
+                      image: @post.cover.attached? ? thumb_url(@post.cover.variant(resize_to_fill: [1200, 1200])) : nil,
+                  }.compact
   end
 
 end

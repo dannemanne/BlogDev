@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     set_meta_tags site: 'DanneManne', author: 'Daniel Viklund'
   end
 
-  helper_method :recent_posts, :popular_tags, :pingback_server_url
+  helper_method :recent_posts, :popular_tags, :pingback_server_url, :thumb_url
 
 protected
 
@@ -35,6 +35,10 @@ protected
     #url_for(:controller => :pingback,
 #      :action => :xmlrpc, :only_path => false)
     "https://dannemanne.com/xmlrpc" #TODO:Fix this later. The former syntax is causing errors in devise controllers
+  end
+
+  def thumb_url(variant)
+    Rails.application.routes.url_helpers.rails_representation_url(variant, host: request.host, protocol: Rails.env.production? ? 'https' : 'http')
   end
 
 end

@@ -49,7 +49,7 @@
   <header>
     <% if @post.cover.attached? %>
       <div style="margin-bottom: 2rem; position: relative; width: 100%; height: 0; overflow: hidden; padding-top: <%= "%d" % (@post.cover.blob.metadata[:height].to_d / @post.cover.blob.metadata[:width] * 100) %>%">
-        <%= image_tag @post.cover, style: 'width: 100%; position: absolute; top: 0; left: 0;' %>
+        <%= image_tag @post.cover.variant(resize_to_fit: [768,768]), style: 'width: 100%; position: absolute; top: 0; left: 0;' %>
       </div>
     <% end %>
     <% title @post.full_title %>

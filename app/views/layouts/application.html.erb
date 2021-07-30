@@ -10,7 +10,9 @@
   <%= canonical_tag -%>
   <link rel="sitemap" href="/sitemap.xml" />
   <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <%= stylesheet_link_tag 'application' %>
 
   <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css', rel: 'preload', as: 'style', onload: "this.onload=null;this.rel='stylesheet'" %>
@@ -19,6 +21,11 @@
   <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-dark.min.css', rel: 'preload', as: 'style', onload: "this.onload=null;this.rel='stylesheet'" %>
   <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-dark.min.css' # Duplicate declaration afterwards because no support for preload in FireFox
   %>
+
+  <%= stylesheet_pack_tag 'application' %>
+
+  <%= render 'partials/gtm' %>
+  <%= javascript_pack_tag 'application' %>
 
   <%= csrf_meta_tag %>
 
@@ -49,73 +56,61 @@
   </script>
   <%= yield :head %>
 </head>
-<body>
+<body class="bg-black text-gray-300">
+<%= render 'partials/gtm_noscript' %>
 
-<div id="wrap">
-  <div class="top-bar-container" data-sticky-container>
-    <div class="sticky-topbar sticky" data-sticky data-sticky-on="small" data-options="marginTop: 0;">
-      <div class="top-bar">
-        <div class="top-bar-left">
-          <ul class="dropdown menu" data-dropdown-menu>
-            <li class="menu-text"><%= link_to 'DanneManne', root_path %></li>
-          </ul>
-        </div>
+<div class="flex flex-col min-h-screen justify-between">
 
-        <div class="top-bar-right">
-          <ul class="menu">
-            <li class="active"><%= link_to 'Blog', posts_path %></li>
-            <li class="active"><%= link_to 'Sandbox', 'https://viklund.dev', target: '_blank', rel: 'noopener' %></li>
-            <% if user_signed_in? %>
-              <li class="active">
-                <%= link_to 'Drafts', drafts_path %>
-              </li>
-              <li class="active">
-                <%= link_to 'New Post', new_post_path %>
-              </li>
-              <li class="active">
-                <%= link_to destroy_user_session_path, title: "Logout user #{current_user.display_name}" do %>
-                  <i class="fa fa-sign-out-alt"></i>
-                <% end %>
-              </li>
-            <% else %>
-              <li class="active">
-                <%= link_to new_user_session_path, title: 'Login to DanneManne.com' do -%>
-                  <i class="fa fa-sign-in-alt"></i>
-                <% end -%>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+  <header class="fixed top-0 left-0 right-0 px-6 flex flex-col pin-t pin-r pin-l z-50 bg-black border-b border-gray-700">
+    <nav id="sticky-header" class="flex items-center justify-between h-16">
+      <div>
+        <%= link_to 'DanneManne', root_path %>
       </div>
-    </div>
-  </div>
 
-  <main>
-    <div class="grid-container <%= content_for?(:grid_container_class) ? yield(:grid_container_class) : '' %>">
-      <div class="grid-x grid-padding-x">
-        <div class="cell">
-          <%= yield %>
-        </div>
+      <div>
+        <ul class="menu flex">
+          <li class="ml-4"><%= link_to 'Blog', posts_path, class: 'text-gray-300' %></li>
+          <li class="ml-4"><%= link_to 'Sandbox', 'https://viklund.dev', target: '_blank', rel: 'noopener', class: 'text-gray-300' %></li>
+          <% if user_signed_in? %>
+            <li class="ml-4">
+              <%= link_to 'Drafts', drafts_path, class: 'text-gray-300' %>
+            </li>
+            <li class="ml-4">
+              <%= link_to 'New Post', new_post_path, class: 'text-gray-300' %>
+            </li>
+            <li class="ml-4">
+              <%= link_to destroy_user_session_path, title: "Logout user #{current_user.display_name}", class: 'text-gray-300' do %>
+                <i class="fa fa-sign-out-alt"></i>
+              <% end %>
+            </li>
+          <% else %>
+            <li class="ml-4">
+              <%= link_to new_user_session_path, title: 'Login to DanneManne.com', class: 'text-gray-300' do -%>
+                <i class="fa fa-sign-in-alt"></i>
+              <% end -%>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main class="mb-auto pt-16">
+    <div class="container mx-auto <%= content_for?(:grid_container_class) ? yield(:grid_container_class) : '' %>">
+      <div class="max-w-3xl mx-auto">
+        <%= yield %>
       </div>
     </div>
   </main>
+
+  <footer class="flex text-xs h-16 justify-center items-end pb-4">
+    <span>Copyright © <%= Date.today.year %></span>
+    <span style="margin: 0 3px;">|</span>
+    <span><%= link_to 'About', about_path %></span>
+    <span style="margin: 0 3px;">|</span>
+    <span><%= link_to 'info@dannemanne.com', 'mailto:info@dannemanne.com' %></span>
+  </footer>
 </div>
-
-<footer class="page-footer">
-
-  <div class="grid-x">
-    <div class="cell large-offset-2 large-8 end">
-      <p class="text-center">
-        <span>Copyright © <%= Date.today.year %></span>
-        <span style="margin: 0 3px;">|</span>
-        <span><%= link_to 'About', about_path %></span>
-        <span style="margin: 0 3px;">|</span>
-        <span><%= link_to 'info@dannemanne.com', 'mailto:info@dannemanne.com' %></span>
-      </p>
-    </div>
-  </div>
-
-</footer>
 
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js' %>
 <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-qore.min.js' %>

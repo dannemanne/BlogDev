@@ -7,6 +7,7 @@ gem 'pg', '1.2.3'
 gem 'meta-tags'
 gem 'bootsnap'
 gem 'canonical-rails'
+gem 'webpacker'
 
 group :production do
   gem 'rails_12factor'
@@ -42,6 +43,3 @@ gem 'aws-sdk-s3', require: false
 gem 'ancestry'
 gem 'draper'
 gem 'trans_forms', git: 'https://github.com/dannemanne/trans_forms.git'
-
-gem 'sass' #, '3.4'
-gem 'foundation-rails', '6.5.3.0'

@@ -1,4 +1,4 @@
-<article class="post-teaser">
+<article class="post-teaser px-4 md:px-0">
   <header>
     <h2><%= link_to post_path(post) do %>
       <% if post.series_title.present? %>
@@ -6,31 +6,30 @@
       <% end %>
       <%= post.title %>
     <% end %></h2>
-    <p style="color: rgb(169,169,169); margin-bottom: 3px;">
+    <p class="text-gray-500 mb-1 -mt-2">
       <%= post.posted_at.strftime("%b %e, %Y") %> - <%= post.user.display_name %>
       <% if can? :update, post %>
         - <%= link_to "Edit", edit_post_path(post) %>
       <% end %>
     </p>
   </header>
-  <section>
+  <section class="mb-4">
     <%= post.display_preview %>
   </section>
   <section>
-    <p><%= link_to "Read More >>", post_path(post) %></p>
-    <p>
-      <% if post.allow_comments %>
-        <span style="float:left;" class="disqus-comment-count" data-disqus-url="<%= post_url(post) %>"></span>
-      <% end %>
-      <span style="float:right;">
-        <% if post.tags.any? %>
-          Tags:
-          <% post.tags.each_with_index do |tag, i| %><% if i != 0 %>,<% end %>
-            <%= link_to tag_path(tag), :class => "postTag", :title => "View posts tagged with #{tag.name}", :rel => "tag" do %>
-              <span class="postTagText"><%= tag.name %></span><% end %><% end %>
+    <% if post.tags.any? %>
+      <p class="flex justify-start">
+        <% post.tags.each_with_index do |tag, i| %>
+          <%= link_to tag_path(tag), :class => "mr-4", :title => "View posts tagged with #{tag.name}", :rel => "tag" do %>
+            <span class="text-gray-500">#</span><%= tag.name %>
+          <% end %>
         <% end %>
-      </span>
-    </p>
-    <div class="clear"></div>
+    <% end %>
+      </p>
+    <% if post.allow_comments %>
+      <p>
+        <span class="disqus-comment-count" data-disqus-url="<%= post_url(post) %>"></span>
+      </p>
+    <% end %>
   </section>
 </article>

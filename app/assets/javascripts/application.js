@@ -1,5 +1,4 @@
 //= require jquery_ujs
-//= require foundation
 //= require wysiwym/wysiwym.min
 
 
@@ -36,5 +35,3 @@ jQuery(window).load(function() {
     }
   });
 });
-
-$(function(){ $(document).foundation(); });

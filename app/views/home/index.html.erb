@@ -2,34 +2,31 @@
   <%= render 'structured_data/me' %>
 <% end %>
 
-<section class="welcome">
-  <div class="grid-x grid-padding-x">
-    <div class="cell title">
-      <h1><%= title "Full-stack developer and sometimes blogger", "I'm Daniel Viklund." %></h1>
-      <h2>Developer by day, Father & Husband as much as I can!</h2>
-    </div>
-
-    <div class="cell medium-6 intro">
-      <p><%= description "I'm a Software Developer, based in Hong Kong, specialising in retail and supply chain solutions." %></p>
-      <p>I divide my time between Happy Rabbit, a tech-focused service provider
-        for fashion companies, and Fabriqo, our initiative for open sourcing
-        product data.</p>
-      <p>When I'm not working, I exercise (I wish), study new things (definitely
-        not on Twitter), and spend time with my kids (this is true!)</p>
-
-      <%= render 'partials/social' %>
-
-      <% if latest_post %>
-        <h2>Latest Blog Article</h2>
-        <p>
-          <%= link_to latest_post.title, post_path(latest_post) %><br/>
-          Posted at <%= latest_post.posted_at.strftime("%b %e, %Y") %>
-        </p>
-      <% end %>
-    </div>
-
-    <div class="cell medium-6 profile">
-      <%= image_tag 'Daniel_Viklund.png', alt: 'Profile picture' %>
-    </div>
+<section class="grid grid-cols-2 mt-8 gap-x-8">
+  <div class="col-span-2 mb-6 px-4 md:px-0">
+    <h1><%= title "Full-stack developer and sometimes blogger", "I'm Daniel Viklund." %></h1>
+    <h2 class="mt-0 text-3xl">Developer by day, Father & Husband as much as I can!</h2>
   </div>
+
+  <div class="col-span-2 md:col-span-1 px-4 md:px-0">
+    <p class="text-xl"><%= description "I'm a Software Developer, based in Hong Kong, specialising in retail and supply chain solutions." %></p>
+    <p class="text-xl">I divide my time between Happy Rabbit, a tech-focused service provider
+      for fashion companies, and Fabriqo, our initiative for open sourcing
+      product data.</p>
+    <p class="text-xl">When I'm not working, I exercise (I wish), study new things (definitely
+      not on Twitter), and spend time with my kids (this is true!)</p>
+
+    <%= render 'partials/social' %>
+  </div>
+
+  <div class="col-span-2 md:col-span-1">
+    <%= image_tag 'Daniel_Viklund.png', alt: 'Profile picture', class: 'rounded w-full max-w-sm' %>
+  </div>
+
+  <% if latest_post %>
+    <div class="col-span-2">
+      <h2 class="mb-0 px-4 md:px-0">Latest blog post</h2>
+      <%= render 'posts/post_teaser', post: latest_post %>
+    </div>
+  <% end %>
 </section>

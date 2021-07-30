@@ -26,7 +26,7 @@ class HomeController < ApplicationController
   private
 
   def latest_post
-    @latest_post ||= Post.posted.recent.first
+    @latest_post ||= Post.posted.recent.first&.decorate
   end
 
 end

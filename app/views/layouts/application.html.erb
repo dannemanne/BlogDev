@@ -22,7 +22,7 @@
   <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-dark.min.css' # Duplicate declaration afterwards because no support for preload in FireFox
   %>
 
-  <%= stylesheet_pack_tag 'application' %>
+  <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
   <%= render 'partials/gtm' %>
   <%= javascript_pack_tag 'application' %>

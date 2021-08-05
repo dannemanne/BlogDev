@@ -1,4 +1,4 @@
 plugins:
   postcss-import: {}
   postcss-preset-env: {}
-  tailwindcss: './app/packs/stylesheets/tailwind.js'
+  tailwindcss: './tailwind.config.js'

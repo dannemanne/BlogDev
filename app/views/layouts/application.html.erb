@@ -10,10 +10,6 @@
   <%= canonical_tag -%>
   <link rel="sitemap" href="/sitemap.xml" />
   <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-  <%= stylesheet_link_tag 'application' %>
 
   <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css', rel: 'preload', as: 'style', onload: "this.onload=null;this.rel='stylesheet'" %>
   <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' # Duplicate declaration afterwards because no support for preload in FireFox
@@ -122,10 +118,8 @@
   </footer>
 </div>
 
-<%= javascript_include_tag 'https://code.jquery.com/jquery-1.12.4.min.js' %>
 <%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js' %>
-<%= javascript_include_tag 'https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' %>
+<%#= javascript_include_tag 'https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' %>
 <%= javascript_pack_tag 'application' %>
 <%= yield :javascript %>
 

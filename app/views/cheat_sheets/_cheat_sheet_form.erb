@@ -1,14 +1,22 @@
-<% content_for :javascript_code do %>
-  jQuery(window).load(function() {
-    jQuery('#cheat_sheet_body').wysiwym(Wysiwym.Markdown, {});
+<% content_for :javascript do %>
+  <%= javascript_include_tag 'https://code.jquery.com/jquery-1.12.4.min.js' %>
+  <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js' %>
+  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js' %>
+  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-qore.min.js' %>
+  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js' %>
+  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/showdown/0.1.0/showdown.min.js' %>
+  <%= javascript_pack_tag 'editor' %>
 
-    $(function() {
-    var availableTags = <%= CheatSheet.select("DISTINCT category").map(&:category).to_json.html_safe %>;
-      $( "#cheat_sheet_category" ).autocomplete({
-        source: availableTags
+  <script type="text/javascript">
+    jQuery(window).load(function() {
+      $(function() {
+      var availableTags = <%= CheatSheet.select("DISTINCT category").map(&:category).to_json.html_safe %>;
+        $( "#cheat_sheet_category" ).autocomplete({
+          source: availableTags
+        });
       });
     });
-  });
+  </script>
 <% end %>
 
 <% if f.object.errors.any? %>

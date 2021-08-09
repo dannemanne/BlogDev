@@ -1,11 +1,12 @@
-<article class="post-teaser px-4 md:px-0">
+<article class="post-teaser px-4 md:px-0 pb-4">
   <header>
-    <h2><%= link_to post_path(post) do %>
-      <% if post.series_title.present? %>
-        <small><%= post.display_series %></small><br/>
-      <% end %>
-      <%= post.title %>
-    <% end %></h2>
+    <% if post.series_title.present? %>
+      <p class="text-gray-500 text-lg md:text-xl mt-8 mb-0"><%= post.display_series %></p>
+      <h2 class="mt-0"><%= link_to post.title, post_path(post) %></h2>
+    <% else %>
+      <h2><%= link_to post.title, post_path(post) %></h2>
+    <% end %>
+
     <p class="text-gray-500 mb-1 -mt-2">
       <%= post.posted_at.strftime("%b %e, %Y") %> - <%= post.user.display_name %>
       <% if can? :update, post %>

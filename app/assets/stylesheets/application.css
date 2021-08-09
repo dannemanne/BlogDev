@@ -1,18 +1,4 @@
 /* ...
 *= require cupertino/jquery-ui-1.8.19.custom
-*= require wysiwym/wysiwym
-
 *= require_self
 */
-
-html { height: 100%; }
-body, #wrap {min-height: 100%; position: relative;}
-body #wrap {height: auto; min-height: 100vh;}
-
-code {
-    border: none;
-    padding: 0;
-}
-.page-title {
-    text-transform: uppercase;
-}

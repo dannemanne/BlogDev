@@ -1,14 +1,16 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag :application %>
+<% end %>
 <% content_for :javascript do %>
+  <%= javascript_include_tag 'https://code.jquery.com/jquery-1.12.4.min.js' %>
+  <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js' %>
   <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js' %>
   <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-qore.min.js' %>
   <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js' %>
   <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/showdown/0.1.0/showdown.min.js' %>
-  <%= javascript_pack_tag 'editor' %>
 
   <script type="text/javascript">
     docReady(function() {
-      //jQuery('#post_body').wysiwym(Wysiwym.Markdown, {});
-
       var availableTags = <%= Tag.all.map(&:name).to_json.html_safe %>;
 
       function split( val ) {
@@ -119,7 +121,7 @@
     </div>
 
     <div id="post_body_preview" class="post-preview">
-      <%=f.object.parsed_body.html_safe %>
+      <%=f.object.parsed_body&.html_safe %>
     </div>
   </div>
 </label>

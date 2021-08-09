@@ -1,6 +1,4 @@
 body {
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
-    font-weight: 400;
     @apply text-gray-300;
 }
 
@@ -46,5 +44,5 @@ a {
 }
 
 code {
-    @apply text-black bg-gray-100 px-1;
+    @apply text-black bg-gray-400 px-1 rounded;
 }

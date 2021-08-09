@@ -67,6 +67,11 @@
         const html = showdown.makeHtml(area.value);
         targetElement.innerHTML = html;
         Prism.highlightAll();
+
+        if (area.dataset.parseSave) {
+          const saveToElement = document.querySelector(area.dataset.parseSave);
+          saveToElement.value = html;
+        }
       };
 
       if (bodyElement.addEventListener) {

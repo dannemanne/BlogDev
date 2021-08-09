@@ -73,7 +73,7 @@ private
     self.title_url = [series_title, display_series_part, title].reject(&:blank?).join(' ').gsub(/[^A-Za-z0-9_\-]/i, '_').gsub(/_+/, '_').downcase
 
     # Parses the body into different formats to be used in different places on the site
-    self.parsed_body = Kramdown::Document.new(body).to_html
+    parsed_body = Kramdown::Document.new(body).to_html
     paragraph = Nokogiri::HTML.fragment(parsed_body).children.first
     self.parsed_preview = paragraph.respond_to?(:to_html) && paragraph.to_html || ''
     self.meta_description = "#{ paragraph.respond_to?(:text) && paragraph.text || '' }"[0..150]

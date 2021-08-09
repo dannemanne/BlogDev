@@ -70,7 +70,7 @@
 
         if (area.dataset.parseSave) {
           const saveToElement = document.querySelector(area.dataset.parseSave);
-          saveToElement.value = html;
+          saveToElement.value = targetElement.innerHTML;
         }
       };
 

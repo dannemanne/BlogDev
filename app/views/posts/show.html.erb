@@ -44,17 +44,6 @@
   </style>
 <% end %>
 
-<% content_for :javascript do %>
-  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js' %>
-  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-qore.min.js' %>
-  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js' %>
-  <script type="text/javascript">
-    docReady(function() {
-      Prism.highlightAll();
-    })
-  </script>
-<% end %>
-
 <article>
   <header>
     <% if @post.cover.attached? %>

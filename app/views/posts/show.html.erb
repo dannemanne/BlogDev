@@ -1,4 +1,3 @@
-<% content_for :grid_container_class do %>narrow<% end %>
 <% content_for :head do %>
   <script type="application/ld+json">
     <%=
@@ -45,6 +44,17 @@
   </style>
 <% end %>
 
+<% content_for :javascript do %>
+  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js' %>
+  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-qore.min.js' %>
+  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js' %>
+  <script type="text/javascript">
+    docReady(function() {
+      Prism.highlightAll();
+    })
+  </script>
+<% end %>
+
 <article>
   <header>
     <% if @post.cover.attached? %>
@@ -69,7 +79,7 @@
     </p>
   </header>
 
-  <section data-parse="once"><%= @post.body %></section>
+  <section><%= @post.parsed_body.html_safe %></section>
 
   <footer>
     <div class="grid-x grid-padding-x">

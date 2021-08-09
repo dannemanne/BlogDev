@@ -1,48 +1,81 @@
-<% content_for :javascript_code do %>
-jQuery(window).load(function() {
-    jQuery('#post_body').wysiwym(Wysiwym.Markdown, {});
+<% content_for :javascript do %>
+  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js' %>
+  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-qore.min.js' %>
+  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js' %>
+  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/showdown/0.1.0/showdown.min.js' %>
+  <%= javascript_pack_tag 'editor' %>
 
-    var availableTags = <%= Tag.all.map(&:name).to_json.html_safe %>;
+  <script type="text/javascript">
+    docReady(function() {
+      //jQuery('#post_body').wysiwym(Wysiwym.Markdown, {});
 
-    function split( val ) {
+      var availableTags = <%= Tag.all.map(&:name).to_json.html_safe %>;
+
+      function split( val ) {
         return val.split( /,\s*/ );
-    }
-    function extractLast( term ) {
+      }
+      function extractLast( term ) {
         return split( term ).pop();
-    }
+      }
 
-    $( "#post_tag_names" )
+      $( "#post_tag_names" )
         // don't navigate away from the field on tab when selecting an item
-        .bind( "keydown", function( event ) {
-            if ( event.keyCode === $.ui.keyCode.TAB &&
-                    $( this ).data( "autocomplete" ).menu.active ) {
-                event.preventDefault();
-            }
+        .bind("keydown", function(e) {
+          if (e.keyCode === $.ui.keyCode.TAB && $(this).data("autocomplete").menu.active) {
+            e.preventDefault();
+          }
         })
         .autocomplete({
-            minLength: 0,
-            source: function( request, response ) {
-                // delegate back to autocomplete, but extract the last term
-                response( $.ui.autocomplete.filter(
-                    availableTags, extractLast( request.term ) ) );
-            },
-            focus: function() {
-                // prevent value inserted on focus
-                return false;
-            },
-            select: function( event, ui ) {
-                var terms = split( this.value );
-                // remove the current input
-                terms.pop();
-                // add the selected item
-                terms.push( ui.item.value );
-                // add placeholder to get the comma-and-space at the end
-                terms.push( "" );
-                this.value = terms.join( ", " );
-                return false;
-            }
+          minLength: 0,
+          source: function(request, response) {
+            // delegate back to autocomplete, but extract the last term
+            response($.ui.autocomplete.filter(availableTags, extractLast(request.term)));
+          },
+          focus: function() {
+            // prevent value inserted on focus
+            return false;
+          },
+          select: function(event, ui) {
+            var terms = split( this.value );
+            // remove the current input
+            terms.pop();
+            // add the selected item
+            terms.push(ui.item.value);
+            // add placeholder to get the comma-and-space at the end
+            terms.push("");
+            this.value = terms.join(", ");
+            return false;
+          }
         });
-});
+
+      // const parse_live = function(node, preview) {
+      //   const input_text = node.val();
+      //   if (input_text !== prev_text) {
+      //     var showdown = new Showdown.converter();
+      //     preview.html(showdown.makeHtml(input_text));
+      //     Prism.highlightAll();
+      //     prev_text = input_text;
+      //   }
+      // };
+
+      // Setup the WYSIWYM editor!
+      const bodyElement = document.querySelector('[data-parse]');
+      const handleChange = function(event) {
+        const area = event ? event.target : bodyElement;
+        const targetElement = document.querySelector(area.dataset.parse);
+        var showdown = new Showdown.converter();
+        const html = showdown.makeHtml(area.value);
+        targetElement.innerHTML = html;
+        Prism.highlightAll();
+      };
+
+      if (bodyElement.addEventListener) {
+        bodyElement.addEventListener('input', handleChange, false);
+      } else if (area.attachEvent) {
+        bodyElement.attachEvent('onpropertychange', handleChange);
+      }
+  });
+  </script>
 <% end %>
 
 <% if f.object.errors.any? %>
@@ -53,43 +86,69 @@ jQuery(window).load(function() {
   </ul>
 <% end %>
 
-<h2><%= f.label :title %></h2>
-<p><%= f.text_field :title %></p>
+<label class="block text-sm mb-2">
+  Title
+  <%= f.text_field :title, class: 'block shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+</label>
 
-<h2><%= f.label :series_title %></h2>
-<p><%= f.text_field :series_title %></p>
+<label class="block text-sm mb-2">
+  Series Title
+  <%= f.text_field :series_title, class: 'block shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+</label>
 
-<h2><%= f.label :series_part %></h2>
-<p><%= f.number_field :series_part %></p>
+<label class="block text-sm mb-2">
+  Series Part
+  <%= f.number_field :series_part, class: 'block shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+</label>
 
-<h2><%= f.label :cover %></h2>
-<p><%= f.file_field :cover %></p>
+<label class="block text-sm mb-2">
+  Cover
+  <%= f.file_field :cover %>
+</label>
 
-<div class="grid-x grid-x-padding">
-  <div class="cell large-6">
-    <h2><%= f.label :body %></h2>
-    <p><%= f.text_area :body, :style => "height: 500px; resize: vertical;", "data-parse" => "live", "data-parse-preview" => "#post_body_preview" %></p>
+<label class="block text-sm mb-2">
+  Body
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <%= f.text_area :body, class: "text-sm min-h-full block shadow appearance-none border h-32 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", "data-parse" => "#post_body_preview", 'data-parse-save' => '.js-parsed-body-field' %>
+    </div>
+
+    <div id="post_body_preview" class="post-preview">
+      <%=f.object.parsed_body.html_safe %>
+    </div>
   </div>
+</label>
+<%= f.hidden_field :parsed_body, class: 'js-parsed-body-field' %>
 
-  <div class="cell large-6">
-    <h2>Preview of post</h2>
-    <div id="post_body_preview" class="post-preview"></div>
-  </div>
+<label class="block text-sm mb-2">
+  Tag Names
+  <%= f.text_field :tag_names, class: 'block shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+</label>
+
+<div class="mb-2 text-sm">
+  Status
+  <label class="block mb-1 text-base">
+    <%= f.radio_button :status, PostStatus::DRAFT, class: 'mr-2' %>
+    Draft
+  </label>
+  <label class="block mb-1 text-base">
+    <%= f.radio_button :status, PostStatus::POSTED, class: 'mr-2' %>
+    Posted
+  </label>
 </div>
 
-<div class="clear"></div>
+<div class="mb-2 text-sm">
+  Allow Comments
+  <label class="block mb-1 text-base">
+    <%= f.radio_button :allow_comments, false, class: 'mr-2' %>
+    No
+  </label>
+  <label class="block mb-1 text-base">
+    <%= f.radio_button :allow_comments, true, class: 'mr-2' %>
+    Yes
+  </label>
+</div>
 
-<h2><%= f.label :tag_names %></h2>
-<p><%= f.text_field :tag_names %></p>
-
-<h2><%= f.label :status %></h2>
-<p><%= f.radio_button :status, PostStatus::DRAFT %> Draft</p>
-<p><%= f.radio_button :status, PostStatus::POSTED %> Published</p>
-
-<h2><%= f.label :allow_comments %></h2>
 <p>
-  <%= f.radio_button :allow_comments, false %> No
-  <%= f.radio_button :allow_comments, true %> Yes
+  <%= f.submit "Save", class: "text-xs averta-bold py-2 px-8 uppercase tracking-wider box-border focus:outline-none whitespace-nowrap bg-white hover:bg-gray-200 focus:bg-gray-200 disabled:text-gray-500 text-black" %>
 </p>
-
-<h2><%= f.submit "Save" %></h2>

@@ -25,7 +25,6 @@
   <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
   <%= render 'partials/gtm' %>
-  <%= javascript_pack_tag 'application' %>
 
   <%= csrf_meta_tag %>
 
@@ -53,6 +52,17 @@
         },
       }.to_json.html_safe
     %>
+  </script>
+  <script type="text/javascript">
+    docReady = function(fn) {
+      // see if DOM is already available
+      if (document.readyState === "complete" || document.readyState === "interactive") {
+        // call on next available tick
+        setTimeout(fn, 1);
+      } else {
+        document.addEventListener("DOMContentLoaded", fn);
+      }
+    }
   </script>
   <%= yield :head %>
 </head>
@@ -96,8 +106,8 @@
   </header>
 
   <main class="mb-auto pt-16">
-    <div class="container mx-auto <%= content_for?(:grid_container_class) ? yield(:grid_container_class) : '' %>">
-      <div class="max-w-3xl mx-auto">
+    <div class="mx-auto container">
+      <div class="mx-auto <%= content_for?(:grid_container_class) ? yield(:grid_container_class) : 'max-w-3xl' %>">
         <%= yield %>
       </div>
     </div>
@@ -112,31 +122,22 @@
   </footer>
 </div>
 
-<%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js' %>
-<%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-qore.min.js' %>
-<%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js' %>
 <%= javascript_include_tag 'https://code.jquery.com/jquery-1.12.4.min.js' %>
-<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/showdown/0.1.0/showdown.min.js' %>
+<%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js' %>
 <%= javascript_include_tag 'https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' %>
+<%= javascript_pack_tag 'application' %>
+<%= yield :javascript %>
 
-<script type="text/javascript">
-  <% if content_for? :javascript_code %>
+<% if content_for? :javascript_code %>
+  <script type="text/javascript">
   <%= yield :javascript_code %>
-  <% end %>
-</script>
+  </script>
+<% end %>
+
 
 <% if Rails.env.production? %>
   <%= render 'partials/google_analytics' %>
-  <script type="text/javascript"><!--
-  google_ad_client = "ca-pub-1507841842116581";
-  /* Main Banner */
-  google_ad_slot = "8960650403";
-  google_ad_width = 468;
-  google_ad_height = 60;
-  //-->
-  </script>
 <% end %>
 </body>
 </html>

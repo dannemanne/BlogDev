@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     set_meta_tags site: 'DanneManne', author: 'Daniel Viklund'
   end
 
-  helper_method :recent_posts, :popular_tags, :pingback_server_url, :thumb_url
+  helper_method :recent_posts, :popular_tags, :pingback_server_url, :thumb_url, :rich_text_author
 
 protected
 
@@ -39,6 +39,25 @@ protected
 
   def thumb_url(variant)
     Rails.application.routes.url_helpers.rails_representation_url(variant, host: request.host, protocol: Rails.env.production? ? 'https' : 'http')
+  end
+
+  def rich_text_author
+    {
+        "@type": 'Person',
+        "familyName": 'Viklund',
+        "givenName": 'Daniel',
+        "name": 'Daniel Viklund',
+        "alternateName": 'DanneManne',
+        "sameAs": %w(
+            https://twitter.com/dannemanne84
+            https://www.linkedin.com/in/daniel-viklund-83231793/
+            https://github.com/dannemanne
+            https://stackoverflow.com/users/511558/dannemanne
+            https://dev.to/dannemanne
+            https://www.buymeacoffee.com/dannemanne
+            https://hashnode.com/@dannemanne
+        ),
+    }
   end
 
 end

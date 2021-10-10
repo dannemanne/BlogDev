@@ -1,29 +1,41 @@
 require 'spec_helper'
 
 describe Post do
-  let(:post) { FactoryBot.build(:post) }
+  subject { post }
+
   describe 'validations' do
-    it 'validates title presence' do
-      expect(post).to be_valid
+    let(:post) { FactoryBot.build(:post) }
 
-      post.title = ''
-      expect(post).to be_invalid
+    it { is_expected.to be_valid }
+
+    context 'when :title is missing' do
+      before { post.title = nil }
+
+      it { is_expected.not_to be_valid }
     end
-    it 'validates body presence' do
-      expect(post).to be_valid
 
-      post.body = ''
-      expect(post).to be_invalid
+    context 'when :body is missing' do
+      before { post.body = nil }
+
+      it { is_expected.not_to be_valid }
+    end
+
+    context 'when :parsed_body is missing' do
+      before { post.parsed_body = nil }
+
+      it { is_expected.to be_valid }
     end
   end
 
-  describe 'assignments' do
-    it 'assigns title_url based on title upon save' do
-      expect(post.title).to be_present
-      expect(post.title_url).to be_blank
+  describe '#save' do
+    let(:post) { FactoryBot.build(:post) }
 
-      expect(post.save).to eq(true)
-      expect(post.title_url).to be_present
+    context 'when creating a new post' do
+      before { post.title = 'A very good post' }
+
+      it 'assigns title_url based on title upon save' do
+        expect { post.save }.to change{ post.title_url }.to('a_very_good_post')
+      end
     end
   end
 end

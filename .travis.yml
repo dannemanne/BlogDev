@@ -4,9 +4,9 @@ env:
     - DB=postgresql
 
 language: ruby
-
+cache: bundler
 rvm:
-  - 2.4.5
+  - 2.6
 
 services:
   - postgresql

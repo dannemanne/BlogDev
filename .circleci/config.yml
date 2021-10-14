@@ -63,18 +63,6 @@ jobs:
             ./tmp/cc-test-reporter format-coverage -t simplecov -o tmp/codeclimate.backend.json coverage/.resultset.json
             ./tmp/cc-test-reporter upload-coverage -i tmp/codeclimate.backend.json
 
-  upload-coverage:
-    <<: *defaults
-    docker:
-      - image: cimg/ruby:2.6-node
-    steps:
-      - attach_workspace:
-          at: ~/repo/tmp
-      - run:
-          name: Upload coverage results to Code Climate
-          command: |
-            ./tmp/cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 2 -o tmp/codeclimate.total.json
-
 
 # We use workflows to orchestrate the jobs that we declared above.
 workflows:
@@ -85,6 +73,3 @@ workflows:
       - test:
           requires:
             - build
-      - upload-coverage:
-          requires:
-            - test

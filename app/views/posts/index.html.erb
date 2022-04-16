@@ -4,7 +4,7 @@
       {
         "@context": "http://schema.org",
         "@type": "Blog",
-        "name": "The personal Blog of DanneManne",
+        "name": "My personal Blog | DanneManne",
         "url": canonical_href,
         "author": rich_text_author,
       }.to_json.html_safe
@@ -12,8 +12,8 @@
   </script>
 <% end %>
 
-<h2 class="uppercase"><%= title "Blog Posts" %></h2>
-<% description "Listing all blog posts" %>
+<h2 class="uppercase"><%= title "Posts" %></h2>
+<% description "Listing all posts" %>
 
 <% @posts.each do |post| %>
   <%= render '/posts/post_teaser', post: post %>

@@ -60,16 +60,19 @@
     <% if @post.in_series? %>
       <div class="grid-x grid-padding-x">
         <div class="cell">
-          <h5>Posts in <%= @post.series_title %></h5>
-          <% @post.all_in_series.each do |post| %>
-            <p>
-              <% if post == @post %>
-                <%= post.display_title_with_part_if_present %>
-              <% else %>
-                <%= link_to post.display_title_with_part_if_present, post_path(post), title: "View the other part in this series: #{post.title}" %>
-              <% end %>
-            </p>
-          <% end %>
+          <h5 class="italic">Part of the Series: <%= @post.series_title %></h5>
+          <ul>
+            <% @post.all_in_series.each do |post| %>
+              <li class="mb-1">
+                <% if post == @post %>
+                  <%= post.display_title_with_part_if_present %>
+                <% else %>
+                  <%= link_to post.display_title_with_part_if_present, post_path(post) %>
+                <% end %>
+                <small class="text-gray-500"><%= post.posted_at.strftime("#{post.posted_at.day.ordinalize} of %b, %Y") %></small>
+              </li>
+            <% end %>
+          </ul>
         </div>
       </div>
     <% end %>

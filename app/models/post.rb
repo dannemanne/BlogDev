@@ -20,6 +20,7 @@ class Post < ApplicationRecord
   scope :posted, -> { where('posts.status = ?', PostStatus::POSTED) }
   scope :drafts, -> { where(status: PostStatus::DRAFT) }
   scope :archive_months, -> { select(:posted_at).where(status: PostStatus::POSTED).order('1 DESC') }
+  scope :in_series, -> (series_title) { where(series_title: series_title).order(:series_part).order(:posted_at) }
 
   def self.from_archive(year, month)
     date1 = Date.new(year.to_i,month.to_i)
@@ -51,12 +52,28 @@ class Post < ApplicationRecord
     @post_form ||= PostForm.new_in_model(self, attr, current_user)
   end
 
+  def in_series?
+    series_title.present?
+  end
+
+  def all_in_series
+    if in_series?
+      @other_in_series ||= Post.posted.in_series(series_title)
+    else
+      Post.none
+    end
+  end
+
   def display_series_part
     series_part.presence && "Part #{series_part}"
   end
 
   def display_series
     [series_title, display_series_part].reject(&:blank?).join(' - ')
+  end
+
+  def display_title_with_part_if_present
+    [display_series_part, title].reject(&:blank?).join(": ")
   end
 
   def full_title

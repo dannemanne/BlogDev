@@ -57,6 +57,17 @@
   <section><%= @post.display_body %></section>
 
   <footer>
+    <div class="grid-x grid-padding-x">
+      <div class="cell text-right">
+        <% if @post.tags.any? %>
+          Tags:
+          <% @post.tags.each_with_index do |tag, i| %><% if i != 0 %>,<% end %>
+            <%= link_to tag_path(tag), :class => "postTag", :title => "View posts tagged with #{tag.name}", :rel => "tag" do %>
+              <span class="postTagText"><%= tag.name %></span><% end %><% end %>
+        <% end %>
+      </div>
+    </div>
+
     <% if @post.in_series? %>
       <div class="grid-x grid-padding-x">
         <div class="cell">
@@ -76,17 +87,6 @@
         </div>
       </div>
     <% end %>
-    <div class="grid-x grid-padding-x">
-      <div class="cell text-right">
-        <% if @post.tags.any? %>
-          Tags:
-          <% @post.tags.each_with_index do |tag, i| %><% if i != 0 %>,<% end %>
-            <%= link_to tag_path(tag), :class => "postTag", :title => "View posts tagged with #{tag.name}", :rel => "tag" do %>
-              <span class="postTagText"><%= tag.name %></span><% end %><% end %>
-        <% end %>
-      </div>
-    </div>
-    <div class="clear"></div>
 
     <% if @post.allow_comments %>
       <% if Rails.env.production? %>
@@ -110,12 +110,17 @@
       <% end %>
     <% end %>
 
-    <% if @post.newer_post %>
-      <span style="float: left;"><%= link_to "< #{@post.newer_post.title_preview}", post_path(@post.newer_post), :rel => "next", :title => "View the next post: #{@post.newer_post.title}" %></span>
-    <% end %>
-    <% if @post.older_post %>
-      <span style="float: right;"><%= link_to "#{@post.older_post.title_preview} >", post_path(@post.older_post), :rel => "prev", :title => "View the previous post: #{@post.older_post.title}" %></span>
-    <% end %>
-    <div class="clear"></div>
+    <div class="flex mt-4">
+      <div class="flex-1">
+        <% if @post.newer_post %>
+          <%= link_to "< #{@post.newer_post.title_preview}", post_path(@post.newer_post), :rel => "next", :title => "View the next post: #{@post.newer_post.title}" %>
+        <% end %>
+      </div>
+      <div class="flex-1">
+        <% if @post.older_post %>
+          <%= link_to "#{@post.older_post.title_preview} >", post_path(@post.older_post), :rel => "prev", :title => "View the previous post: #{@post.older_post.title}" %>
+        <% end %>
+      </div>
+    </div>
   </footer>
 </article>

@@ -57,7 +57,7 @@
   <section><%= @post.display_body %></section>
 
   <footer>
-    <% if @post.in_series %>
+    <% if @post.in_series? %>
       <div class="grid-x grid-padding-x">
         <div class="cell">
           <h5>Posts in <%= @post.series_title %></h5>

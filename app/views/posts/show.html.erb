@@ -110,15 +110,21 @@
       <% end %>
     <% end %>
 
-    <div class="flex mt-4">
+    <div class="flex mt-8">
       <div class="flex-1">
         <% if @post.newer_post %>
-          <%= link_to "< #{@post.newer_post.title_preview}", post_path(@post.newer_post), :rel => "next", :title => "View the next post: #{@post.newer_post.title}" %>
+          <%= link_to post_path(@post.newer_post), :rel => "next", :title => "View the next post: #{@post.newer_post.title}" do %>
+            <i class="fa fa-angle-left"></i>
+            <%= @post.newer_post.title_preview %>
+          <% end %>
         <% end %>
       </div>
       <div class="flex-1">
         <% if @post.older_post %>
-          <%= link_to "#{@post.older_post.title_preview} >", post_path(@post.older_post), :rel => "prev", :title => "View the previous post: #{@post.older_post.title}" %>
+          <%= link_to post_path(@post.older_post), :rel => "prev", :title => "View the previous post: #{@post.older_post.title}" do %>
+            <%= @post.older_post.title_preview %>
+            <i class="fa fa-angle-right"></i>
+          <% end %>
         <% end %>
       </div>
     </div>

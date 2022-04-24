@@ -1,21 +1,23 @@
-<div class="grid-x">
-  <div class="cell medium-8 medium-offset-2 large-6 large-offset-3">
-    <h2 class="text-center">Sign in</h2>
+<div class="mx-auto max-w-xl">
+  <h2 class="text-center">Sign in</h2>
 
-    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-      <h5><%= f.label :email %></h5>
-      <%= f.text_field :email %>
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <label class="block text-sm mb-2">
+      Email
+      <%= f.text_field :email, class: 'block shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+    </label>
 
-      <h5><%= f.label :password %></h5>
-      <%= f.password_field :password %>
+    <label class="block text-sm mb-2">
+      Password
+      <%= f.password_field :password, class: 'block shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+    </label>
 
-      <% if devise_mapping.rememberable? -%>
-        <p><%= f.check_box :remember_me %> <%= f.label :remember_me %></p>
-      <% end -%>
+    <% if devise_mapping.rememberable? -%>
+      <p><%= f.check_box :remember_me %> <%= f.label :remember_me %></p>
+    <% end -%>
 
-      <p><%= f.submit "Sign in", class: 'button' %></p>
-    <% end %>
+    <p><%= f.submit "Sign in", class: 'text-xs py-2 px-8 uppercase tracking-wider box-border focus:outline-none whitespace-nowrap bg-white hover:bg-gray-200 focus:bg-gray-200 disabled:text-gray-500 text-black' %></p>
+  <% end %>
 
-    <%= render :partial => "devise/shared/links" %>
-  </div>
+  <%= render :partial => "devise/shared/links" %>
 </div>

@@ -29,8 +29,8 @@
       <section id="<%= cheat_sheet.title_stub %>">
         <% if can? :update, cheat_sheet %><span style="float: right;"><%= link_to "Edit", edit_cheat_sheet_path(cheat_sheet) %></span><% end %>
         <h3><%= cheat_sheet.title %></h3>
-        <div data-parse="once">
-          <%= cheat_sheet.display_body %>
+        <div>
+          <%= cheat_sheet.parsed_body&.html_safe %>
         </div>
         <p><%= link_to "Back to Table of Content", "#table-of-content", :rel => "index" %></p>
       </section>

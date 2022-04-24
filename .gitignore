@@ -99,6 +99,7 @@ Gemfile.lock
 # Application configurations
 config/database.yml
 config/cloudinary.yml
+docker-compose.yml
 
 # Guard
 Guardfile

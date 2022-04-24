@@ -23,6 +23,8 @@ services:
       - "5432:5432"
     volumes:
       - my_dbdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: "[CHANGE TO MATCH database.yml]"
 
   redis:
     image: redis:alpine

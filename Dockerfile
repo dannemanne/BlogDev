@@ -16,13 +16,15 @@ WORKDIR /myapp
 
 COPY ./docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["sh", "/docker-entrypoint.sh"]
 # Add bundle entry point to handle bundle cache
 
 ENV BUNDLE_PATH=/bundle \
     BUNDLE_BIN=/bundle/bin \
-    GEM_HOME=/bundle
+    GEM_HOME=/bundle \
+    YARN_CACHE_FOLDER=/yarn
 ENV PATH="${BUNDLE_BIN}:${PATH}"
 # Bundle installs with binstubs to our custom /bundle/bin volume path.
 
+RUN mkdir -p $YARN_CACHE_FOLDER
 COPY Gemfile Gemfile.lock package.json yarn.lock /myapp/

@@ -5,7 +5,6 @@
   <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-qore.min.js' %>
   <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js' %>
   <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/showdown/0.1.0/showdown.min.js' %>
-  <%= javascript_pack_tag 'editor' %>
 
   <script type="text/javascript">
     jQuery(window).load(function() {
@@ -17,6 +16,32 @@
       });
     });
   </script>
+
+  <script type="text/javascript">
+      docReady(function() {
+          // Setup the WYSIWYM editor!
+          const bodyElement = document.querySelector('[data-parse]');
+          const handleChange = function(event) {
+              const area = event ? event.target : bodyElement;
+              const targetElement = document.querySelector(area.dataset.parse);
+              var showdown = new Showdown.converter();
+              const html = showdown.makeHtml(area.value);
+              targetElement.innerHTML = html;
+              Prism.highlightAll();
+
+              if (area.dataset.parseSave) {
+                  const saveToElement = document.querySelector(area.dataset.parseSave);
+                  saveToElement.value = targetElement.innerHTML;
+              }
+          };
+
+          if (bodyElement.addEventListener) {
+              bodyElement.addEventListener('input', handleChange, false);
+          } else if (area.attachEvent) {
+              bodyElement.attachEvent('onpropertychange', handleChange);
+          }
+      });
+  </script>
 <% end %>
 
 <% if f.object.errors.any? %>
@@ -27,17 +52,28 @@
   </ul>
 <% end %>
 
-<h2><%= f.label :title %></h2>
-<p><%= f.text_field :title %></p>
+<label class="block text-sm mb-2">
+  Title
+  <%= f.text_field :title, class: 'block shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+</label>
 
-<h2><%= f.label :category %></h2>
-<p><%= f.text_field :category %></p>
+<label class="block text-sm mb-2">
+  Category
+  <%= f.text_field :category, class: 'block shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+</label>
 
-<h2><%= f.label :body %></h2>
-<p><%= f.text_area :body, :style => "width: 600px; height: 200px; resize: vertical;", "data-parse" => "live", "data-parse-preview" => "#cheat_sheet_body_preview" %></p>
+<label class="block text-sm mb-2">
+  Body
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <%= f.text_area :body, class: "text-sm min-h-full block shadow appearance-none border h-32 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", "data-parse" => "#post_body_preview", 'data-parse-save' => '.js-parsed-body-field' %>
+    </div>
 
-<div class="clear"></div>
-<h2>Preview of Cheat Sheet</h2>
-<div id="cheat_sheet_body_preview" class="post-preview"></div>
+    <div id="post_body_preview" class="post-preview">
+      <%=f.object.parsed_body&.html_safe %>
+    </div>
+  </div>
+</label>
+<%= f.hidden_field :parsed_body, class: 'js-parsed-body-field' %>
 
-<h2><%= f.submit "Save" %></h2>
+<h2><%= f.submit "Save", class: "text-xs py-2 px-8 uppercase tracking-wider box-border focus:outline-none whitespace-nowrap bg-white hover:bg-gray-200 focus:bg-gray-200 disabled:text-gray-500 text-black" %></h2>

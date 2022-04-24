@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 #ruby '2.6.6'
 
 gem 'unicorn'
+gem 'puma'
 gem 'rails', '< 6.1'
 gem 'pg', '1.2.3'
 gem 'meta-tags'

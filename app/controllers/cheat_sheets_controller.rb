@@ -20,7 +20,7 @@ class CheatSheetsController < ApplicationController
   end
 
   def update
-    if @cheat_sheet.update_attributes(params[:cheat_sheets])
+    if @cheat_sheet.update_attributes(cheat_sheet_params)
       redirect_to :action => :index
     else
       render :edit
@@ -33,6 +33,11 @@ class CheatSheetsController < ApplicationController
     else
       render :edit
     end
+  end
+
+private
+  def cheat_sheet_params
+    params.require(:cheat_sheet).permit(:title, :category, :body, :parsed_body)
   end
 
 end

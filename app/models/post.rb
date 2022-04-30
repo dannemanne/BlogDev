@@ -88,7 +88,6 @@ private
   def set_attributes
     # If the post is posted, then make sure that posted_at is set
     self.posted_at ||= Time.now if post_status.is_posted?
-    self.posted_at = nil if post_status.is_draft?
 
     # Parses title into a url-friendly format
     self.title_url = [series_title, display_series_part, title].reject(&:blank?).join(' ').gsub(/[^A-Za-z0-9_\-]/i, '_').gsub(/_+/, '_').downcase

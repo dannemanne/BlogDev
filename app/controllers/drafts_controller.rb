@@ -63,7 +63,18 @@ private
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :status, :tag_names, :allow_comments)
+    params.require(:post).permit(
+        :allow_comments,
+        :body,
+        :cover,
+        :parsed_body,
+        :posted_at,
+        :series_part,
+        :series_title,
+        :status,
+        :tag_names,
+        :title,
+    )
   end
 
 end

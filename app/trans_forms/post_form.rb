@@ -1,5 +1,14 @@
 class PostForm < ApplicationTransForm
-  PROXY_ATTR = %w(title series_title series_part body parsed_body status allow_comments)
+  PROXY_ATTR = %w(
+    allow_comments
+    body
+    parsed_body
+    posted_at
+    series_part
+    series_title
+    status
+    title
+  )
 
   set_main_model :post, proxy: { attributes: PROXY_ATTR }
 
@@ -17,7 +26,16 @@ class PostForm < ApplicationTransForm
 
 private
   def save_post!
-    post.attributes = { title: title, series_title: series_title, series_part: series_part, body: body, parsed_body: parsed_body, status: status, allow_comments: allow_comments }
+    post.attributes = {
+        allow_comments: allow_comments,
+        body: body,
+        parsed_body: parsed_body,
+        posted_at: posted_at,
+        series_part: series_part,
+        series_title: series_title,
+        status: status,
+        title: title,
+    }
     post.user = current_user
     post.save!
   end
